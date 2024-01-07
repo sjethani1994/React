@@ -1,0 +1,45 @@
+/* Header Styles */
+.header-section {
+    background-color: #343a40;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header-section .container-fluid {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .header-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .header-section li {
+    margin-bottom: 10px;
+  }
+  
+  /* Responsive Header Styles */
+  @media (max-width: 768px) {
+    .header-section {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .header-section .container-fluid {
+      text-align: center;
+      margin-top: 10px;
+    }
+  
+    .header-section ul {
+      list-style: none;
+      padding: 0;
+    }
+  
+    .header-section li {
+      margin-bottom: 10px;
+    }
+  }

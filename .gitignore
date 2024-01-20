@@ -5,3 +5,7 @@ learning/package-lock.json
 usermanager/node_modules/
 usermanager/package.json 
 usermanager/package-lock.json
+
+Counter/node_modules/
+Counter/package.json 
+Counter/package-lock.json

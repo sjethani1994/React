@@ -1,3 +1,7 @@
 learning/node_modules/
 learning/package.json
 learning/package-lock.json
+
+usermanager/node_modules/
+usermanager/package.json 
+usermanager/package-lock.json

@@ -1,0 +1,46 @@
+/* UserList.css */
+
+/* Container styling for the user list */
+.user-list-container {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading styling for the user list */
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+/* Styling for the unordered list */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* Styling for each list item in the user list */
+li {
+    border: 1px solid #eee;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Hover effect for list items */
+li:hover {
+    background-color: #f9f9f9;
+}
+
+/* Styling for the bullet point before each list item */
+li::before {
+    content: '\2022'; /* Bullet point */
+    color: #007bff; /* Bullet point color */
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}

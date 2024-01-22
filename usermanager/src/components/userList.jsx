@@ -32,48 +32,50 @@ const UserList = ({
   };
 
   return (
-    <div className="user-list-container">
+    <div className="main-container">
       <h2>User List</h2>
-      <ul>
-        <li key={user.id}>
-          {/* Input for editing user name */}
-          <input
-            type="text"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
-            readOnly={!isUserEditable} // Make input read-only when not in edit mode
-          />
+      <div className="user-list-container">
+        <ul>
+          <li key={user.id}>
+            {/* Input for editing user name */}
+            <input
+              type="text"
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
+              readOnly={!isUserEditable} // Make input read-only when not in edit mode
+            />
 
-          {/* Input for editing user email */}
-          <input
-            type="text"
-            value={userEmail}
-            onChange={(e) => setUserEmail(e.target.value)}
-            readOnly={!isUserEditable} // Make input read-only when not in edit mode
-          />
+            {/* Input for editing user email */}
+            <input
+              type="text"
+              value={userEmail}
+              onChange={(e) => setUserEmail(e.target.value)}
+              readOnly={!isUserEditable} // Make input read-only when not in edit mode
+            />
 
-          {/* Button for toggling edit mode and saving edits */}
-          <button
-            className="inline-flex"
-            onClick={() => {
-              if (isUserEditable) {
-                // Save edits and exit edit mode
-                editUser(user);
-              } else {
-                // Enter edit mode
-                setIsUserEditable(true);
-              }
-            }}
-          >
-            {isUserEditable ? "📁 Save" : "✏️ Edit"}
-          </button>
+            {/* Button for toggling edit mode and saving edits */}
+            <button
+              className="inline-flex"
+              onClick={() => {
+                if (isUserEditable) {
+                  // Save edits and exit edit mode
+                  editUser(user);
+                } else {
+                  // Enter edit mode
+                  setIsUserEditable(true);
+                }
+              }}
+            >
+              {isUserEditable ? "📁" : "✏️"}
+            </button>
 
-          {/* Button for deleting the user */}
-          <button className="" onClick={() => deleteUser(user.id)}>
-            ❌ Delete
-          </button>
-        </li>
-      </ul>
+            {/* Button for deleting the user */}
+            <button className="" onClick={() => deleteUser(user.id)}>
+              ❌
+            </button>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };

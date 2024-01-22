@@ -6,6 +6,18 @@ usermanager/node_modules/
 usermanager/package.json 
 usermanager/package-lock.json
 
-Counter/node_modules/
-Counter/package.json 
-Counter/package-lock.json
+counter/node_modules/
+counter/package.json 
+counter/package-lock.json
+
+githubusersearch/node_modules/
+githubusersearch/package.json 
+githubusersearch/package-lock.json
+
+advancereact/node_modules/
+advancereact/package.json 
+advancereact/package-lock.json
+
+car-rental/node_modules/
+car-rental/package.json 
+car-rental/package-lock.json

@@ -1,15 +1,7 @@
 /* UserList.css */
 
 /* Container styling for the user list */
-.main-container {
-    max-width: 500px;
-    margin: 20px auto;
-    padding: 10px 20px;
-    border: 1px solid #ccc;
-    border-radius: 50px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-}
+
 .user-list-container {
     display: flex;
     flex-direction: row;
@@ -46,6 +38,12 @@ input {
     font-size: 14px;
     box-sizing: border-box;
 
+    /* Additional styling for read-only mode */
+    &:read-only {
+        border: none;
+        background-color: transparent;
+        pointer-events: none;
+    }
 }
 
 input.email {
@@ -54,7 +52,7 @@ input.email {
 
 /* Hover effect for list items */
 li:hover {
-    background-color: #f9f9f9;
+    background-color: transparent;
 }
 
 /* Styling for the bullet point before each list item */

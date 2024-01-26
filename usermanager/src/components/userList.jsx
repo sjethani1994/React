@@ -32,8 +32,6 @@ const UserList = ({
   };
 
   return (
-    <div className="main-container">
-      <h2>User List</h2>
       <div className="user-list-container">
         <ul>
           <li key={user.id}>
@@ -76,7 +74,6 @@ const UserList = ({
           </li>
         </ul>
       </div>
-    </div>
   );
 };
 

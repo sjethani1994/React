@@ -1,15 +1,18 @@
 // App.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import UserList from "./components/userList";
 import AddUser from "./components/addUser";
-
+import SearchUsers from "./components/searchUsers";
+import ProductList from "./components/ProductList";
 function App() {
   // State for storing user data
   const [users, setUsers] = useState([]);
 
   // State for managing whether a user is in editable mode
   const [isUserEditable, setIsUserEditable] = useState(false);
+
+  const [filteredUsers, setFilteredUsers] = useState([]);
 
   // Function to handle adding a new user
   const handleAddUser = (newUser) => {
@@ -36,6 +39,22 @@ function App() {
   const toggleUserEditable = () => {
     setIsUserEditable((prev) => !prev);
   };
+  // Function to handle search
+  const handleSearch = (searchTerm) => {
+    const filtered = users.filter(
+      (user) =>
+        user.userName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.userEmail.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    // Update the filtered users
+    setFilteredUsers(filtered);
+  };
+
+  // Initialize filtered users with all users when the component mounts
+  useEffect(() => {
+    setFilteredUsers(users);
+  }, [users]);
 
   return (
     <div className="App">
@@ -43,18 +62,26 @@ function App() {
       <AddUser onAddUser={handleAddUser} />
 
       {/* Component for displaying the list of users */}
-
-      {users.map((user) => (
-        <div key={user.id} className="w-full">
-          <UserList
-            user={user}
-            deleteUser={deleteUser}
-            updatedUser={updatedUser}
-            setIsUserEditable={toggleUserEditable}
-            isUserEditable={isUserEditable}
-          />
+      {users.length === 0 ? (
+        <div></div>
+      ) : (
+        <div className="main-container">
+          <h2>User List</h2>
+          <SearchUsers onSearch={handleSearch} />
+          {filteredUsers.map((user) => (
+            <div key={user.id} className="w-full">
+              <UserList
+                user={user}
+                deleteUser={deleteUser}
+                updatedUser={updatedUser}
+                setIsUserEditable={toggleUserEditable}
+                isUserEditable={isUserEditable}
+              />
+            </div>
+          ))}
         </div>
-      ))}
+      )}
+      <ProductList />
     </div>
   );
 }

@@ -1,0 +1,25 @@
+body {
+  margin: 0;
+  /* Remove default margin */
+  padding: 0;
+  /* Remove default padding */
+  background-image: url('https://images.pexels.com/photos/4464438/pexels-photo-4464438.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+  background-size: auto;
+  background-attachment: fixed;
+}
+
+
+.App {
+  text-align: center;
+  height: 100vh;
+}
+
+.main-container {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}

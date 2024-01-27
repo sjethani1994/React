@@ -1,11 +1,13 @@
 // searchUsers.js
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import UserContext from "../context/UserContext";
 
-const SearchUsers = ({ onSearch }) => {
+const SearchUsers = () => {
+  const { handleSearch } = useContext(UserContext);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const handleSearch = () => {
-    onSearch(searchTerm);
+  const onSearch = () => {
+    handleSearch(searchTerm);
   };
 
   return (
@@ -16,7 +18,7 @@ const SearchUsers = ({ onSearch }) => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <button onClick={handleSearch}>Search</button>
+      <button onClick={onSearch}>Search</button>
     </div>
   );
 };

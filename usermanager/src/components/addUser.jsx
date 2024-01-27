@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "../styles/AddUser.css"; // Import the CSS file for styling
+import UserContext from "../context/UserContext";
 
-function AddUser({ onAddUser }) {
+function AddUser() {
+  const { addUser } = useContext(UserContext);
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
 
-  const addUser = () => {
+  const addNewUser = () => {
     const newUser = {
       id: Date.now(),
       userName,
       userEmail,
     };
 
-    onAddUser(newUser);
+    addUser(newUser);
     setUserName("");
     setUserEmail("");
   };
@@ -36,7 +38,7 @@ function AddUser({ onAddUser }) {
             onChange={(e) => setUserEmail(e.target.value)}
           />
         </label>
-        <button type="button" onClick={addUser}>
+        <button type="button" onClick={addNewUser}>
           Add User
         </button>
       </form>

@@ -20,7 +20,7 @@ function App() {
         <Route element={<HomePage setEnablebtn={setEnablebtn} enablebtn={enablebtn}/>} path='/home' />
         <Route element={<ProductDetails setEnablebtn={setEnablebtn} enablebtn={enablebtn}/>} path='/product/:id' />
         <Route element={<Login setEnableHeader={setEnableHeader} />} path='/' />
-        <Route element={<Register />} path='/register' />
+        <Route element={<Register setEnableHeader={setEnableHeader} />} path='/register' />
       </Routes>
     </>
   );

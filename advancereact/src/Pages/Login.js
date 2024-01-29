@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import API from "../connection/connection";
 import { useNavigate } from "react-router-dom";
-export default function Login({ setEnableHeader }) {
+import UserContext from "../contexts/UserContext";
+import HeaderContext from "../contexts/HeaderContext";
+export default function Login() {
+  const ctx = useContext(UserContext);
+  const hctx = useContext(HeaderContext);
+  console.log(ctx);
   const [data, setData] = useState({
     email: "",
     username: "",
     password: "",
   });
-  // const [showerror, setShowError] = useState({
-  //   email:false,
-  //   username:false,
-  //   password:false
-  // })
   const [showerror, setShowError] = useState(false);
 
   const [errormessage, setErrorMsg] = useState("");
@@ -27,37 +27,22 @@ export default function Login({ setEnableHeader }) {
 
   async function handleSubmit() {
     try {
-      // if(data.email==''){
-      //   setShowError((prev)=>(
-      //     {
-      //       ...prev,
-      //       email:true
-      //     }
-      //   ))
-      // }
-      // if(data.username==""){
-      //   setShowError((prev)=>(
-      //     {
-      //       ...prev,
-      //       username:true
-      //     }
-      //   ))
-      // }
-
       const response = await axios.post(`${API}/user/login`, data);
-
-      console.log(response);
       if (response.status === 200) {
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("login", "true");
+        hctx.setUsername(data.username);
         navigate("/home");
-        setEnableHeader(true);
+        ctx.setEnableHeader(true);
+        ctx.setLogin(true);
       } else {
         setShowError(true);
-        setErrorMsg(response.message);
+        setErrorMsg(response.data.message);
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.message, "error from catch block");
       setShowError(true);
-      setErrorMsg(error.response.data.message);
+      setErrorMsg("Something went wrong");
     }
   }
   return (
@@ -76,7 +61,6 @@ export default function Login({ setEnableHeader }) {
           value={data.email}
         />
       </div>
-
       <div className="mb-3">
         <label for="exampleFormControlInput1" className="form-label">
           Password

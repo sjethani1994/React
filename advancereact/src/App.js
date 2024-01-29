@@ -1,26 +1,24 @@
-import './App.css';
-import Header from './components/Header';
-import Body from './components/Body';
-import { Routes, Route } from "react-router-dom"
-import HomePage from './Pages/HomePage';
-import ProductDetails from './Pages/ProductDetails';
-import Login from './Pages/Login';
-import { useState } from 'react';
-import Register from './Pages/Register';
+import "./App.css";
+import Header from "./components/Header";
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./Pages/HomePage";
+import ProductDetails from "./Pages/ProductDetails";
+import Login from "./Pages/Login";
+import { useContext } from "react";
+import UserContext from "./contexts/UserContext";
+import Register from "./Pages/Register";
 function App() {
-  const [enableHeader, setEnableHeader] = useState(false)
-  const [enablebtn,setEnablebtn] =useState(true)
+  const ctx = useContext(UserContext);
   return (
     <>
-
-      {
-        enableHeader && <Header />
-      }
+      {ctx.login && <Header />}
       <Routes>
-        <Route element={<HomePage setEnablebtn={setEnablebtn} enablebtn={enablebtn}/>} path='/home' />
-        <Route element={<ProductDetails setEnablebtn={setEnablebtn} enablebtn={enablebtn}/>} path='/product/:id' />
-        <Route element={<Login setEnableHeader={setEnableHeader} />} path='/' />
-        <Route element={<Register setEnableHeader={setEnableHeader} />} path='/register' />
+        {ctx.login && <Route element={<HomePage />} path="/home" />}
+        {ctx.login && (
+          <Route element={<ProductDetails />} path="/product/:id" />
+        )}
+        <Route element={<Login />} path="/" />
+        <Route element={<Register />} path="/register" />
       </Routes>
     </>
   );

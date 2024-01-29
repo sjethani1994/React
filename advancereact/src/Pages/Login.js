@@ -7,7 +7,6 @@ import HeaderContext from "../contexts/HeaderContext";
 export default function Login() {
   const ctx = useContext(UserContext);
   const hctx = useContext(HeaderContext);
-  console.log(ctx);
   const [data, setData] = useState({
     email: "",
     username: "",
@@ -40,7 +39,6 @@ export default function Login() {
         setErrorMsg(response.data.message);
       }
     } catch (error) {
-      console.log(error.message, "error from catch block");
       setShowError(true);
       setErrorMsg("Something went wrong");
     }

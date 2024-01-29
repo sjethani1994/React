@@ -86,7 +86,6 @@ export default function Register({ setEnableHeader }) {
   // JSX for the registration form
   return (
     <>
-      {/* Email input */}
       <div className="mb-3">
         <label htmlFor="exampleFormControlInput1" className="form-label">
           Email address
@@ -94,6 +93,7 @@ export default function Register({ setEnableHeader }) {
         <input
           type="email"
           name="email"
+          value={registerdata.email}
           className="form-control"
           id="exampleFormControlInput1"
           placeholder="name@example.com"
@@ -104,7 +104,6 @@ export default function Register({ setEnableHeader }) {
         )}
       </div>
 
-      {/* Username input */}
       <div className="mb-3">
         <label htmlFor="exampleFormControlInput1" className="form-label">
           Username
@@ -112,6 +111,7 @@ export default function Register({ setEnableHeader }) {
         <input
           type="text"
           name="username"
+          value={registerdata.username}
           className="form-control"
           id="exampleFormControlInput1"
           placeholder="pegasis1234"
@@ -122,14 +122,14 @@ export default function Register({ setEnableHeader }) {
         )}
       </div>
 
-      {/* Password input */}
       <div className="mb-3">
         <label htmlFor="exampleFormControlInput1" className="form-label">
           Password
         </label>
         <input
-          type="password" // Change to password type for sensitive information
+          type="password"
           name="password"
+          value={registerdata.password}
           className="form-control"
           id="exampleFormControlInput1"
           placeholder="password"

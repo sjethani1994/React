@@ -51,7 +51,7 @@ export default function Header() {
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
-                href="#"
+                href="#top"
                 id="navbarDropdown"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -61,17 +61,17 @@ export default function Header() {
               </a>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#top">
                     Action
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#top">
                     Another action
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#top">
                     Something else here
                   </a>
                 </li>
@@ -80,7 +80,7 @@ export default function Header() {
             <li className="nav-item">
               <a
                 className="nav-link disabled"
-                href="#"
+                href="#top"
                 tabindex="-1"
                 aria-disabled="true"
               >

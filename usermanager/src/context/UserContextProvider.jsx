@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import UserContext from "./UserContext";
 
 // UserContextProvider component
-const UserContextProvider = ({ children }) => {
+export default function UserContextProvider({ children }) {
   // State for storing user data
   const [users, setUsers] = useState([]);
 
@@ -67,5 +67,3 @@ const UserContextProvider = ({ children }) => {
     </UserContext.Provider>
   );
 };
-
-export default UserContextProvider;

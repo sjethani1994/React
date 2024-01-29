@@ -7,13 +7,13 @@ const UserList = (user) => {
   const { isUserEditable, deleteUser, updateUser, toggleUserEditable } =
     useContext(UserContext);
   // State for handling the editable user name
-  const [userName, setUserName] = useState(user.userName);
+  const [userName, setUserName] = useState(user.user.userName);
 
   // State for handling the editable user email
-  const [userEmail, setUserEmail] = useState(user.userEmail);
+  const [userEmail, setUserEmail] = useState(user.user.userEmail);
 
   // Function to handle the user edit
-  const editUser = (user) => {
+  const editUser = ({ user }) => {
     // Create an object with the updated user data
     const updatedUserData = {
       ...user,
@@ -27,7 +27,6 @@ const UserList = (user) => {
     // Exit edit mode after updating user
     toggleUserEditable(false);
   };
-
   return (
     <div className="user-list-container">
       <ul>
@@ -65,7 +64,7 @@ const UserList = (user) => {
           </button>
 
           {/* Button for deleting the user */}
-          <button className="" onClick={() => deleteUser(user.id)}>
+          <button className="" onClick={() => deleteUser(user.user.id)}>
             ❌
           </button>
         </li>

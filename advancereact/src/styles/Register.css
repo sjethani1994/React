@@ -1,0 +1,27 @@
+.main-container {
+    /* This assumes that the parent container has a defined height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    /* You may need to adjust this based on your layout */
+}
+
+Form {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.alert {
+    height: 30px;
+    padding: 0 !important;
+    padding-left: 11px !important;
+    padding-top: 2px !important;
+    margin: 0 !important;
+    font-size: 15px;
+}

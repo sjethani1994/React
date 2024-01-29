@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import "./App.css";
 import AddUser from "./components/addUser";
-import UserContextProvider from "./context/UserContextProvider";
 import SearchUsers from "./components/searchUsers";
 import UserList from "./components/userList";
 import UserContext from "./context/UserContext";
@@ -9,9 +8,8 @@ import UserContext from "./context/UserContext";
 function App() {
   const { users, filteredUsers } = useContext(UserContext);
 
-  console.log(users)
+  console.log(filteredUsers)
   return (
-    <UserContextProvider>
       <div className="App">
         {/* Component for adding a new user */}
         <AddUser />
@@ -31,7 +29,6 @@ function App() {
           </div>
         )}
       </div>
-    </UserContextProvider>
   );
 }
 

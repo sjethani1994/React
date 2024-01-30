@@ -6,6 +6,10 @@ usermanager/node_modules/
 usermanager/package.json 
 usermanager/package-lock.json
 
+UsermanagerUsingProps/node_modules/
+UsermanagerUsingProps/package.json 
+UsermanagerUsingProps/package-lock.json
+
 counter/node_modules/
 counter/package.json 
 counter/package-lock.json

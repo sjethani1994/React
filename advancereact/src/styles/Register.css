@@ -7,7 +7,7 @@
     /* You may need to adjust this based on your layout */
 }
 
-Form {
+.register-form {
     width: 400px;
     display: flex;
     flex-direction: column;

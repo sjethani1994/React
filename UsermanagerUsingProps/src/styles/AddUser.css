@@ -1,0 +1,57 @@
+/* AddUser.css */
+
+.add-user-container {
+    max-width: 300px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff; /* Background color for the container */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 10px;
+    font-weight: bold; /* Make labels bold */
+}
+
+input {
+    padding: 8px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    border: 1px solid #ccc; /* Add border to input fields */
+    border-radius: 3px; /* Rounded corners for input fields */
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px; /* Adjust font size */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Additional styling for a highlighted background on hover */
+.add-user-container:hover {
+    background-color: #f5f5f5;
+}
+
+/* Additional styling for the form container */
+.form-container {
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}

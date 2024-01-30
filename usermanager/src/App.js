@@ -8,7 +8,6 @@ import UserContext from "./context/UserContext";
 function App() {
   const { users, filteredUsers } = useContext(UserContext);
 
-  console.log(filteredUsers)
   return (
       <div className="App">
         {/* Component for adding a new user */}

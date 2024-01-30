@@ -6,7 +6,9 @@ export default function ContextProvider({ children }) {
   const [enableHeader, setEnableHeader] = useState(false);
   const [enablebtn, setEnablebtn] = useState(true);
 
-  const [login, setLogin] = useState(localStorage.getItem("login") === "true");
+  const [login, setLogin] = useState(
+    localStorage.getItem("login") === "true" ? "true" : "false"
+  );
   const [username, setUsername] = useState("");
 
   useEffect(() => {

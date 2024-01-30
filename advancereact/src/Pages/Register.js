@@ -68,7 +68,7 @@ export default function Register({ setEnableHeader }) {
 
   return (
     <div className="main-container">
-      <Form>
+      <Form className="register-form">
         <Form.Group className="mb-3" controlId="exampleFormControlInput1">
           <Form.Label>Email address</Form.Label>
           <Form.Control

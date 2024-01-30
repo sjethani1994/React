@@ -4,6 +4,7 @@ import "./App.css";
 import UserList from "./components/userList";
 import AddUser from "./components/addUser";
 import SearchUsers from "./components/searchUsers";
+import ProductList from "./components/ProductList";
 
 function App() {
   // State for storing user data
@@ -83,6 +84,8 @@ function App() {
           ))}
         </div>
       )}
+
+      <ProductList />
     </div>
   );
 }

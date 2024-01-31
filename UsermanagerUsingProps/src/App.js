@@ -10,9 +10,6 @@ function App() {
   // State for storing user data
   const [users, setUsers] = useState([]);
 
-  // State for managing whether a user is in editable mode
-  const [isUserEditable, setIsUserEditable] = useState(false);
-
   // State for filtered users
   const [filteredUsers, setFilteredUsers] = useState([]);
 
@@ -35,11 +32,6 @@ function App() {
 
     // Update the state with the new array of users
     setUsers(updatedUsers);
-  };
-
-  // Function to toggle user editable mode
-  const toggleUserEditable = () => {
-    setIsUserEditable((prev) => !prev);
   };
 
   // Function to handle search
@@ -77,8 +69,6 @@ function App() {
                 user={user}
                 deleteUser={deleteUser}
                 updatedUser={updatedUser}
-                setIsUserEditable={toggleUserEditable}
-                isUserEditable={isUserEditable}
               />
             </div>
           ))}

@@ -44,13 +44,7 @@ const UserList = ({ user, deleteUser, updatedUser }) => {
           {/* Button for toggling edit mode and saving edits */}
           <button
             className="inline-flex"
-            onClick={() => {
-              if (isUserEditable) {
-                editUser();
-              } else {
-                setIsUserEditable(true);
-              }
-            }}
+            onClick={() => setIsUserEditable(!isUserEditable)}
           >
             {isUserEditable ? "📁" : "✏️"}
           </button>

@@ -11,7 +11,6 @@ export default function Login() {
   const hctx = useContext(HeaderContext);
   const [data, setData] = useState({
     email: "",
-    username: "",
     password: "",
   });
   const [showerror, setShowError] = useState(false);
@@ -20,7 +19,6 @@ export default function Login() {
 
   const [fieldErrors, setFieldErrors] = useState({
     email: "",
-    username: "",
     password: "",
   });
 
@@ -35,10 +33,10 @@ export default function Login() {
   }
 
   async function handleSubmit(event) {
-    event.preventDefault(); // Add this line
+    event.preventDefault();
     try {
       let isValid = true;
-      const newFieldErrors = { email: "", username: "", password: "" };
+      const newFieldErrors = { email: "", password: "" };
 
       if (!data.email) {
         isValid = false;
@@ -74,46 +72,76 @@ export default function Login() {
     }
   }
   return (
-    <div className="main-container">
-      <Form className="login-form">
-        <Form.Group className="mb-3" controlId="exampleFormControlInput1">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            type="email"
-            name="email"
-            placeholder="name@example.com"
-            onChange={handleChange}
-            value={data.email}
-          />
-          {fieldErrors.email && (
-            <Alert className="alert" variant="danger">
-              {fieldErrors.email}
+    <div className="container">
+      <div className="d-flex flex-column align-items-center mt-5">
+        {/* Form */}
+        <Form style={{ width: "400px" }}>
+          <div className="sign-in mb-4">Sign In</div>
+
+          {/* Email Input */}
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="email"
+              name="email"
+              placeholder="Enter email"
+              onChange={handleChange}
+              value={data.email}
+            />
+            <Form.Text className="text-muted"></Form.Text>
+            {fieldErrors.email && (
+              <Alert className="alert" variant="danger">
+                {fieldErrors.email}
+              </Alert>
+            )}
+          </Form.Group>
+
+          {/* Password Input */}
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              name="password"
+              value={data.password}
+              placeholder="Password"
+              onChange={handleChange}
+            />
+            {fieldErrors.password && (
+              <Alert className="alert" variant="danger">
+                {fieldErrors.password}
+              </Alert>
+            )}
+          </Form.Group>
+
+          {/* Sign In Button */}
+          <Button
+            variant="warning"
+            type="button"
+            className="mb-3"
+            block
+            onClick={handleSubmit}
+          >
+            Sign In
+          </Button>
+
+          {/* Create Account Button */}
+          <Button variant="warning" type="button" block>
+            Create your account
+          </Button>
+
+          {/* Error Message */}
+          {showerror && (
+            <Alert variant="danger" className="mt-3">
+              {errormessage}
             </Alert>
           )}
-        </Form.Group>
+        </Form>
 
-        <Form.Group className="mb-3" controlId="exampleFormControlInput1">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            name="password"
-            value={data.password}
-            placeholder="password"
-            onChange={handleChange}
-          />
-          {fieldErrors.password && (
-            <Alert className="alert" variant="danger">
-              {fieldErrors.password}
-            </Alert>
-          )}
-        </Form.Group>
-
-        <Button variant="primary" onClick={handleSubmit}>
-          Submit
-        </Button>
-
-        {showerror && <Alert variant="danger">{errormessage}</Alert>}
-      </Form>
+        {/* Forgot Password */}
+        <div className="mt-3">
+          <a href="#top">Forgot your password?</a>
+        </div>
+      </div>
     </div>
   );
 }

@@ -9,11 +9,12 @@ import UserContext from "./contexts/UserContext";
 import Register from "./Pages/Register";
 function App() {
   const ctx = useContext(UserContext);
+  console.log(ctx.login)
   return (
     <>
       {ctx.login && <Header />}
       <Routes>
-        {ctx.login && <Route element={<HomePage />} path="/home" />}
+        {ctx.login &&  <Route path="/home" element={<HomePage />} />}
         {ctx.login && (
           <Route element={<ProductDetails />} path="/product/:id" />
         )}

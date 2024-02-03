@@ -67,15 +67,15 @@ export default function Register({ setEnableHeader }) {
   }
 
   return (
-    <div className="main-container">
-      <Form className="register-form">
+    <div className="main-container d-flex flex-column align-items-center mt-5">
+      <Form className="register-form" style={{ width: "400px" }}>
         <Form.Group className="mb-3" controlId="exampleFormControlInput1">
           <Form.Label>Email address</Form.Label>
           <Form.Control
             type="email"
             name="email"
             value={registerdata.email}
-            placeholder="name@example.com"
+            placeholder="Enter email"
             onChange={handleChange}
           />
           {fieldErrors.email && (
@@ -91,7 +91,7 @@ export default function Register({ setEnableHeader }) {
             type="text"
             name="username"
             value={registerdata.username}
-            placeholder="pegasis1234"
+            placeholder="Enter userName"
             onChange={handleChange}
           />
           {fieldErrors.username && (
@@ -107,7 +107,7 @@ export default function Register({ setEnableHeader }) {
             type="password"
             name="password"
             value={registerdata.password}
-            placeholder="password"
+            placeholder="Enter password"
             onChange={handleChange}
           />
           {fieldErrors.password && (
@@ -117,7 +117,13 @@ export default function Register({ setEnableHeader }) {
           )}
         </Form.Group>
 
-        <Button variant="primary" onClick={PopulatetoDB}>
+        <Button
+          variant="warning"
+          type="button"
+          className="mb-3"
+          block
+          onClick={PopulatetoDB}
+        >
           Submit
         </Button>
 

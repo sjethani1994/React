@@ -2,9 +2,11 @@ import axios from "axios";
 import React, { useContext } from "react";
 import API from "../connection/connection";
 import ProductContext from "../contexts/ProductContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Card({ element, enablebtn }) {
   const ctx = useContext(ProductContext);
+  const navigate = useNavigate();
   const getProductById = async (_id) => {
     try {
       const headers = {
@@ -15,7 +17,8 @@ export default function Card({ element, enablebtn }) {
         headers,
       });
 
-      const { product } = response.data.product;
+      ctx.setProductById(response.data.product);
+      navigate(`/product/${_id}`);
       ctx.setEnablebtn(true);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -25,7 +28,7 @@ export default function Card({ element, enablebtn }) {
     <div
       className="card"
       style={{
-        width: "18rem",
+        width: "25rem",
         margin: "20px",
         height: "39rem",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Adjust shadow values as needed
@@ -40,7 +43,7 @@ export default function Card({ element, enablebtn }) {
       />
       <div className="card-body">
         <h6 className="card-text fw-bold">{element.title}</h6>
-        <p className="card-text">{element.description}</p>
+        <p className="card-text text-justify">{element.description}</p>
       </div>
 
       <div className="card-footer">

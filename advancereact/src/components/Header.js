@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import UserContext from "../contexts/UserContext";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -7,6 +7,7 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import "../styles/Header.css";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -16,10 +17,18 @@ export default function Header() {
     ctx.setLogin(false);
     navigate("/");
   }
+
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar
+      expand="lg"
+      className="bg-body-tertiary header-navbar"
+      bg="light"
+      sticky="top"
+      data-bs-theme="light"
+      style={{ height: "70px" }}
+    >
       <Container fluid>
-        <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
+        <Navbar.Brand href="#">E-Commerce</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -27,30 +36,47 @@ export default function Header() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link href="#action1">Home</Nav.Link>
-            <Nav.Link href="#action2">Link</Nav.Link>
-            <NavDropdown title="Link" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">
-                Something else here
-              </NavDropdown.Item>
-            </NavDropdown>
-            <Nav.Link href="#" disabled>
-              Link
-            </Nav.Link>
+            <NavLink
+              to="/home"
+              className={({ isActive }) => {
+                return `nav-link ${
+                  isActive ? "orange" : "black"
+                }`;
+              }}
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to="/register"
+              className={({ isActive }) => {
+                return `nav-link ${
+                  isActive ? "orange" : "black"
+                }`;
+              }}
+            >
+              About
+            </NavLink>
           </Nav>
-          <Form className="d-flex">
+          <Form className="d-flex p-0 m-0 border-0">
             <Form.Control
               type="search"
               placeholder="Search"
               className="me-2"
               aria-label="Search"
+              style={{
+                fontSize: "14px",
+                height: "40px",
+                display: "inline-block",
+                marginTop: "6px",
+                width: "300px",
+              }}
             />
-            <Button variant="outline-success">Search</Button>
+            <Button
+              variant="outline-success"
+              style={{ width: "100px", marginTop: "8px" }}
+            >
+              Search
+            </Button>
           </Form>
         </Navbar.Collapse>
       </Container>

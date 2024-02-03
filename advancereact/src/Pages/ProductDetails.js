@@ -7,7 +7,7 @@ export default function ProductDetails() {
 
   return (
     <>
-      <ProductComp id={id} />
+      <ProductComp />
     </>
   );
 }

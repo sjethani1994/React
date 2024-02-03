@@ -1,11 +1,11 @@
-import React, { useState, useContext } from "react";
-import axios from "axios";
-import API from "../connection/connection";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../contexts/UserContext";
 import HeaderContext from "../contexts/HeaderContext";
 import "../styles/login.css";
 import { Form, Button, Alert } from "react-bootstrap";
+import useApiCallHook from "../hooks/useApiCallHook";
+
 export default function Login() {
   const ctx = useContext(UserContext);
   const hctx = useContext(HeaderContext);
@@ -14,63 +14,68 @@ export default function Login() {
     password: "",
   });
   const [showerror, setShowError] = useState(false);
-
   const [errormessage, setErrorMsg] = useState("");
-
   const [fieldErrors, setFieldErrors] = useState({
     email: "",
     password: "",
   });
-
   const navigate = useNavigate();
 
-  function handleChange(event) {
+  const { response, error, fetchData } = useApiCallHook();
+
+  const handleChange = (event) => {
     setData((prev) => ({
       ...prev,
       [event.target.name]: event.target.value,
     }));
     setFieldErrors((prev) => ({ ...prev, [event.target.name]: "" }));
-  }
+  };
 
-  async function handleSubmit(event) {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      let isValid = true;
-      const newFieldErrors = { email: "", password: "" };
 
-      if (!data.email) {
-        isValid = false;
-        newFieldErrors.email = "Email is required.";
-      }
+    let isValid = true;
+    const newFieldErrors = { email: "", password: "" };
 
-      if (!data.password) {
-        isValid = false;
-        newFieldErrors.password = "Password is required.";
-      }
-
-      if (!isValid) {
-        setFieldErrors(newFieldErrors);
-        return;
-      }
-
-      const response = await axios.post(`${API}/user/login`, data);
-      if (response.status === 200) {
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("login", "true");
-        hctx.setUsername(data.username);
-        navigate("/home");
-        ctx.setEnableHeader(true);
-        ctx.setLogin(true);
-      } else {
-        setShowError(true);
-        setErrorMsg(response.message);
-      }
-    } catch (error) {
-      console.log(error);
-      setShowError(true);
-      setErrorMsg(error.response.data.message);
+    if (!data.email) {
+      isValid = false;
+      newFieldErrors.email = "Email is required.";
     }
-  }
+
+    if (!data.password) {
+      isValid = false;
+      newFieldErrors.password = "Password is required.";
+    }
+
+    if (!isValid) {
+      setFieldErrors(newFieldErrors);
+      return;
+    }
+
+    // Explicitly call the API when needed
+    fetchData("user/login", "post", data);
+  };
+
+  useEffect(() => {
+    // Handle the response here
+    console.log(response);
+    if (response && response.status === 200) {
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("login", "true");
+      hctx.setUsername(response.data.username);
+      navigate("/home");
+      ctx.setEnableHeader(true);
+      ctx.setLogin(true);
+    } else if (response) {
+      setShowError(true);
+      setErrorMsg(response.message);
+    }
+  }, [response, navigate, hctx, ctx]);
+
+  const gotoRegister = () => {
+    navigate("/register");
+  };
+
   return (
     <div className="container">
       <div className="d-flex flex-column align-items-center mt-5">
@@ -125,7 +130,7 @@ export default function Login() {
           </Button>
 
           {/* Create Account Button */}
-          <Button variant="warning" type="button" block>
+          <Button variant="warning" type="button" block onClick={gotoRegister}>
             Create your account
           </Button>
 

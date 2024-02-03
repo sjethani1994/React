@@ -1,0 +1,26 @@
+.header-navbar {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+.nav-link.black {
+  color: black !important;
+}
+
+.nav-link.orange {
+  color: orange !important;
+}
+
+.search-input {
+  font-size: 14px;
+  height: 40px;
+  display: inline-block;
+  margin-top: 6px;
+  width: 300px;
+}
+
+.search-button {
+  width: 100px;
+  margin-top: 8px;
+}

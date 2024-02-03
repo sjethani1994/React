@@ -5,38 +5,60 @@ import ProductContext from "../contexts/ProductContext";
 import API from "../connection/connection";
 import { useNavigate } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
+import useApiCallHook from "../hooks/useApiCallHook";
 export default function Body() {
-  const ctx = useContext(ProductContext);
+  const productCtx = useContext(ProductContext);
   const navigate = useNavigate();
-  console.log(ctx, "from body");
   const [products, setproducts] = useState([]);
+  // useEffect(() => {
+  //   const fetchdata = async () => {
+  //     try {
+        // const headers = {
+        //   Authorization: localStorage.getItem("token"),
+        // };
+
+  //       const response = await axios.get(`${API}/product/getAllProducts`, {
+  //         headers,
+  //       });
+
+  //       setproducts(response.data.allProducts);
+  //       ctx.setEnablebtn(true);
+  //     } catch (error) {
+  //       if (error.response && error.response.status === 401) {
+  //         navigate("/");
+  //         ctx.setLogin(false);
+  //       } else {
+  //         console.error("Error fetching data:", error);
+  //       }
+  //     }
+  //   };
+
+  //   fetchdata();
+  // }, []);
+
+  // Use the custom hook
+  const { response, error } = useApiCallHook("/product/getAllProducts");
+
+  // Extracting data from the response and handling errors
+  const { allProducts } = response?.data || {};
+  const enablebtn = !error;
+
+  // Set the data to the context
   useEffect(() => {
-    const fetchdata = async () => {
-      try {
-        const headers = {
-          Authorization: localStorage.getItem("token"),
-        };
+    if (allProducts) {
+      productCtx.setProducts(allProducts);
+      productCtx.setEnablebtn(enablebtn);
+      setproducts(response.data.allProducts);
+    }
+  }, [allProducts, enablebtn, productCtx, setproducts]);
 
-        const response = await axios.get(`${API}/product/getAllProducts`, {
-          headers,
-        });
-
-        console.log(response.data.allProducts);
-        setproducts(response.data.allProducts);
-        ctx.setEnablebtn(true);
-      } catch (error) {
-        if (error.response && error.response.status === 401) {
-          navigate("/");
-          ctx.setEnableHeader(false);
-          ctx.setLogin(false);
-        } else {
-          console.error("Error fetching data:", error);
-        }
-      }
-    };
-
-    fetchdata();
-  }, []);
+  useEffect(() => {
+    // Handle authentication errors
+    if (error && error.response && error.response.status === 401) {
+      navigate("/");
+      productCtx.setLogin(false);
+    }
+  }, [error, navigate, productCtx]);
 
   return (
     <Row>
@@ -49,7 +71,7 @@ export default function Body() {
             sm={12}
             className="d-flex justify-content-center align-items-center"
           >
-            <Card element={element} enablebtn={ctx.enablebtn} />
+            <Card element={element} enablebtn={productCtx.enablebtn} />
           </Col>
         ))
       ) : (

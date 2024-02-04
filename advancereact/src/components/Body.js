@@ -10,59 +10,42 @@ export default function Body() {
   const productCtx = useContext(ProductContext);
   const navigate = useNavigate();
   const [products, setproducts] = useState([]);
-  // useEffect(() => {
-  //   const fetchdata = async () => {
-  //     try {
-        // const headers = {
-        //   Authorization: localStorage.getItem("token"),
-        // };
-
-  //       const response = await axios.get(`${API}/product/getAllProducts`, {
-  //         headers,
-  //       });
-
-  //       setproducts(response.data.allProducts);
-  //       ctx.setEnablebtn(true);
-  //     } catch (error) {
-  //       if (error.response && error.response.status === 401) {
-  //         navigate("/");
-  //         ctx.setLogin(false);
-  //       } else {
-  //         console.error("Error fetching data:", error);
-  //       }
-  //     }
-  //   };
-
-  //   fetchdata();
-  // }, []);
-
-  // Use the custom hook
-  const { response, error } = useApiCallHook("/product/getAllProducts");
-
-  // Extracting data from the response and handling errors
-  const { allProducts } = response?.data || {};
-  const enablebtn = !error;
-
-  // Set the data to the context
+  const { response, error, fetchData } = useApiCallHook();
   useEffect(() => {
-    if (allProducts) {
-      productCtx.setProducts(allProducts);
-      productCtx.setEnablebtn(enablebtn);
-      setproducts(response.data.allProducts);
-    }
-  }, [allProducts, enablebtn, productCtx, setproducts]);
+    const getProducts = async () => {
+      try {
+        const headers = {
+          Authorization: localStorage.getItem("token"),
+        };
 
-  useEffect(() => {
-    // Handle authentication errors
-    if (error && error.response && error.response.status === 401) {
-      navigate("/");
-      productCtx.setLogin(false);
-    }
-  }, [error, navigate, productCtx]);
+        // Use response directly
+        await fetchData(
+          `product/getAllProducts`,
+          "get",
+          null,
+          headers
+        );
+
+        console.log(response?.data?.allProducts);
+
+        setproducts(response?.data?.allProducts);
+        productCtx.setEnablebtn(true);
+      } catch (error) {
+        if (error.response && error.response.status === 401) {
+          navigate("/");
+          productCtx.setLogin(false);
+        } else {
+          console.error("Error fetching data:", error);
+        }
+      }
+    };
+
+    getProducts();
+  }, []);
 
   return (
     <Row>
-      {products.length > 0 ? (
+      {products?.length > 0 ? (
         products.map((element, index) => (
           <Col
             key={index}

@@ -1,0 +1,11 @@
+.card {
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.fakeimg {
+    background-color: #aaa;
+    width: 35%;
+    padding: 20px;
+  }

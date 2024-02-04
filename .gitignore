@@ -1,15 +1,19 @@
-learning/node_modules/
+# learning/node_modules/
 
-usermanager/node_modules/
+# usermanager/node_modules/
 
-UsermanagerUsingProps/node_modules/
+# UsermanagerUsingProps/node_modules/
 
-counter/node_modules/
+# counter/node_modules/
 
-githubusersearch/node_modules/
+# githubusersearch/node_modules/
 
-advancereact/node_modules/
+# advancereact/node_modules/
 
-car-rental/node_modules/
+# car-rental/node_modules/
 
-ecom/node_modules/
+# ecom/node_modules/
+
+# ecom/node_modules/
+
+**/node_modules/

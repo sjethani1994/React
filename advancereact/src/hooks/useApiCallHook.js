@@ -11,7 +11,7 @@ function useApiCallHook() {
     try {
       let axiosResponse;
       const headers = {
-        Authorization: customHeaders?.Authorization || "", 
+        Authorization: customHeaders?.Authorization || "",
         ...customHeaders,
       };
 
@@ -23,7 +23,6 @@ function useApiCallHook() {
           headers,
         });
       }
-
       setResponse(axiosResponse);
     } catch (error) {
       setError(error.response.data);
@@ -31,7 +30,11 @@ function useApiCallHook() {
     }
   };
 
-  return { response, error, fetchData };
+  if (response) {
+    return { response, error, fetchData };
+  } else {
+    return null;
+  }
 }
 
 export default useApiCallHook;

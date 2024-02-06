@@ -1,31 +1,32 @@
 import React from "react";
-import { Row, Col, Form, Button } from "react-bootstrap";
 const ContactForm = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted!");
-  };
-
   return (
-    <form>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input
-          type="email"
-          class="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
-          placeholder="Enter email"
-        />
+    <div class="footer-col">
+      <h2>Contact us</h2>
+      <p className="lead fs-4 text-secondary mb-3">
+        Stay in the loop! Subscribe to our blog for a weekly dose of news,
+        updates, helpful tips, and exclusive offers.
+      </p>
+      <form action="#">
+        <input type="text" placeholder="Your email" required />
+        <button
+          type="button"
+          style={{
+            backgroundColor: "#007bff",
+            color: "white",
+            padding: "7px 15px",
+          }}
+        >
+          Button
+        </button>
+      </form>
+      <div class="icons">
+        <i class="fa-brands fa-facebook-f"></i>
+        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-linkedin"></i>
+        <i class="fa-brands fa-github"></i>
       </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Message</label>
-        <textarea class="form-control" aria-label="With textarea"></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary">
-        Submit
-      </button>
-    </form>
+    </div>
   );
 };
 

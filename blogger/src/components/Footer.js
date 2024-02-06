@@ -1,65 +1,53 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import ContactForm from "../pages/ContactForm";
 import "../styles/Footer.css";
-import { Row, Col } from "react-bootstrap";
-import AboutUs from "../pages/AboutUs";
+import { MDBContainer, MDBBtn, MDBIcon } from "mdb-react-ui-kit";
 const Footer = () => {
   return (
-    <section class="footer">
-    <div class="footer-row">
-      <div class="footer-col">
-        <h4>Info</h4>
-        <ul class="links">
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Compressions</a></li>
-          <li><a href="#">Customers</a></li>
-          <li><a href="#">Service</a></li>
-          <li><a href="#">Collection</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Explore</h4>
-        <ul class="links">
-          <li><a href="#">Free Designs</a></li>
-          <li><a href="#">Latest Designs</a></li>
-          <li><a href="#">Themes</a></li>
-          <li><a href="#">Popular Designs</a></li>
-          <li><a href="#">Art Skills</a></li>
-          <li><a href="#">New Uploads</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <ul class="links">
-          <li><a href="#">Customer Agreement</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">GDPR</a></li>
-          <li><a href="#">Security</a></li>
-          <li><a href="#">Testimonials</a></li>
-          <li><a href="#">Media Kit</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Newsletter</h4>
-        <p>
-          Subscribe to our newsletter for a weekly dose
-          of news, updates, helpful tips, and
-          exclusive offers.
-        </p>
-        <form action="#">
-          <input type="text" placeholder="Your email" required />
-          <button type="submit">SUBSCRIBE</button>
-        </form>
-        <div class="icons">
-          <i class="fa-brands fa-facebook-f"></i>
-          <i class="fa-brands fa-twitter"></i>
-          <i class="fa-brands fa-linkedin"></i>
-          <i class="fa-brands fa-github"></i>
+    <MDBContainer fluid className="p-0 mt-5 h-custom fixed-bottom">
+      <div className="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
+        <div className="text-white mb-3 mb-md-0">
+          Copyright © 2024. All rights reserved.
+        </div>
+
+        <div>
+          <MDBBtn
+            tag="a"
+            color="none"
+            className="mx-3"
+            style={{ color: "white" }}
+          >
+            <MDBIcon fab icon="facebook-f" size="md" />
+          </MDBBtn>
+
+          <MDBBtn
+            tag="a"
+            color="none"
+            className="mx-3"
+            style={{ color: "white" }}
+          >
+            <MDBIcon fab icon="twitter" size="md" />
+          </MDBBtn>
+
+          <MDBBtn
+            tag="a"
+            color="none"
+            className="mx-3"
+            style={{ color: "white" }}
+          >
+            <MDBIcon fab icon="google" size="md" />
+          </MDBBtn>
+
+          <MDBBtn
+            tag="a"
+            color="none"
+            className="mx-3"
+            style={{ color: "white" }}
+          >
+            <MDBIcon fab icon="linkedin-in" size="md" />
+          </MDBBtn>
         </div>
       </div>
-    </div>
-  </section>
+    </MDBContainer>
   );
 };
 

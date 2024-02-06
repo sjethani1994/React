@@ -1,98 +1,40 @@
-import React, { useRef } from "react";
+import React from "react";
 import "../styles/Bloglist.css";
-import { motion, Variants } from "framer-motion";
 function Bloglist() {
   return (
     <>
-      <div class="card">
-        <h2>TITLE HEADING</h2>
-        <h5>Title description, Dec 7, 2017</h5>
-        <div class="fakeimg">
-          <motion.img
-            src="https://images.pexels.com/photos/267371/pexels-photo-267371.jpeg?auto=compress&cs=tinysrgb&w=600"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          />
+      <div
+        className="card mb-3"
+        style={{
+          maxWidth: "540px",
+          border: "1px solid #ccc",
+          borderRadius: "8px",
+        }}
+      >
+        <div className="row g-0">
+          <div className="col-md-4">
+            <img
+              src="https://png.pngtree.com/png-vector/20191126/ourmid/pngtree-image-of-cute-radish-vector-or-color-illustration-png-image_2040180.jpg" // Replace with your actual image URL
+              className="img-fluid rounded-start"
+              alt="Card preview"
+            />
+          </div>
+          <div className="col-md-8">
+            <div className="card-body">
+              <h5 className="card-title">Card title</h5>
+              <p className="card-text">
+                This is a wider card with supporting text below as a natural
+                lead-in to additional content. This content is a little bit
+                longer.
+              </p>
+              <p className="card-text">
+                <small className="text-body-secondary">
+                  Last updated 3 mins ago
+                </small>
+              </p>
+            </div>
+          </div>
         </div>
-        <p>Some text..</p>
-        <p>
-          Sunt in culpa qui officia deserunt mollit anim id est laborum
-          consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-          labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco.
-        </p>
-      </div>
-      <div class="card">
-        <h2>TITLE HEADING</h2>
-        <h5>Title description, Dec 7, 2017</h5>
-        <div class="fakeimg">
-          <motion.img
-            src="https://images.pexels.com/photos/267371/pexels-photo-267371.jpeg?auto=compress&cs=tinysrgb&w=600"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          />
-        </div>
-        <p>Some text..</p>
-        <p>
-          Sunt in culpa qui officia deserunt mollit anim id est laborum
-          consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-          labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco.
-        </p>
-      </div>
-      <div class="card">
-        <h2>TITLE HEADING</h2>
-        <h5>Title description, Dec 7, 2017</h5>
-        <div class="fakeimg">
-          <motion.img
-            src="https://images.pexels.com/photos/267371/pexels-photo-267371.jpeg?auto=compress&cs=tinysrgb&w=600"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          />
-        </div>
-        <p>Some text..</p>
-        <p>
-          Sunt in culpa qui officia deserunt mollit anim id est laborum
-          consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-          labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco.
-        </p>
-      </div>
-      <div class="card">
-        <h2>TITLE HEADING</h2>
-        <h5>Title description, Dec 7, 2017</h5>
-        <div class="fakeimg">
-          <motion.img
-            src="https://images.pexels.com/photos/267371/pexels-photo-267371.jpeg?auto=compress&cs=tinysrgb&w=600"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          />
-        </div>
-        <p>Some text..</p>
-        <p>
-          Sunt in culpa qui officia deserunt mollit anim id est laborum
-          consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-          labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco.
-        </p>
-      </div>
-      <div class="card">
-        <h2>TITLE HEADING</h2>
-        <h5>Title description, Dec 7, 2017</h5>
-        <div class="fakeimg">
-          <motion.img
-            src="https://images.pexels.com/photos/267371/pexels-photo-267371.jpeg?auto=compress&cs=tinysrgb&w=600"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          />
-        </div>
-        <p>Some text..</p>
-        <p>
-          Sunt in culpa qui officia deserunt mollit anim id est laborum
-          consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-          labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco.
-        </p>
       </div>
     </>
   );

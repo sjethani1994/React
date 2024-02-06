@@ -1,11 +1,61 @@
 .card {
-    background-color: white;
+    max-width: 600px;
+    margin: 20px;
     padding: 20px;
-    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.card-header {
+    text-align: center;
+    background-color: #fff;
+}
+
+.card-header h2 {
+    color: #333;
+}
+
+.card-header h5 {
+    color: #666;
 }
 
 .fakeimg {
-    background-color: #aaa;
-    width: 35%;
-    padding: 20px;
-  }
+    text-align: center;
+    margin-top: 20px;
+}
+
+.fakeimg img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.card-content p {
+    color: #444;
+    line-height: 1.6;
+}
+
+.card-footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+}
+
+.edit-icon,
+.delete-icon {
+    cursor: pointer;
+    color: #10182f;
+    font-size: 20px;
+}
+
+/* Add hover effect to icons */
+.edit-icon:hover,
+.delete-icon:hover {
+    text-decoration: none;
+
+}

@@ -1,13 +1,6 @@
 /* Importing Google font - Open Sans */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Open Sans', sans-serif;
-}
-
 .footer {
   background: #10182F;
 }
@@ -47,7 +40,7 @@
 .footer-col p {
   margin: 20px 0;
   color: #bfbfbf;
-  max-width: 300px;
+  max-width: 900px;
 }
 
 .footer-col form {
@@ -61,17 +54,18 @@
   background: none;
   width: 100%;
   outline: none;
-  border: 1px solid #7489C6 ;
+  border: 1px solid #7489C6;
   caret-color: #fff;
   color: #fff;
   padding-left: 10px;
+  width: 300px;
 }
 
 .footer-col input::placeholder {
   color: #ccc;
 }
 
- .footer-col form button {
+.footer-col form button {
   background: #fff;
   outline: none;
   border: none;
@@ -94,11 +88,8 @@
 }
 
 .footer-col .icons i {
-  color: #afb6c7;
-}
-
-.footer-col .icons i:hover  {
-  color: #fff;
+  color: #007bff;
+  font-size: 20px;
 }
 
 @media (max-width: 768px) {

@@ -10,7 +10,7 @@ export default function Body() {
   const productCtx = useContext(ProductContext);
   const navigate = useNavigate();
   const [products, setproducts] = useState([]);
-  const { response, error, fetchData } = useApiCallHook();
+  const { response, error, fetchData } = useApiCallHook(); // Call the custom hook
   useEffect(() => {
     const getProducts = async () => {
       try {
@@ -26,6 +26,7 @@ export default function Body() {
           headers
         );
 
+        console.log(response)
         console.log(response?.data?.allProducts);
 
         setproducts(response?.data?.allProducts);
@@ -42,6 +43,24 @@ export default function Body() {
 
     getProducts();
   }, []);
+
+  // const getProducts = async () => {
+  //   try {
+  //     // Make API call to fetch blogs
+  //     await fetchData("localhost:3000/blogs", "get");
+  //     console.log(response);
+  //   } catch (error) {
+  //     console.error("Error fetching blogs:", error);
+  //   }
+  // };
+ 
+  // // useEffect to update state with response data when it changes
+  // useEffect(() => {
+  //   if (response) {
+  //     setproducts(response);
+  //     getProducts()
+  //   }
+  // }, [response]);
 
   return (
     <Row>

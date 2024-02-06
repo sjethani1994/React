@@ -5,8 +5,8 @@ import Bloglist from "./Bloglist";
 
 const Home = () => {
   return (
-    <div>
-    <Bloglist />
+    <div className="body">
+      <Bloglist />
     </div>
   );
 };

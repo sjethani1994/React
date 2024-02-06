@@ -1,23 +1,49 @@
+import React, { useState } from "react";
 import "./App.css";
 import Home from "./pages/Home";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import { motion, useScroll } from "framer-motion";
+import Login from "./components/Login";
+import AboutUs from "./pages/AboutUs";
+import Registration from "./components/Registration";
 
 function App() {
-  const { scrollYProgress } = useScroll();
+  const location = useLocation();
+  const [showHeader, setShowHeader] = useState(true);
+  const [showFooter, setShowFooter] = useState(true);
+
+  // Check if the current route is login or register
+  const isLoginOrRegister =
+    location.pathname === "/" || location.pathname === "/register";
+
+  // Hide/show header and footer based on current route
+  const handleShowHeaderFooter = () => {
+    if (isLoginOrRegister) {
+      console.log(isLoginOrRegister);
+      setShowHeader(true);
+      setShowFooter(true);
+    } else {
+      setShowHeader(false);
+      setShowFooter(false);
+    }
+  };
+
+  // Listen for route changes
+  React.useEffect(() => {
+    handleShowHeaderFooter();
+  }, [location]);
+
   return (
     <>
-    <motion.div
-    className="progress-bar"
-    style={{ scaleX: scrollYProgress }}
-  />
-      <Header />
+      {!showHeader && <Header />}
       <Routes>
-        <Route element={<Home />} path="/" />
+        <Route element={<Login />} path="/" />
+        <Route element={<Registration />} path="/register" />
+        <Route element={<Home />} path="/home" />
+        <Route element={<AboutUs />} path="/aboutUs" />
       </Routes>
-      <Footer />
+      {!showFooter && <Footer />}
     </>
   );
 }

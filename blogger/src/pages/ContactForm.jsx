@@ -1,7 +1,7 @@
 import React from "react";
 const ContactForm = () => {
   return (
-    <div class="footer-col">
+    <div className="footer-col">
       <h2>Contact us</h2>
       <p className="lead fs-4 text-secondary mb-3">
         Stay in the loop! Subscribe to our blog for a weekly dose of news,
@@ -20,11 +20,11 @@ const ContactForm = () => {
           Button
         </button>
       </form>
-      <div class="icons">
-        <i class="fa-brands fa-facebook-f"></i>
-        <i class="fa-brands fa-twitter"></i>
-        <i class="fa-brands fa-linkedin"></i>
-        <i class="fa-brands fa-github"></i>
+      <div className="icons">
+        <i className="fa-brands fa-facebook-f"></i>
+        <i className="fa-brands fa-twitter"></i>
+        <i className="fa-brands fa-linkedin"></i>
+        <i className="fa-brands fa-github"></i>
       </div>
     </div>
   );

@@ -7,6 +7,8 @@ import Header from "./components/Header";
 import Login from "./components/Login";
 import AboutUs from "./pages/AboutUs";
 import Registration from "./components/Registration";
+import AddBlog from "./components/AddBlog";
+import EditBlog from "./pages/EditBlog";
 
 function App() {
   const location = useLocation();
@@ -41,6 +43,8 @@ function App() {
         <Route element={<Login />} path="/" />
         <Route element={<Registration />} path="/register" />
         <Route element={<Home />} path="/home" />
+        <Route element={<AddBlog />} path="/addBlog" />
+        <Route element={<EditBlog />} path="/editBlog" />
         <Route element={<AboutUs />} path="/aboutUs" />
       </Routes>
       {!showFooter && <Footer />}

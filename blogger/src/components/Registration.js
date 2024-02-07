@@ -15,38 +15,49 @@ import {
 import { useNavigate } from "react-router-dom";
 import API from "../connection/connection";
 import axios from "axios";
+
 function Registration() {
+  // State variables for form values and error message
   const [formValue, setFormValue] = useState({
     firstName: "",
     lastName: "",
     username: "",
     password: "",
   });
+  const [error, setError] = useState("");
 
-  const navigate = useNavigate();
-
+  // Function to handle form input change
   const onChange = (e) => {
     setFormValue({ ...formValue, [e.target.name]: e.target.value });
   };
 
+  // Function to handle form submission
   async function handleSubmit() {
     try {
-      console.log(formValue)
+      // Check if any field is empty
       const isEmpty = Object.values(formValue).some((value) => value === "");
-      console.log(isEmpty)
-      if (isEmpty) return;
+      if (isEmpty) {
+        setError("Please fill out all fields.");
+        return;
+      }
 
-      console.log(formValue)
+      // Post form data to the server
       const response = await axios.post(`${API}/auth/signup`, formValue);
-      if (response.status === 201) {
+      // If successful response, navigate to home page
+      if (response.status === 200) {
         navigate("/home");
       } else {
-        console.log(response.data.message)
+        setError(response.data.message);
       }
     } catch (error) {
-      console.log(error.response.data.message)
+      // If there's an error, set error message
+      setError(error.response.data.message);
     }
   }
+
+  // Hook from React Router DOM for navigation
+  const navigate = useNavigate();
+
   return (
     <MDBContainer fluid className="mt-1 mb-1">
       <MDBRow className="g-0 align-items-center">
@@ -128,6 +139,7 @@ function Registration() {
                     label="Password"
                   />
                 </MDBValidationItem>
+                {error && <div className="text-danger">{error}</div>}
                 <MDBBtn className="w-100 mb-4" size="md" onClick={handleSubmit}>
                   sign up
                 </MDBBtn>

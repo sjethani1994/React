@@ -21,6 +21,7 @@
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: whitesmoke;
+    margin-top: 7rem;
 }
 
 .blog-form {
@@ -61,4 +62,13 @@ button:hover {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.alert-danger {
+    height: 30px;
+    padding: 0 !important;
+    padding-left: 11px !important;
+    padding-top: 2px !important;
+    margin: 0 !important;
+    font-size: 15px;
 }

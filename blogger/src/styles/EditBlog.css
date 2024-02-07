@@ -2,7 +2,19 @@
 
 
 .edit-blog-container {
-    max-width: 400px;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.form-div {
+    position: relative;
+    background-color: white;
+    max-width: 450px;
     margin: auto;
     padding: 20px;
     border: 1px solid #ccc;

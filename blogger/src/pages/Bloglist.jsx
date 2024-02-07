@@ -1,6 +1,30 @@
 import React from "react";
 import "../styles/Bloglist.css";
-function Bloglist() {
+function Bloglist({ blog }) {
+  const renderLastUpdatedMessage = (updatedAt) => {
+    const currentDate = new Date();
+    const updatedDate = new Date(updatedAt);
+
+    const diffInMs = currentDate - updatedDate;
+    const diffInMinutes = Math.round(diffInMs / (1000 * 60));
+
+    if (diffInMinutes > 60) {
+      const diffInHours = Math.floor(diffInMinutes / 60);
+      if (diffInHours > 24) {
+        const diffInDays = Math.floor(diffInHours / 24);
+        return `Last updated ${diffInDays} day${diffInDays > 1 ? "s" : ""} ago`;
+      } else {
+        return `Last updated ${diffInHours} hour${
+          diffInHours > 1 ? "s" : ""
+        } ago`;
+      }
+    } else {
+      return `Last updated ${diffInMinutes} minute${
+        diffInMinutes > 1 ? "s" : ""
+      } ago`;
+    }
+  };
+
   return (
     <>
       <div
@@ -14,22 +38,18 @@ function Bloglist() {
         <div className="row g-0">
           <div className="col-md-4">
             <img
-              src="https://png.pngtree.com/png-vector/20191126/ourmid/pngtree-image-of-cute-radish-vector-or-color-illustration-png-image_2040180.jpg" // Replace with your actual image URL
+              src={blog.image} // Replace with your actual image URL
               className="img-fluid rounded-start"
               alt="Card preview"
             />
           </div>
           <div className="col-md-8">
             <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="card-text">
-                This is a wider card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </p>
+              <h5 className="card-title"> {blog.title} </h5>
+              <p className="card-text">{blog.content}</p>
               <p className="card-text">
                 <small className="text-body-secondary">
-                  Last updated 3 mins ago
+                  {renderLastUpdatedMessage(blog.updatedAt)}
                 </small>
               </p>
             </div>

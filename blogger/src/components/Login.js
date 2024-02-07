@@ -40,8 +40,10 @@ const Login = () => {
 
       // Post form data to the server
       const response = await axios.post(`${API}/auth/login`, formValue);
+      console.log(response)
       // If successful response, navigate to home page
       if (response.status === 200) {
+        localStorage.setItem("token", response.data.token)
         navigate("/home");
       } else {
         setError(response.data.message);

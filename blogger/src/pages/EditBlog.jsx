@@ -44,46 +44,44 @@ const EditBlog = ({ blogData, onSave, onCancel }) => {
   return (
     <div className="edit-blog-container">
       <div className="background-image"></div>
-      <h2>Edit Blog</h2>
-      <form onSubmit={handleSubmit} className="blog-form">
-        <label>
-          Title:
-          <input type="text" value={title} onChange={handleTitleChange} />
-        </label>
+      <div className="form-div">
+        <h2>Edit Blog</h2>
+        <form onSubmit={handleSubmit} className="blog-form">
+          <label>
+            Title:
+            <input type="text" value={title} onChange={handleTitleChange} />
+          </label>
 
-        <br />
+          <br />
 
-        <label>
-          Description:
-          <textarea value={description} onChange={handleDescriptionChange} />
-        </label>
+          <label>
+            Description:
+            <textarea value={description} onChange={handleDescriptionChange} />
+          </label>
 
-        <br />
+          <br />
 
-        <label>
-          New Image:
-          <input type="file" accept="image/*" onChange={handleImageChange} />
-        </label>
+          <label>
+            New Image:
+            <input type="file" accept="image/*" onChange={handleImageChange} />
+          </label>
 
-        <br />
+          <br />
 
-        {imagePreview && (
-          <img
-            src={imagePreview}
-            alt="Image Preview"
-            className="image-preview"
-          />
-        )}
+          {imagePreview && (
+            <img src={imagePreview} alt="Preview" className="image-preview" />
+          )}
 
-        <br />
+          <br />
 
-        <div className="button-container">
-          <button type="submit">Save Changes</button>
-          <button type="button" onClick={onCancel}>
-            Cancel
-          </button>
-        </div>
-      </form>
+          <div className="button-container">
+            <button type="submit">Save Changes</button>
+            <button type="button" onClick={onCancel}>
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

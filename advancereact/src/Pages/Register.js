@@ -79,7 +79,7 @@ export default function Register({ setEnableHeader }) {
             onChange={handleChange}
           />
           {fieldErrors.email && (
-            <Alert className="alert" variant="danger">
+            <Alert className="custom-alert" variant="danger">
               {fieldErrors.email}
             </Alert>
           )}
@@ -95,7 +95,7 @@ export default function Register({ setEnableHeader }) {
             onChange={handleChange}
           />
           {fieldErrors.username && (
-            <Alert className="alert" variant="danger">
+            <Alert className="custom-alert" variant="danger">
               {fieldErrors.username}
             </Alert>
           )}
@@ -111,7 +111,7 @@ export default function Register({ setEnableHeader }) {
             onChange={handleChange}
           />
           {fieldErrors.password && (
-            <Alert className="alert" variant="danger">
+            <Alert className="custom-alert" variant="danger">
               {fieldErrors.password}
             </Alert>
           )}
@@ -127,7 +127,12 @@ export default function Register({ setEnableHeader }) {
           Submit
         </Button>
 
-        {showerror && <Alert variant="danger">{errormessage}</Alert>}
+        {/* Error Message */}
+        {showerror && (
+          <Alert variant="danger" className="mt-3">
+            {errormessage}
+          </Alert>
+        )}
       </Form>
     </div>
   );

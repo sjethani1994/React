@@ -1,40 +1,58 @@
-// useApiCall.js
 import { useState } from "react";
 import axios from "axios";
 import API from "../connection/connection";
 
 function useApiCallHook() {
-  const [response, setResponse] = useState(null);
-  const [error, setError] = useState(null);
+  // State for response and error
+  const [responseData, setResponseData] = useState(null);
+  const [fetchError, setFetchError] = useState(null);
 
-  const fetchData = async (url, method, data, customHeaders) => {
+  // Function to fetch data from API
+  const fetchData = (url, method, requestData, customHeaders) => {
     try {
-      let axiosResponse;
+      // Prepare headers for the request
       const headers = {
         Authorization: customHeaders?.Authorization || "",
         ...customHeaders,
       };
 
+      // Make the API request based on the method (POST or GET)
       if (method === "post") {
-        axiosResponse = await axios.post(`${API}/${url}`, data, { headers });
+        // Make a POST request
+        axios
+          .post(`${API}/${url}`, requestData, { headers })
+          .then((response) => {
+            // Set response data and clear error if request was successful
+            setResponseData(response);
+            setFetchError(null);
+          })
+          .catch((error) => {
+            // Set error if there's an error with the request
+            setFetchError(error);
+          });
       } else if (method === "get") {
-        axiosResponse = await axios.get(`${API}/${url}`, {
-          params: data,
-          headers,
-        });
+        // Make a GET request
+        axios
+          .get(`${API}/${url}`, { params: requestData, headers })
+          .then((response) => {
+            // Set response data and clear error if request was successful
+            setResponseData(response.data);
+            setFetchError(null);
+          })
+          .catch((error) => {
+            // Clear response and set error if there's an error with the request
+            setResponseData(null);
+            setFetchError(error);
+          });
       }
-      setResponse(axiosResponse);
     } catch (error) {
-      setError(error.response.data);
-      console.error("API call failed:", error);
+      // Catch any errors occurred during the API call
+      setFetchError(error);
     }
   };
 
-  if (response) {
-    return { response, error, fetchData };
-  } else {
-    return null;
-  }
+  // Return response data, error, and fetchData function
+  return { responseData, fetchError, fetchData };
 }
 
 export default useApiCallHook;

@@ -58,19 +58,19 @@ export default function Login() {
 
   useEffect(() => {
     // Handle the response here
-    console.log(response);
     if (response && response.status === 200) {
+      console.log(response)
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("login", "true");
       hctx.setUsername(response.data.username);
       navigate("/home");
       ctx.setEnableHeader(true);
       ctx.setLogin(true);
-    } else if (response) {
+    } else if (error) {
       setShowError(true);
-      setErrorMsg(response.message);
+      setErrorMsg(error?.response?.data?.message);
     }
-  }, [response, navigate, hctx, ctx]);
+  }, [response, error, navigate, hctx, ctx]);
 
   const gotoRegister = () => {
     navigate("/register");
@@ -95,7 +95,7 @@ export default function Login() {
             />
             <Form.Text className="text-muted"></Form.Text>
             {fieldErrors.email && (
-              <Alert className="alert" variant="danger">
+              <Alert className="custom-alert" variant="danger">
                 {fieldErrors.email}
               </Alert>
             )}
@@ -112,7 +112,7 @@ export default function Login() {
               onChange={handleChange}
             />
             {fieldErrors.password && (
-              <Alert className="alert" variant="danger">
+              <Alert className="custom-alert" variant="danger">
                 {fieldErrors.password}
               </Alert>
             )}
@@ -135,11 +135,7 @@ export default function Login() {
           </Button>
 
           {/* Error Message */}
-          {showerror && (
-            <Alert variant="danger" className="mt-3">
-              {errormessage}
-            </Alert>
-          )}
+          {showerror && <Alert variant="danger" className="mt-3">{errormessage}</Alert>}
         </Form>
 
         {/* Forgot Password */}

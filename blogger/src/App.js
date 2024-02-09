@@ -44,7 +44,7 @@ function App() {
         <Route element={<Registration />} path="/register" />
         <Route element={<Home />} path="/home" />
         <Route element={<AddBlog />} path="/addBlog" />
-        <Route element={<EditBlog />} path="/editBlog" />
+        <Route element={<EditBlog />} path="/editBlog/:id" />
         <Route element={<AboutUs />} path="/aboutUs" />
       </Routes>
       {!showFooter && <Footer />}

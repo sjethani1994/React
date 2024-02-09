@@ -39,7 +39,7 @@ const Home = () => {
       {blogs.length !== 0 ? (
         <div>
           {blogs.map((blog) => (
-            <div key={blog.id}>
+            <div key={blog._id}>
               <Bloglist blog={blog} />
             </div>
           ))}

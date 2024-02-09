@@ -1,6 +1,10 @@
 import React from "react";
 import "../styles/Bloglist.css";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import API from "../connection/connection";
 function Bloglist({ blog }) {
+  const navigate = useNavigate();
   const renderLastUpdatedMessage = (updatedAt) => {
     const currentDate = new Date();
     const updatedDate = new Date(updatedAt);
@@ -22,6 +26,36 @@ function Bloglist({ blog }) {
       return `Last updated ${diffInMinutes} minute${
         diffInMinutes > 1 ? "s" : ""
       } ago`;
+    }
+  };
+
+  const editBlog = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        console.log("Token not found in local storage.");
+        return;
+      }
+
+      const headers = {
+        Authorization: token,
+      };
+
+      const response = await axios.get(`${API}/blogs/getBlogById/${blog._id}`, {
+        headers,
+      });
+
+      if (response.status === 200) {
+        const data = response.data;
+        // If successful, navigate to the edit page with the current blog data
+        navigate(`/editBlog/${blog._id}`, { state: data });
+      } else {
+        // Handle other status codes
+        console.error(`Failed to fetch blog: ${response.status}`);
+      }
+    } catch (error) {
+      // Handle errors
+      console.error("Error fetching blog:", error);
     }
   };
 
@@ -53,6 +87,14 @@ function Bloglist({ blog }) {
                 </small>
               </p>
             </div>
+          </div>
+        </div>
+        <div class="row">
+          <div className="card-footer">
+            <button className="btn btn-primary mr-2" onClick={editBlog}>
+              <i class="fa-solid fa-pen"></i>
+              &nbsp; Edit
+            </button>
           </div>
         </div>
       </div>

@@ -32,7 +32,7 @@ export default function Body() {
     };
 
     getProducts();
-  }, []);
+  });
 
   return (
     <Row>

@@ -24,10 +24,18 @@ const AddBlog = () => {
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];
 
-    // Update image preview
-    const previewURL = URL.createObjectURL(selectedImage);
-    setImagePreview(previewURL);
+    // Get image URL
+    const imageURL = URL.createObjectURL(selectedImage);
+    console.log("Image URL:", imageURL);
 
+    // Get image name
+    const imageName = selectedImage.name;
+    console.log("Image Name:", imageName);
+
+    // Update image preview
+    setImagePreview(imageURL);
+
+    // Set selected image
     setImage(selectedImage);
   };
 
@@ -52,20 +60,23 @@ const AddBlog = () => {
         setImageError("Image is required.");
         return;
       }
-
-      // Post form data to the server
-      const formData = new FormData();
-      formData.append("title", title);
-      formData.append("content", content);
-      formData.append("image", image);
-
+      
       const headers = {
         Authorization: localStorage.getItem("token"),
       };
 
-      const response = await axios.post(`${API}/blogs/createBlog`, formData, {
-        headers: headers,
-      });
+      const response = await axios.post(
+        `${API}/blogs/createBlog`,
+        {
+          title: title,
+          content: content,
+          file: imagePreview,
+          userId: "65c24158852ff3fa5fecb6dd",
+        },
+        {
+          headers: headers,
+        }
+      );
 
       // If successful response, navigate to home page
       if (response.status === 200) {

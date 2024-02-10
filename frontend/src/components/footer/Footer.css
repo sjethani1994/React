@@ -1,0 +1,16 @@
+*,
+::after,
+::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.foot{
+    background-color: #17cf97;
+    font-size: larger;
+    color: black;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-weight: bolder;
+}

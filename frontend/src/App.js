@@ -6,11 +6,11 @@ import Login from "./components/Login/login";
 
 function App() {
   const [isValid, setisValid] = useState(false);
-
+  const user = localStorage.getItem("token")
   return (
     <Routes>
     {/* If the user is logged in, render the Main component */}
-    {isValid ? (
+    {isValid || user ? (
       <Route path="/" element={<Main />} />
     ) : (
       // If the user is not logged in, redirect to the login page

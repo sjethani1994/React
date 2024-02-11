@@ -27,10 +27,36 @@ const usePost = () => {
     }
   };
 
+  const signup = async (firstName, lastName, email, username, password, address) => {
+    try {
+      const response = await axios.post(`${API}/user/register`, {
+        firstName,
+        lastName,
+        email,
+        username,
+        password,
+        address,
+      });
+
+      if (response.status === 201) {
+        setData(response);
+      } else {
+        setError("Invalid email or password");
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        setError("Invalid email or password"); // Unauthorized error
+      } else {
+        setError(error.response.data.message); // Other errors
+      }
+    }
+  };
+
   return {
     data,
     error,
     login,
+    signup,
   };
 };
 

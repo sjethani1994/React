@@ -1,75 +1,78 @@
-import React from 'react'
-import { useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import styles from '../Signup/style.module.css';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import styles from "../Signup/style.module.css";
+import usePost from "../../hooks/usePost"; // Import the usePost hook
+import { useGlobalState } from "../../context/GlobalStateContext"; // Import the global state context
+import API from "../../connection/connection";
 
 const Login = () => {
-    const [data,setData] = useState({email: "", password: ""});
-    const [error, setError] = useState("");
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const { makeRequest } = usePost(`${API}/user/login`);
+  const { isLoading, error, data } = useGlobalState(); // Access global state
+  const navigate = useNavigate();
+  const handleChange = ({ target }) => {
+    setFormData({ ...formData, [target.name]: target.value });
+  };
 
-    const handleChange = ({currentTarger: input}) => {
-        setData({...data, [input.name]: input.value});
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await makeRequest(formData); // Wait for the request to complete
+      console.log(data);
+      localStorage.setItem("token", data?.data?.token);
+      if (data?.status === 200) navigate("/");
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const url = "http://localhost:5000/api/auth";
-            const {data: res} = await axios.post(url,data);
-            localStorage.setItem("token", res.data);
-            window.location = "/";
-        } catch (error) {
-            if(
-                error.response &&
-                error.response.status >=400 &&
-                error.response.status <=500
-            ){
-                setError(error.response.data.message);
-            }
-        }
-    };
   return (
     <div className={styles.login_container}>
-        <div className={styles.login_form_container}>
-            <div className={styles.left}>
-                <form className={styles.form_container} onSubmit={handleSubmit}>
-                    <h1>Login To Validate</h1>
-                    <input
-                    type='email'
-                    placeholder='Email'
-                    name='email'
-                    onChange={handleChange}
-                    value={data.email}
-                    required
-                    className={styles.input}                    
-                    />
-                    <input
-                    type='password'
-                    placeholder='Password'
-                    name='password'
-                    onChange={handleChange}
-                    value={data.password}
-                    required
-                    className={styles.input}
-                    />
+      <div className={styles.login_form_container}>
+        <div className={styles.left}>
+          <form className={styles.form_container} onSubmit={handleSubmit}>
+            <h1>Login To Validate</h1>
+            <input
+              type="email"
+              placeholder="Email"
+              name="email"
+              onChange={handleChange}
+              value={formData.email}
+              required
+              className={styles.input}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              onChange={handleChange}
+              value={formData.password}
+              required
+              className={styles.input}
+            />
 
-                    {error && <div className={styles.error_msg}>{error}</div>}
-                    <button type='submit' className={styles.green_btn}>
-                        Validate
-                    </button>
-                </form>
-            </div>
-            <div className={styles.right}>
-                <h3>New Here?</h3>
-                <Link to="/signup">
-                    <button type='button' className={styles.white_btn}>
-                        Apply
-                    </button>
-                </Link>
-            </div>
+            {error && <div className={styles.error_msg}>{error}</div>}
+            {data && <div className={styles.success_msg}>Login Successful</div>}
+            <button
+              type="submit"
+              className={styles.green_btn}
+              disabled={isLoading}
+            >
+              {isLoading ? "Loading..." : "Validate"}
+            </button>
+          </form>
         </div>
+        <div className={styles.right}>
+          <h3>New Here?</h3>
+          <Link to="/signup">
+            <button type="button" className={styles.white_btn}>
+              Apply
+            </button>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };
+
 export default Login;

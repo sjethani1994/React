@@ -27,13 +27,20 @@ const usePost = () => {
     }
   };
 
-  const signup = async (firstName, lastName, email, username, password, address) => {
+  const signup = async ({
+    firstName,
+    lastName,
+    email,
+    username,
+    password,
+    address,
+  }) => {
     try {
       const response = await axios.post(`${API}/user/register`, {
         firstName,
         lastName,
-        email,
         username,
+        email,
         password,
         address,
       });

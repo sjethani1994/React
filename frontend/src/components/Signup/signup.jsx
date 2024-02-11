@@ -27,14 +27,14 @@ function Signup({ setisValid }) {
   // Function to handle form submission
   const registerUser = async (event) => {
     event.preventDefault();
-    await signup(
-      formData.firstName,
-      formData.lastName,
-      formData.address,
-      formData.email,
-      formData.username,
-      formData.password
-    );
+    await signup({
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      username: formData.username,
+      email: formData.email,
+      password: formData.password,
+      address: formData.address,
+    });
   };
 
   // Effect to handle navigation after successful signup
@@ -83,6 +83,15 @@ function Signup({ setisValid }) {
               />
               <input
                 type="email"
+                placeholder="Username"
+                name="username"
+                onChange={handleChange}
+                value={formData.username}
+                required
+                className={styles.input}
+              />
+              <input
+                type="email"
                 placeholder="Email"
                 name="email"
                 onChange={handleChange}
@@ -90,15 +99,6 @@ function Signup({ setisValid }) {
                 required
                 className={styles.input}
               />
-              <input
-              type="email"
-              placeholder="Username"
-              name="username"
-              onChange={handleChange}
-              value={formData.username}
-              required
-              className={styles.input}
-            />
               <input
                 type="password"
                 placeholder="Password"

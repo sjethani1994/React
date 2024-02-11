@@ -1,38 +1,37 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
+import API from "../connection/connection";
 
-function useFetch(url, method = "GET", requestData = null) {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
+const useFetch = () => {
+  const [getData, setGetData] = useState(null);
   const [error, setError] = useState(null);
+  const getAllProducts = async () => {
+    try {
+      const headers = {
+        Authorization: localStorage.getItem("token")
+      };
 
-  useEffect(() => {
-    setLoading(true);
-    setData(null);
-    setError(null);
-    const source = axios.CancelToken.source();
+      const response = await axios.get(`${API}/product/getAllProducts`, { headers });
 
-    axios({
-      method: method,
-      url: url,
-      data: requestData,
-      cancelToken: source.token,
-    })
-      .then((res) => {
-        setLoading(false);
-        setData(res.data);
-      })
-      .catch((err) => {
-        setLoading(false);
-        setError("An error occurred. Awkward..");
-      });
+      if (response.status === 200) {
+        setGetData(response.data.products);
+      } else {
+        setError("Invalid email or password");
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        setError("Invalid email or password"); // Unauthorized error
+      } else {
+        setError(error.response.data.message); // Other errors
+      }
+    }
+  };
 
-    return () => {
-      source.cancel();
-    };
-  }, [url, method, requestData]);
-
-  return { data, loading, error };
-}
+  return {
+    getData,
+    error,
+    getAllProducts
+  };
+};
 
 export default useFetch;

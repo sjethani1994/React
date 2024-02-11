@@ -1,31 +1,37 @@
-import { useCallback } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { useGlobalState } from "../context/GlobalStateContext"; // Import the global state context
+import API from "../connection/connection";
 
-export default function usePost(url) {
-  const { setError, setData, setIsLoading } = useGlobalState(); // Access global state functions
+const usePost = () => {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
 
-  const makeRequest = useCallback(
-    async (requestData) => {
-      setIsLoading(true); // Set loading state to true
-      setError(null); // Reset error state
-      try {
-        const response = await axios.post(url, requestData);
+  const login = async (email, password) => {
+    try {
+      const response = await axios.post(`${API}/user/login`, {
+        email,
+        password,
+      });
+
+      if (response.status === 200) {
         setData(response);
-      } catch (err) {
-        if (err.response) {
-          setError(err.response.data.message || "An error occurred");
-        } else if (err.request) {
-          setError("No response received from the server");
-        } else {
-          setError("An error occurred while processing the request");
-        }
-      } finally {
-        setIsLoading(false);
+      } else {
+        setError("Invalid email or password");
       }
-    },
-    [url, setError, setData, setIsLoading]
-  );
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        setError("Invalid email or password"); // Unauthorized error
+      } else {
+        setError(error.response.data.message); // Other errors
+      }
+    }
+  };
 
-  return { makeRequest };
-}
+  return {
+    data,
+    error,
+    login,
+  };
+};
+
+export default usePost;

@@ -1,37 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "../Signup/style.module.css";
 import usePost from "../../hooks/usePost"; // Import the usePost hook
-import { useGlobalState } from "../../context/GlobalStateContext"; // Import the global state context
-import API from "../../connection/connection";
 
-const Login = () => {
+const Login = ({ setisValid }) => {
+  // State to manage form data
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const { makeRequest } = usePost(`${API}/user/login`);
-  const { isLoading, error, data } = useGlobalState(); // Access global state
+
+  // Destructuring values returned by usePost hook
+  const { data, error, login } = usePost();
+
+  // Hook provided by react-router-dom for navigation
   const navigate = useNavigate();
+
+  // Function to handle input changes
   const handleChange = ({ target }) => {
     setFormData({ ...formData, [target.name]: target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await makeRequest(formData); // Wait for the request to complete
-      console.log(data);
-      localStorage.setItem("token", data?.data?.token);
-      if (data?.status === 200) navigate("/");
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
+  // Function to handle form submission
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await login(formData.email, formData.password);
   };
+
+  // Effect to handle navigation after successful login
+  useEffect(() => {
+    if (data && data.status === 200) {
+      localStorage.setItem("token", data.data.token);
+      setisValid(true);
+      navigate("/");
+    }
+  }, [data, error, navigate, setisValid]);
 
   return (
     <div className={styles.login_container}>
       <div className={styles.login_form_container}>
         <div className={styles.left}>
-          <form className={styles.form_container} onSubmit={handleSubmit}>
+          <div className={styles.form_container}>
             <h1>Login To Validate</h1>
+            {/* Input fields for email and password */}
             <input
               type="email"
               placeholder="Email"
@@ -51,18 +59,21 @@ const Login = () => {
               className={styles.input}
             />
 
+            {/* Display error message if there is an error */}
             {error && <div className={styles.error_msg}>{error}</div>}
-            {data && <div className={styles.success_msg}>Login Successful</div>}
+
+            {/* Button to trigger form submission */}
             <button
-              type="submit"
+              type="button" // Change type to "button"
               className={styles.green_btn}
-              disabled={isLoading}
+              onClick={handleSubmit} // Call handleSubmit function on button click
             >
-              {isLoading ? "Loading..." : "Validate"}
+              Validate
             </button>
-          </form>
+          </div>
         </div>
         <div className={styles.right}>
+          {/* Link to navigate to signup page */}
           <h3>New Here?</h3>
           <Link to="/signup">
             <button type="button" className={styles.white_btn}>

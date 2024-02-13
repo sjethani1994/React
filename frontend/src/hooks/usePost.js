@@ -3,9 +3,10 @@ import axios from "axios";
 import API from "../connection/connection";
 
 const usePost = () => {
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
+  const [data, setData] = useState(null); // State to hold response data
+  const [error, setError] = useState(null); // State to hold error messages
 
+  // Function to handle user login
   const login = async (email, password) => {
     try {
       const response = await axios.post(`${API}/user/login`, {
@@ -14,19 +15,24 @@ const usePost = () => {
       });
 
       if (response.status === 200) {
-        setData(response);
+        setData(response); // Set data if login is successful
       } else {
-        setError("Invalid email or password");
+        setError("Invalid email or password"); // Set error message for unsuccessful login
       }
     } catch (error) {
-      if (error.response && error.response.status === 401) {
-        setError("Invalid email or password"); // Unauthorized error
+      if (error.response) {
+        if (error.response && error.response.status === 401) {
+          setError("Invalid email or password"); // Unauthorized error
+        } else {
+          setError(error.response.data.message); // Other errors
+        }
       } else {
-        setError(error.response.data.message); // Other errors
+        setError(error.message); // Network error
       }
     }
   };
 
+  // Function to handle user signup
   const signup = async ({
     firstName,
     lastName,
@@ -46,19 +52,24 @@ const usePost = () => {
       });
 
       if (response.status === 201) {
-        setData(response);
+        setData(response); // Set data if signup is successful
       } else {
-        setError("Invalid email or password");
+        setError("Invalid email or password"); // Set error message for unsuccessful signup
       }
     } catch (error) {
-      if (error.response && error.response.status === 401) {
-        setError("Invalid email or password"); // Unauthorized error
+      if (error.response) {
+        if (error.response && error.response.status === 401) {
+          setError("Invalid email or password"); // Unauthorized error
+        } else {
+          setError(error.response.data.message); // Other errors
+        }
       } else {
-        setError(error.response.data.message); // Other errors
+        setError(error.message); // Network error
       }
     }
   };
 
+  // Return data, error, login and signup functions
   return {
     data,
     error,

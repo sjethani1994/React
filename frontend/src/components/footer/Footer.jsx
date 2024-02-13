@@ -1,10 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Footer.css";
+import usePost from "../../hooks/usePost";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+
+  // Destructuring values returned by usePost hook
+  const { data, error, subscribe } = usePost();
+
+  const handleSubmit = async () => {
+    try {
+      // Make a POST request to your backend API endpoint to subscribe the user
+      await subscribe(email);
+      setSubscribed(true);
+    } catch (error) {
+      console.error("Error subscribing:", error);
+      // Handle error (e.g., show error message to user)
+    }
+  };
+
   return (
-    <div className="container-fuild mt-5">
-      <footer className="text-center text-white" style={{background: "#3bb19b"}}>
+    <div className="container-fluid mt-5">
+      <footer
+        className="text-center text-white"
+        style={{ background: "#3bb19b" }}
+      >
         <div className="container p-4 pb-0">
           <section className="">
             <form action="">
@@ -21,16 +42,29 @@ const Footer = () => {
                       id="form5Example2"
                       className="form-control"
                       placeholder="Enter your email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
                 </div>
                 <div className="col-auto">
-                  <button type="submit" className="btn btn-outline-light mb-4">
+                  <button
+                    type="button"
+                    className="btn btn-outline-light mb-4"
+                    onClick={handleSubmit}
+                  >
                     Subscribe
                   </button>
                 </div>
               </div>
             </form>
+            {subscribed && (
+              <div className="row">
+                <div className="col text-center">
+                  <p className="text-white">Thank you for subscribing!</p>
+                </div>
+              </div>
+            )}
           </section>
         </div>
         <div

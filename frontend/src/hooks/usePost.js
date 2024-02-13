@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import API from "../connection/connection";
+import { swalError, swalSuccess } from "../utils/Swal";
 
 const usePost = () => {
   const [data, setData] = useState(null); // State to hold response data
@@ -69,12 +70,55 @@ const usePost = () => {
     }
   };
 
+  const subscribe = async (email) => {
+    try {
+      const headers = {
+        Authorization: localStorage.getItem("token"),
+      };
+
+      const response = await axios.post(
+        `${API}/user/newsLetter`,
+        {
+          email,
+        },
+        { headers }
+      );
+
+      if (response.status === 200) {
+        // Assuming successful subscription returns a success message
+        setData(response.data.message); // Set data if subscription is successful
+        swalSuccess("", response.data.message);
+      } else {
+        // Handle unexpected response status
+        setError("Unexpected response status");
+      }
+    } catch (error) {
+      console.log(error);
+      if (error.response) {
+        // The request was made and the server responded with an error status code
+        if (error.response.status === 400) {
+          setError(error.response.data.error); // Bad request, email format is invalid
+          swalError("", error.response.data.error);
+        } else {
+          setError("Server error"); // Other server errors
+        }
+      } else if (error.request) {
+        // The request was made but no response was received
+        setError("No response from server"); // Network error
+      } else {
+        // Something happened in setting up the request that triggered an error
+        setError("Error occurred"); // Generic error
+      }
+    }
+  };
+
   // Return data, error, login and signup functions
   return {
     data,
     error,
     login,
     signup,
+    subscribe,
   };
 };
 

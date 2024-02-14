@@ -66,7 +66,7 @@ const AddBlog = () => {
   };
 
   return (
-    <div className="add-blog-container background-image">
+    <div className="add-blog-container background-image d-flex">
       <div className="form-container">
         <h2>Add Blog</h2>
         <form onSubmit={handleSubmit} className="blog-form">

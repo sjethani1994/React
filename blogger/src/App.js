@@ -36,7 +36,7 @@ function App() {
   }, [location]);
 
   return (
-    <>
+    <div className="body">
       {!showHeader && <Header />}
       <Routes>
         <Route element={<Login />} path="/" />
@@ -47,7 +47,7 @@ function App() {
         <Route element={<AboutUs />} path="/aboutUs" />
       </Routes>
       {!showFooter && <Footer />}
-    </>
+    </div>
   );
 }
 

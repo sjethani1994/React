@@ -36,11 +36,11 @@ const Home = () => {
   }, [blogs]); // Add blogs state as a dependency
 
   return (
-    <div className="body">
+    <div>
       {blogs.length !== 0 ? (
-        <div>
+        <div className="row">
           {blogs.map((blog) => (
-            <div key={blog._id}>
+            <div className="col-sm-12 col-md-6 col-lg-4" key={blog._id}>
               <Bloglist blog={blog} />
             </div>
           ))}

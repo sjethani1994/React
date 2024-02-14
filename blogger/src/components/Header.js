@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../styles/Header.css";
 const Navbar = () => {
   return (
-    <nav className="navbar sticky-top navbar-expand-lg custom-header py-2 px-4 px-xl-5">
+    <nav className="navbar navbar-expand-lg custom-header py-2 px-4 px-xl-5">
       <button
         className="navbar-toggler"
         type="button"
@@ -23,13 +23,13 @@ const Navbar = () => {
         />
         <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
           <li className="nav-item active">
-            <Link className="nav-link" href="#">
+            <Link className="nav-link" to={"/home"}>
               Home <span className="sr-only">(current)</span>
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" href="#">
-              Link
+            <Link className="nav-link" to={"/addBlog"}>
+              Add Blog
             </Link>
           </li>
           <li className="nav-item">

@@ -3,7 +3,7 @@ import "../styles/Footer.css";
 import { MDBContainer, MDBBtn, MDBIcon } from "mdb-react-ui-kit";
 const Footer = () => {
   return (
-    <MDBContainer fluid className="p-0 mt-5 h-custom fixed-bottom">
+    <MDBContainer fluid className="p-0  h-custom">
       <div className="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
         <div className="text-white mb-3 mb-md-0">
           Copyright © 2024. All rights reserved.

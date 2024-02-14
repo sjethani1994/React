@@ -1,71 +1,51 @@
 import React, { useState, useEffect } from "react";
 import "../styles/EditBlog.css";
 import { useLocation } from "react-router-dom";
-import { Alert } from "react-bootstrap";
 import axios from "axios";
 import API from "../connection/connection";
 
 const EditBlog = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [image, setImage] = useState(null);
-  const [imagePreview, setImagePreview] = useState(null);
-  const [titleError, setTitleError] = useState("");
-  const [contentError, setContentError] = useState("");
-  const [imageError, setImageError] = useState("");
-  const [error, setError] = useState("");
-
   const location = useLocation(); // Get location object
-  const [blog, setBlogData] = useState(location.state);
-
+  const [blog] = useState(location.state);
+  const [formData, setFormData] = useState({
+    title: "",
+    content: "",
+    avatar: null,
+  });
+  const [imagePreview, setImagePreview] = useState(null);
+  const [error, setError] = useState("");
   useEffect(() => {
     // Set initial values based on received blogData
     if (blog) {
-      setTitle(blog.title);
-      setContent(blog.content);
-      setImagePreview(blog.image);
+      setFormData({
+        title: blog.title,
+        content: blog.content,
+        avatar: `http://localhost:5000/${blog.avatar.replace(/\\/g, "/")}`,
+      });
     }
   }, [blog]);
 
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
-  };
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: files ? files[0] : value,
+    }));
 
-  const handleContentChange = (e) => {
-    setContent(e.target.value);
-  };
-
-  const handleImageChange = (e) => {
-    const selectedImage = e.target.files[0];
-
-    // Update image preview
-    const previewURL = URL.createObjectURL(selectedImage);
-    setImagePreview(previewURL);
-
-    setImage(selectedImage);
+    if (name === "avatar" && files) {
+      const previewURL = URL.createObjectURL(files[0]);
+      setImagePreview(previewURL);
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Reset previous error messages
-    setTitleError("");
-    setContentError("");
-    setImageError("");
     setError("");
 
     try {
-      // Check if any field is empty
-      if (!title) {
-        setTitleError("Title is required.");
-        return;
-      }
-      if (!content) {
-        setContentError("Content is required.");
-        return;
-      }
-      if (!image) {
-        setImageError("Image is required.");
-        return;
+      // Validate form fields
+      if (!formData.title || !formData.content || !formData.avatar) {
+        throw new Error("All fields are required.");
       }
 
       const headers = {
@@ -74,25 +54,31 @@ const EditBlog = () => {
 
       const response = await axios.post(
         `${API}/blogs/updateBlog/${blog._id}`,
-        { title, content, imagePreview },
-        {
-          headers: headers,
-        }
+        createFormData(formData),
+        { headers }
       );
 
       if (response.status === 200) {
         // Reset the form fields after submission
-        setTitle("");
-        setContent("");
-        setImage(null);
+        setFormData({
+          title: "",
+          content: "",
+          avatar: null,
+        });
         setImagePreview(null);
-      } else {
-        setError(response.data.message);
       }
     } catch (error) {
-      // If there's an error, set error message
-      setError(error.response?.data?.message || "An error occurred.");
+      setError(error.response?.data?.message || error.message);
     }
+  };
+
+  const createFormData = (data) => {
+    const formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("content", data.content);
+    formData.append("userId", "65c24158852ff3fa5fecb6dd");
+    formData.append("avatar", data.avatar);
+    return formData;
   };
 
   return (
@@ -104,46 +90,48 @@ const EditBlog = () => {
           <div className="form-fields">
             <label>
               Title:
-              <input type="text" value={title} onChange={handleTitleChange} />
+              <input
+                type="text"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+              />
             </label>
-            {titleError && (
-              <Alert className="alert" variant="danger">
-                {titleError}
-              </Alert>
-            )}
             <br />
 
             <label>
               Description:
-              <textarea value={content} onChange={handleContentChange} />
+              <textarea
+                name="content"
+                value={formData.content}
+                onChange={handleChange}
+              />
             </label>
-            {contentError && (
-              <Alert className="alert" variant="danger">
-                {contentError}
-              </Alert>
-            )}
-
             <br />
+
             <label>
               New Image:
               <input
                 type="file"
                 accept="image/*"
-                onChange={handleImageChange}
+                name="avatar"
+                onChange={handleChange}
               />
             </label>
-            {imageError && (
-              <Alert className="alert" variant="danger">
-                {imageError}
-              </Alert>
-            )}
-
             <br />
           </div>
 
           <div className="image-preview-container">
-            {imagePreview && (
+            {imagePreview ? (
               <img src={imagePreview} alt="Preview" className="image-preview" />
+            ) : (
+              formData.avatar && (
+                <img
+                  src={formData.avatar}
+                  alt="Preview"
+                  className="image-preview"
+                />
+              )
             )}
           </div>
 

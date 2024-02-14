@@ -4,6 +4,7 @@ import "../styles/HomeButtons.css";
 import axios from "axios";
 import API from "../connection/connection";
 import Bloglist from "./Bloglist";
+
 const Home = () => {
   const [blogs, setBlogs] = useState([]);
 
@@ -19,9 +20,11 @@ const Home = () => {
         const headers = {
           Authorization: token,
         };
+
         const response = await axios.get(`${API}/blogs/getAllBlogs`, {
           headers: headers,
         });
+
         console.log("Response:", response.data);
         setBlogs(response.data);
       } catch (error) {

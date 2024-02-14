@@ -72,7 +72,7 @@ function Bloglist({ blog }) {
         <div className="row g-0">
           <div className="col-md-4">
             <img
-              src={blog.image} // Replace with your actual image URL
+              src={`http://localhost:5000/${blog.avatar.replace(/\\/g, "/")}`}
               className="img-fluid rounded-start"
               alt="Card preview"
             />

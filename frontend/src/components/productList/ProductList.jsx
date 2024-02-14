@@ -47,9 +47,12 @@ function ProductList({ product }) {
               </OverlayTrigger>
             )}
           </p>
-          <p className="card-text">Price: ${product.price}</p>
-          {/* Add more details if needed */}
         </div>
+      </div>
+      <div class="card-footer text-muted">
+        <p className="card-text" style={{fontWeight: "bold"}}>Price: ${product.price}</p>
+        <button></button>
+        {/* Add more details if needed */}
       </div>
     </div>
   );

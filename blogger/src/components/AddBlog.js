@@ -1,96 +1,69 @@
 import React, { useState } from "react";
-import axios from "axios"; // Import axios for making HTTP requests
-import "../styles/AddBlog.css";
+import axios from "axios";
+import "../styles/AddBlog.css"; // Make sure to import the CSS file
 import API from "../connection/connection";
 import { Alert } from "react-bootstrap";
+import { swalSuccess } from "../utils/Swal";
+
 const AddBlog = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [image, setImage] = useState(null);
-  const [imagePreview, setImagePreview] = useState(null);
-  const [titleError, setTitleError] = useState("");
-  const [contentError, setContentError] = useState("");
-  const [imageError, setImageError] = useState("");
-  const [error, setError] = useState("");
+  const [formData, setFormData] = useState({
+    title: "",
+    content: "",
+    avatar: null,
+  });
+  const [avatarPreview, setAvatarPreview] = useState(null);
+  const [errors, setErrors] = useState({});
 
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
-  };
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: files ? files[0] : value,
+    }));
 
-  const handleContentChange = (e) => {
-    setContent(e.target.value);
-  };
-
-  const handleImageChange = (e) => {
-    const selectedImage = e.target.files[0];
-
-    // Get image URL
-    const imageURL = URL.createObjectURL(selectedImage);
-    console.log("Image URL:", imageURL);
-
-    // Get image name
-    const imageName = selectedImage.name;
-    console.log("Image Name:", imageName);
-
-    // Update image preview
-    setImagePreview(imageURL);
-
-    // Set selected image
-    setImage(selectedImage);
+    if (name === "avatar" && files) {
+      const avatarURL = URL.createObjectURL(files[0]);
+      setAvatarPreview(avatarURL);
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Reset previous error messages
-    setTitleError("");
-    setContentError("");
-    setImageError("");
-    setError("");
+    setErrors({});
 
     try {
-      // Check if any field is empty
-      if (!title) {
-        setTitleError("Title is required.");
+      // Validate form fields
+      if (!formData.title || !formData.content || !formData.avatar) {
+        throw new Error("All fields are required.");
       }
-      if (!content) {
-        setContentError("Content is required.");
-      }
-      if (!image) {
-        setImageError("Image is required.");
-        return;
-      }
-      
+
       const headers = {
         Authorization: localStorage.getItem("token"),
+        "Content-Type": "multipart/form-data",
       };
 
-      const response = await axios.post(
-        `${API}/blogs/createBlog`,
-        {
-          title: title,
-          content: content,
-          file: imagePreview,
-          userId: "65c24158852ff3fa5fecb6dd",
-        },
-        {
-          headers: headers,
-        }
-      );
+      const response = await axios.post(`${API}/blogs/upload`, formData, {
+        headers,
+      });
 
-      // If successful response, navigate to home page
-      if (response.status === 200) {
-        // Reset the form fields after submission
-        setTitle("");
-        setContent("");
-        setImage("");
-        setImagePreview("");
-      } else {
-        setError(response.data.message);
+      console.log(response)
+      if (response.status === 201) {
+        console.log(response)
+        swalSuccess("", response.data.message);
+        // Reset form data and avatar preview after submission
+        setFormData({
+          title: "",
+          content: "",
+          avatar: null,
+        });
+        setAvatarPreview(null);
       }
     } catch (error) {
-      // If there's an error, set error message
-      setError(error.response.data.message);
+      if (error.response) {
+        setErrors(error.response.data);
+      } else {
+        console.error("An error occurred:", error.message);
+      }
     }
   };
 
@@ -101,11 +74,16 @@ const AddBlog = () => {
         <form onSubmit={handleSubmit} className="blog-form">
           <label>
             Title:
-            <input type="text" value={title} onChange={handleTitleChange} />
+            <input
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+            />
           </label>
-          {titleError && (
+          {errors.title && (
             <Alert className="alert" variant="danger">
-              {titleError}
+              {errors.title}
             </Alert>
           )}
 
@@ -113,11 +91,15 @@ const AddBlog = () => {
 
           <label>
             Content:
-            <textarea value={content} onChange={handleContentChange} />
+            <textarea
+              name="content"
+              value={formData.content}
+              onChange={handleChange}
+            />
           </label>
-          {contentError && (
+          {errors.content && (
             <Alert className="alert" variant="danger">
-              {contentError}
+              {errors.content}
             </Alert>
           )}
 
@@ -125,23 +107,32 @@ const AddBlog = () => {
 
           <label>
             Image:
-            <input type="file" accept="image/*" onChange={handleImageChange} />
+            <input
+              type="file"
+              accept="image/*"
+              name="avatar"
+              onChange={handleChange}
+            />
           </label>
-          {imageError && (
+          {errors.avatar && (
             <Alert className="alert" variant="danger">
-              {imageError}
+              {errors.avatar}
             </Alert>
           )}
 
           <br />
 
-          {imagePreview && (
-            <img src={imagePreview} alt="Preview" className="image-preview" />
+          {avatarPreview && (
+            <img src={avatarPreview} alt="Preview" className="avatar-preview" />
           )}
 
           <br />
 
-          {error && <div className="error">{error}</div>}
+          {errors.message && (
+            <Alert className="alert" variant="danger">
+              {errors.message}
+            </Alert>
+          )}
 
           <br />
 

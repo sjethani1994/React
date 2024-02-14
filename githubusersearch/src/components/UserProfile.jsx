@@ -1,10 +1,3 @@
-// import React from "react";
-
-// function UserProfile() {
-//   return <div>UserProfile</div>;
-// }
-
-// export default UserProfile;
 import React from "react";
 import { useLocation } from "react-router-dom";
 import "../styles/UserProfile.css";
@@ -12,7 +5,6 @@ import "../styles/UserProfile.css";
 const UserProfile = () => {
   const location = useLocation();
   const userData = JSON.parse(location.state);
-  console.log(userData);
   if (!userData) {
     return <div className="loading">Loading...</div>; // Handle loading state
   }

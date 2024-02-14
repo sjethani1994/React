@@ -22,7 +22,6 @@ function App() {
   // Hide/show header and footer based on current route
   const handleShowHeaderFooter = () => {
     if (isLoginOrRegister) {
-      console.log(isLoginOrRegister);
       setShowHeader(true);
       setShowFooter(true);
     } else {

@@ -33,7 +33,6 @@ function Bloglist({ blog }) {
     try {
       const token = localStorage.getItem("token");
       if (!token) {
-        console.log("Token not found in local storage.");
         return;
       }
 

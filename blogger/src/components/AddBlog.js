@@ -46,9 +46,7 @@ const AddBlog = () => {
         headers,
       });
 
-      console.log(response)
       if (response.status === 201) {
-        console.log(response)
         swalSuccess("", response.data.message);
         // Reset form data and avatar preview after submission
         setFormData({

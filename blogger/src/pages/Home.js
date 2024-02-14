@@ -13,7 +13,6 @@ const Home = () => {
       try {
         const token = localStorage.getItem("token");
         if (!token) {
-          console.log("Token not found in local storage.");
           return;
         }
 
@@ -25,7 +24,6 @@ const Home = () => {
           headers: headers,
         });
 
-        console.log("Response:", response.data);
         setBlogs(response.data);
       } catch (error) {
         console.error("Error fetching blogs:", error);

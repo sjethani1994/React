@@ -4,7 +4,6 @@ import Registration from "./Registration";
 export default function Header({ username }) {
   const [toggle, setToggle] = useState(false);
 
-  console.log(username)
   function OpenModal() {
     setToggle(true);
   }

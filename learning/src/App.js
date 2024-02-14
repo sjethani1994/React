@@ -24,7 +24,6 @@ function App() {
     fetchData(); // Call the fetchData function
   }, []); // Empty dependency array to run the effect only once on mount
 
-  console.log(products);
   return (
     <BrowserRouter>
       <Header username={loginDetails.username} />

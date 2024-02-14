@@ -16,7 +16,6 @@ function Searchuser() {
       .then((res) => res.json())
       .then((res) => {
         setData(res);
-        console.log(data);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);

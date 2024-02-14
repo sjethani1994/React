@@ -93,7 +93,6 @@ const usePost = () => {
         setError("Unexpected response status");
       }
     } catch (error) {
-      console.log(error);
       if (error.response) {
         // The request was made and the server responded with an error status code
         if (error.response.status === 400) {

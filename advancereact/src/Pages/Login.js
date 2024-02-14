@@ -58,9 +58,7 @@ export default function Login() {
 
   useEffect(() => {
     // Handle the response here
-    console.log(response)
     if (response && response.status === 200) {
-      console.log(response)
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("login", "true");
       hctx.setUsername(response.data.username);

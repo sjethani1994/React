@@ -9,7 +9,6 @@ import UserContext from "./contexts/UserContext";
 import Register from "./Pages/Register";
 function App() {
   const ctx = useContext(UserContext);
-  console.log(ctx.login)
   return (
     <>
       {ctx.login && <Header />}

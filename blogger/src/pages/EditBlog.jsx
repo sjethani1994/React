@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles/EditBlog.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import API from "../connection/connection";
 
@@ -14,6 +14,7 @@ const EditBlog = () => {
   });
   const [imagePreview, setImagePreview] = useState(null);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
   useEffect(() => {
     // Set initial values based on received blogData
     if (blog) {
@@ -72,6 +73,9 @@ const EditBlog = () => {
     }
   };
 
+  const handleCancel = () => {
+    navigate("/home");
+  };
   const createFormData = (data) => {
     const formData = new FormData();
     formData.append("title", data.title);
@@ -83,7 +87,6 @@ const EditBlog = () => {
 
   return (
     <div className="edit-blog-container">
-      <div className="background-image"></div>
       <div className="form-div">
         <h2>Edit Blog</h2>
         <form onSubmit={handleSubmit} className="blog-form">
@@ -143,7 +146,9 @@ const EditBlog = () => {
 
           <div className="button-container">
             <button type="submit">Save Changes</button>
-            <button type="button">Cancel</button>
+            <button type="button" onClick={handleCancel}>
+              Cancel
+            </button>
           </div>
         </form>
       </div>

@@ -2,12 +2,11 @@
 
 
 .edit-blog-container {
-    max-width: 600px;
     margin: auto;
     border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+    background-image: url("https://images.pexels.com/photos/267569/pexels-photo-267569.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-size: cover;
+    background-position: center;
 }
 
 .form-div {
@@ -15,6 +14,8 @@
     background-color: white;
     max-width: 450px;
     margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;

@@ -32,9 +32,22 @@ const AddBlog = () => {
     setErrors({});
 
     try {
-      // Validate form fields
-      if (!formData.title || !formData.content || !formData.avatar) {
-        throw new Error("All fields are required.");
+      const { title, content, avatar } = formData;
+      const errors = {};
+
+      if (!title) {
+        errors.title = "Title is required.";
+      }
+      if (!content) {
+        errors.content = "Content is required.";
+      }
+      if (!avatar) {
+        errors.avatar = "Image is required.";
+      }
+
+      if (Object.keys(errors).length > 0) {
+        setErrors(errors);
+        return;
       }
 
       const headers = {

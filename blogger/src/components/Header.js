@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "../styles/Header.css";
 const Navbar = () => {
   return (
@@ -22,33 +22,22 @@ const Navbar = () => {
           alt=""
         />
         <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li className="nav-item active">
-            <Link className="nav-link" to={"/home"}>
+          <li className="nav-item active" style={{paddingLeft: "10px"}}>
+            <Link className="nav-link" to={"/home"} >
               Home <span className="sr-only">(current)</span>
             </Link>
           </li>
-          <li className="nav-item">
+          <li className="nav-item" style={{paddingLeft: "10px"}}>
             <Link className="nav-link" to={"/addBlog"}>
               Add Blog
             </Link>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link disabled" href="#">
-              Disabled
+          <li className="nav-item" style={{paddingLeft: "10px"}}>
+            <Link className="nav-link" to={"/aboutUs"} >
+              About Us
             </Link>
           </li>
         </ul>
-        <form className="form-inline my-2 my-lg-0">
-          <input
-            className="form-control mr-sm-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button className="btn btn-outline-light my-2 my-sm-0" type="submit">
-            Search
-          </button>
-        </form>
       </div>
     </nav>
   );

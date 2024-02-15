@@ -3,7 +3,8 @@ import axios from "axios";
 import "../styles/AddBlog.css"; // Make sure to import the CSS file
 import API from "../connection/connection";
 import { Alert } from "react-bootstrap";
-import { swalSuccess } from "../utils/Swal";
+import { swalError, swalSuccess } from "../utils/Swal";
+import { useNavigate } from "react-router-dom";
 
 const AddBlog = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +14,8 @@ const AddBlog = () => {
   });
   const [avatarPreview, setAvatarPreview] = useState(null);
   const [errors, setErrors] = useState({});
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -68,11 +71,14 @@ const AddBlog = () => {
           avatar: null,
         });
         setAvatarPreview(null);
+        navigate("/home");
       }
     } catch (error) {
       if (error.response) {
         setErrors(error.response.data);
+        swalError("", error.response.data)
       } else {
+        swalError("", error.message)
         console.error("An error occurred:", error.message);
       }
     }

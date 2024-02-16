@@ -8,10 +8,12 @@ const useFetch = () => {
   const getAllProducts = async () => {
     try {
       const headers = {
-        Authorization: localStorage.getItem("token")
+        Authorization: localStorage.getItem("token"),
       };
 
-      const response = await axios.get(`${API}/product/getAllProducts`, { headers });
+      const response = await axios.get(`${API}/product/getAllProducts`, {
+        headers,
+      });
 
       if (response.status === 200) {
         setGetData(response.data.products);
@@ -27,10 +29,44 @@ const useFetch = () => {
     }
   };
 
+  const getProductById = async (_id) => {
+    try {
+      const headers = {
+        Authorization: localStorage.getItem("token"),
+      };
+      const response = await axios.get(`${API}/product/getProductById/${_id}`, {
+        headers,
+      });
+
+      if (response.status === 200) {
+        return { success: true, data: response, error: null };
+      } else {
+        return {
+          success: false,
+          data: null,
+          error: `Product with id ${_id} not found`,
+        };
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        return { success: false, data: null, error: "Unauthorized access" };
+      } else {
+        return {
+          success: false,
+          data: null,
+          error: error.response
+            ? error.response.data.message
+            : "An error occurred. Please try again later.",
+        };
+      }
+    }
+  };
+
   return {
     getData,
     error,
-    getAllProducts
+    getAllProducts,
+    getProductById,
   };
 };
 

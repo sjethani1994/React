@@ -9,7 +9,7 @@ const Main = () => {
   const { getData, getAllProducts } = useFetch(); // Call the useFetch hook
 
   useEffect(() => {
-    getAllProducts();// Fetch data when the component mounts
+    getAllProducts(); // Fetch data when the component mounts
   }, []); // Empty dependency array ensures it runs only once on component mount
 
   return (
@@ -20,8 +20,11 @@ const Main = () => {
         <div class="row mt-3">
           {getData &&
             getData.map((product) => (
-              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                <ProductList key={product._id} product={product} />
+              <div
+                key={product._id}
+                class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3"
+              >
+                <ProductList product={product} />
               </div>
             ))}
         </div>

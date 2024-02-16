@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import "./ProductList.css";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
-
+import useFetch from "../../hooks/useFetch";
+import { useNavigate } from "react-router-dom";
 function ProductList({ product }) {
-  const [showFullDescription, setShowFullDescription] = useState(false);
+  const [showFullDescription] = useState(false);
 
-  const toggleDescription = () => {
-    setShowFullDescription(!showFullDescription);
-  };
+  const navigate = useNavigate();
+  // Destructuring values returned by usePost hook
+  const { getProductById } = useFetch();
 
   const getDescription = () => {
     const maxLength = 60;
@@ -22,8 +23,24 @@ function ProductList({ product }) {
     }
   };
 
+  const gotoProductDetails = async (e) => {
+    try {
+      const { data, error } = await getProductById(product._id);
+
+      if (data && data.status === 200) {
+        navigate(`/productDetails/${product._id}`, {
+          state: JSON.stringify(data.data.product),
+        });
+      } else {
+        console.error("An error occurred:", error);
+      }
+    } catch (error) {
+      console.error("An unexpected error occurred:", error);
+    }
+  };
+
   return (
-    <div className="card product-card">
+    <div className="card product-card" onClick={gotoProductDetails}>
       <div className="card-body product-card-body">
         <img
           src={product.image}
@@ -50,9 +67,9 @@ function ProductList({ product }) {
         </div>
       </div>
       <div class="card-footer text-muted">
-        <p className="card-text" style={{fontWeight: "bold"}}>Price: ${product.price}</p>
-        <button></button>
-        {/* Add more details if needed */}
+        <p className="card-text" style={{ fontWeight: "bold" }}>
+          Price: ${product.price}
+        </p>
       </div>
     </div>
   );

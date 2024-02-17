@@ -111,6 +111,45 @@ const usePost = () => {
     }
   };
 
+  const placeBid = async (productId, amount) => {
+    try {
+      const headers = {
+        Authorization: localStorage.getItem("token"),
+      };
+
+      const response = await axios.post(
+        `${API}/product/placeBid/${productId}`,
+        {
+          amount,
+        },
+        { headers }
+      );
+
+      if (response.status === 200) {
+        setData(response.data.message);
+        swalSuccess("", response.data.message);
+      } else {
+        // Handle unexpected response status
+        setError("Unexpected response status");
+      }
+    } catch (error) {
+      if (error.response) {
+        // The request was made and the server responded with an error status code
+        if (error.response.status === 400) {
+          setError(error.response.data.error); // Bad request, email format is invalid
+          swalError("", error.response.data.error);
+        } else {
+          setError("Server error"); // Other server errors
+        }
+      } else if (error.request) {
+        // The request was made but no response was received
+        setError("No response from server"); // Network error
+      } else {
+        // Something happened in setting up the request that triggered an error
+        setError("Error occurred"); // Generic error
+      }
+    }
+  };
   // Return data, error, login and signup functions
   return {
     data,
@@ -118,6 +157,7 @@ const usePost = () => {
     login,
     signup,
     subscribe,
+    placeBid,
   };
 };
 

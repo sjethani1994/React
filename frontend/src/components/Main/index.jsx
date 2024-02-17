@@ -5,7 +5,7 @@ import ProductList from "../productList/ProductList";
 import Navbar from "../../Navbar/Navbar";
 import Footer from "../footer/Footer";
 import Carousel from "../Carousel/Carousel";
-const Main = () => {
+const Main = ({ sendMessage }) => {
   const { getData, getAllProducts } = useFetch(); // Call the useFetch hook
 
   useEffect(() => {

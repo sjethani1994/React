@@ -16,13 +16,28 @@ function App() {
     // Function to handle socket event and update state
     const handleSocketEvent = (data) => {
       if (data) {
-        // Merge new data with existing productData
-        setproductData((prevProductData) => [...prevProductData, data]);
-        // Update localStorage with the new data
-        localStorage.setItem(
-          "biddersData",
-          JSON.stringify([...productData, data])
+        // Retrieve previous product data from localStorage
+        const prevProductData =
+          JSON.parse(localStorage.getItem("biddersData")) || [];
+
+        // Check if the new data's _id already exists
+        const index = prevProductData.findIndex(
+          (item) => item._id === data._id
         );
+
+        // If _id exists, update the record
+        if (index !== -1) {
+          prevProductData[index] = data;
+        } else {
+          // If _id doesn't exist, add a new record
+          prevProductData.push(data);
+        }
+
+        // Update productData state
+        setproductData(prevProductData);
+
+        // Update localStorage with the new data
+        localStorage.setItem("biddersData", JSON.stringify(prevProductData));
       }
     };
 
@@ -58,10 +73,7 @@ function App() {
         path="/productDetails/:id"
         element={<ProductDetails productData={productData} />}
       />
-      <Route
-      path="/addproduct"
-      element={<Addproduct />}
-    />
+      <Route path="/addproduct" element={<Addproduct />} />
     </Routes>
   );
 }

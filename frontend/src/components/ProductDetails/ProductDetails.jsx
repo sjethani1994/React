@@ -51,11 +51,11 @@ function ProductDetails({ productData }) {
 
   useEffect(() => {
     // Check if productData exists
-    if (productData.length > 0) {
+    if (productData) {
       // Find the product with matching _id
-      const matchingProduct = productData.find(
-        (element) => element._id === product._id
-      );
+      const matchingProduct = productData.find((element) => {
+        return element._id === product._id;
+      });
       if (matchingProduct) {
         let sortedBidders = [];
         if (matchingProduct.bidders.length > 0) {
@@ -66,7 +66,7 @@ function ProductDetails({ productData }) {
         setbiddersList(sortedBidders);
       } else {
         // Reset biddersList if productData doesn't contain the product with matching _id
-        setbiddersList(null);
+        setbiddersList(product.bidders);
       }
     } else {
       // Reset biddersList if productData is empty
@@ -82,7 +82,10 @@ function ProductDetails({ productData }) {
     <div className="flex-box">
       <div className="left" style={{ flex: 1 }}>
         <div className="big-img">
-          <img    src={`http://localhost:5000/${product.avatar.replace(/\\/g, "/")}`} alt={product.category} />
+          <img
+            src={`http://localhost:5000/${product.avatar.replace(/\\/g, "/")}`}
+            alt={product.category}
+          />
         </div>
       </div>
 

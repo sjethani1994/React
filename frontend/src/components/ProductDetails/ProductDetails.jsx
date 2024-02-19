@@ -49,38 +49,6 @@ function ProductDetails({ productData }) {
     await placeBid(product._id, amount);
   };
 
-  // useEffect(() => {
-  //   let sortedBidders = [];
-  //   if (productData._id === product._id) {
-  //     if (productData.bidders.length > 0) {
-  //       sortedBidders = productData.bidders.sort(
-  //         (a, b) => b.bidAmount - a.bidAmount
-  //       ); // Sort by bidAmount
-  //     } else if (
-  //       data &&
-  //       data.product &&
-  //       data.product.bidders &&
-  //       data.product.bidders.length > 0
-  //     ) {
-  //       sortedBidders = data.product.bidders.sort(
-  //         (a, b) => b.bidAmount - a.bidAmount
-  //       ); // Sort by bidAmount
-  //     } else if (product) {
-  //       sortedBidders = product.bidders.sort(
-  //         (a, b) => b.bidAmount - a.bidAmount
-  //       ); // Sort by bidAmount
-  //     }
-
-  //     setbiddersList(sortedBidders);
-  //   } else {
-  //     setbiddersList(null);
-  //   }
-
-  //   if (error) {
-  //     console.error(error);
-  //   }
-  // }, [productData, data, error, product]);
-
   useEffect(() => {
     let sortedBidders = [];
     // Check if productData exists

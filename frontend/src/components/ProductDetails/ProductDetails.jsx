@@ -8,7 +8,7 @@ function ProductDetails({ productData }) {
   const [product] = useState(JSON.parse(location.state));
   const [timeLeft, setTimeLeft] = useState(getTimeLeft());
   const [amount, setAmount] = useState(""); // Initialize amount state with an empty string
-  const { data, error, placeBid } = usePost(); // Destructure values returned by usePost hook
+  const { error, placeBid } = usePost(); // Destructure values returned by usePost hook
   const [biddersList, setbiddersList] = useState([]);
   // Function to calculate time left until bidding ends
   function getTimeLeft() {
@@ -50,20 +50,28 @@ function ProductDetails({ productData }) {
   };
 
   useEffect(() => {
-    let sortedBidders = [];
     // Check if productData exists
-    if (productData._id === product._id) {
-      if (productData.bidders.length > 0) {
-        sortedBidders = productData.bidders.sort(
-          (a, b) => b.bidAmount - a.bidAmount
-        ); // Sort by bidAmount
+    if (productData.length > 0) {
+      // Find the product with matching _id
+      const matchingProduct = productData.find(
+        (element) => element._id === product._id
+      );
+      if (matchingProduct) {
+        let sortedBidders = [];
+        if (matchingProduct.bidders.length > 0) {
+          sortedBidders = matchingProduct.bidders.sort(
+            (a, b) => b.bidAmount - a.bidAmount
+          ); // Sort by bidAmount
+        }
+        setbiddersList(sortedBidders);
+      } else {
+        // Reset biddersList if productData doesn't contain the product with matching _id
+        setbiddersList(null);
       }
     } else {
-      // Reset biddersList if productData doesn't match product
+      // Reset biddersList if productData is empty
       setbiddersList(null);
     }
-
-    setbiddersList(sortedBidders);
 
     if (error) {
       console.error(error);

@@ -13,11 +13,15 @@ function App() {
 
   useEffect(() => {
     // Function to handle socket event and update state
-    const handleSocketEvent = (productData) => {
-      if (productData) {
-        setproductData(productData);
-        // Store bidders data in localStorage
-        localStorage.setItem("biddersData", JSON.stringify(productData));
+    const handleSocketEvent = (data) => {
+      if (data) {
+        // Merge new data with existing productData
+        setproductData((prevProductData) => [...prevProductData, data]);
+        // Update localStorage with the new data
+        localStorage.setItem(
+          "biddersData",
+          JSON.stringify([...productData, data])
+        );
       }
     };
 

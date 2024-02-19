@@ -3,13 +3,13 @@ import "./ProductDetails.css";
 import { useLocation } from "react-router-dom";
 import usePost from "../../hooks/usePost"; // Import the usePost hook
 
-function ProductDetails() {
+function ProductDetails({ productData }) {
   const location = useLocation(); // Get location object
   const [product] = useState(JSON.parse(location.state));
   const [timeLeft, setTimeLeft] = useState(getTimeLeft());
   const [amount, setAmount] = useState(""); // Initialize amount state with an empty string
   const { data, error, placeBid } = usePost(); // Destructure values returned by usePost hook
-
+  const [biddersList, setbiddersList] = useState([]);
   // Function to calculate time left until bidding ends
   function getTimeLeft() {
     const deadline = new Date(product.endDate).getTime(); // Use product.endDate to calculate deadline
@@ -43,27 +43,64 @@ function ProductDetails() {
   // Function to handle bid placement
   const handleBid = async () => {
     if (isNaN(amount) || amount <= 0) {
-      // Validate bid amount
       console.log("Invalid bid amount");
       return;
     }
-    console.log("Bid placed", product._id);
     await placeBid(product._id, amount);
   };
 
-  // Effect to handle navigation after successful bid placement or errors
+  // useEffect(() => {
+  //   let sortedBidders = [];
+  //   if (productData._id === product._id) {
+  //     if (productData.bidders.length > 0) {
+  //       sortedBidders = productData.bidders.sort(
+  //         (a, b) => b.bidAmount - a.bidAmount
+  //       ); // Sort by bidAmount
+  //     } else if (
+  //       data &&
+  //       data.product &&
+  //       data.product.bidders &&
+  //       data.product.bidders.length > 0
+  //     ) {
+  //       sortedBidders = data.product.bidders.sort(
+  //         (a, b) => b.bidAmount - a.bidAmount
+  //       ); // Sort by bidAmount
+  //     } else if (product) {
+  //       sortedBidders = product.bidders.sort(
+  //         (a, b) => b.bidAmount - a.bidAmount
+  //       ); // Sort by bidAmount
+  //     }
+
+  //     setbiddersList(sortedBidders);
+  //   } else {
+  //     setbiddersList(null);
+  //   }
+
+  //   if (error) {
+  //     console.error(error);
+  //   }
+  // }, [productData, data, error, product]);
+
   useEffect(() => {
-    if (data) {
-      console.log(data);
-      // Handle successful bid placement, e.g., redirect to a confirmation page
+    let sortedBidders = [];
+    // Check if productData exists
+    if (productData._id === product._id) {
+      if (productData.bidders.length > 0) {
+        sortedBidders = productData.bidders.sort(
+          (a, b) => b.bidAmount - a.bidAmount
+        ); // Sort by bidAmount
+      }
+    } else {
+      // Reset biddersList if productData doesn't match product
+      setbiddersList(null);
     }
+
+    setbiddersList(sortedBidders);
+
     if (error) {
       console.error(error);
-      // Handle error, e.g., display an error message to the user
     }
-  }, [data, error]);
-
-  // Effect to listen to socket changes
+  }, [productData, error, product]);
 
   return (
     <div className="flex-box">
@@ -88,6 +125,20 @@ function ProductDetails() {
           <button className="bid-btn btn-primary" onClick={handleBid}>
             Place Bid
           </button>
+        </div>
+        <div className="bidders-list">
+          <h3>List of Bidders</h3>
+          {biddersList && biddersList.length > 0 ? (
+            <ul>
+              {biddersList.map((bidder, index) => (
+                <li key={index}>
+                  {bidder.username} - Bid Amount: {bidder.bidAmount}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No bidders available</p>
+          )}
         </div>
       </div>
     </div>

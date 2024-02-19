@@ -4,17 +4,28 @@ import Main from "./components/Main";
 import Signup from "./components/Signup/signup";
 import Login from "./components/Login/login";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
-import { io } from "socket.io-client";
 import { socket } from "./hooks/socketSetup";
+
 function App() {
   const [isValid, setisValid] = useState(false);
   const user = localStorage.getItem("token");
+  const [productData, setproductData] = useState([]);
 
   useEffect(() => {
+    // Function to handle socket event and update state
     const handleSocketEvent = (productData) => {
-      console.log("Socket data received:", productData);
-      // Handle socket data, e.g., update state with new product data
+      if (productData) {
+        setproductData(productData);
+        // Store bidders data in localStorage
+        localStorage.setItem("biddersData", JSON.stringify(productData));
+      }
     };
+
+    // Retrieve bidders data from localStorage on component mount
+    const storedBiddersData = localStorage.getItem("biddersData");
+    if (storedBiddersData) {
+      setproductData(JSON.parse(storedBiddersData));
+    }
 
     // Listen for "productBidders" event from the server
     socket.on("productBidders", handleSocketEvent);
@@ -23,7 +34,7 @@ function App() {
     return () => {
       socket.off("productBidders", handleSocketEvent);
     };
-  }, []);
+  }, []); // Empty dependency array ensures the effect runs only once on component mount
 
   return (
     <Routes>
@@ -37,8 +48,11 @@ function App() {
       {/* Always render the Signup component */}
       <Route path="/signup" element={<Signup />} />
       {/* Always render the Login component */}
-      <Route path="/login" element={<Login setisValid={setisValid}/>} />
-      <Route path="/productDetails/:id" element={<ProductDetails />} />
+      <Route path="/login" element={<Login setisValid={setisValid} />} />
+      <Route
+        path="/productDetails/:id"
+        element={<ProductDetails productData={productData} />}
+      />
     </Routes>
   );
 }

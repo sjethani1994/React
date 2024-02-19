@@ -10,6 +10,7 @@ function ProductList({ product }) {
   // Destructuring values returned by usePost hook
   const { getProductById } = useFetch();
 
+  console.log(product)
   const getDescription = () => {
     const maxLength = 60;
     if (showFullDescription) {
@@ -43,7 +44,7 @@ function ProductList({ product }) {
     <div className="card product-card" onClick={gotoProductDetails}>
       <div className="card-body product-card-body">
         <img
-          src={product.image}
+          src={`http://localhost:5000/${product.avatar.replace(/\\/g, "/")}`}
           alt={product.title}
           className="product-image"
         />

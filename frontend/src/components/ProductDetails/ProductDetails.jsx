@@ -82,7 +82,7 @@ function ProductDetails({ productData }) {
     <div className="flex-box">
       <div className="left" style={{ flex: 1 }}>
         <div className="big-img">
-          <img src={product.image} alt={product.subCategory} />
+          <img    src={`http://localhost:5000/${product.avatar.replace(/\\/g, "/")}`} alt={product.category} />
         </div>
       </div>
 

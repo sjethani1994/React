@@ -5,6 +5,7 @@ import Signup from "./components/Signup/signup";
 import Login from "./components/Login/login";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import { socket } from "./hooks/socketSetup";
+import Addproduct from "./components/Addproduct/Addproduct";
 
 function App() {
   const [isValid, setisValid] = useState(false);
@@ -57,6 +58,10 @@ function App() {
         path="/productDetails/:id"
         element={<ProductDetails productData={productData} />}
       />
+      <Route
+      path="/addproduct"
+      element={<Addproduct />}
+    />
     </Routes>
   );
 }

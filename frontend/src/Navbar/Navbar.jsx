@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../App.css";
 import eAuctionLogo from "../assests/eAutionLogo.png";
+import { Link } from "react-router-dom";
 const Navbar = () => {
   const [clicked, setClicked] = useState(false);
 
@@ -32,13 +33,13 @@ const Navbar = () => {
             </a>
           </li>
           <li>
-            <a href="rest.html"> Auction </a>
+          <Link to={"/addproduct"}> Add Product </Link>
           </li>
           <li>
             <a href="contact.html"> Auction </a>
           </li>
           <li>
-            <a href="quest.html"> About us </a>
+            <Link to={"/aboutus"}> About us </Link>
           </li>
           <li>
             <a href="contact.html"> Contact us </a>

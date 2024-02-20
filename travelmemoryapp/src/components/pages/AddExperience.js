@@ -18,7 +18,6 @@ export default function AddExperience() {
   });
 
   const submitForm = () => {
-    console.log(formdata);
     axios.post(`${baseUrl}/trip`, formdata)
   };
 

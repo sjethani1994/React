@@ -6,7 +6,7 @@ const swalSuccess = (title, message) => {
     title: title || "Success",
     text: message || "Operation completed successfully",
     showConfirmButton: false,
-    timer: 1500, // Auto close after 1.5 seconds
+    timer: 2500,
   });
 };
 
@@ -16,7 +16,7 @@ const swalError = (title, message) => {
     title: title || "Error",
     text: message || "An error occurred",
     showConfirmButton: false,
-    timer: 1500, // Auto close after 1.5 seconds
+    timer: 2500,
   });
 };
 

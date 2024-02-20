@@ -9,8 +9,6 @@ function ProductList({ product }) {
   const navigate = useNavigate();
   // Destructuring values returned by usePost hook
   const { getProductById } = useFetch();
-
-  console.log(product)
   const getDescription = () => {
     const maxLength = 60;
     if (showFullDescription) {

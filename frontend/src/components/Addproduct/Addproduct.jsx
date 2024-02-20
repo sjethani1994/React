@@ -70,7 +70,6 @@ function AddProduct() {
     }
 
     // If no errors, submit the form
-    console.log("Form Data:", formData);
     await addProduct(formData);
     // Clear form data and errors after successful submission
     setFormData({
@@ -89,7 +88,6 @@ function AddProduct() {
 
   useEffect(() => {
     if (data && data.status === 200) {
-        console.log(data)   
     }
   }, [data, error]);
 

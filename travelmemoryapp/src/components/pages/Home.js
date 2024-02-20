@@ -9,7 +9,6 @@ export default function Home() {
   useEffect(() => {
     axios.get(`${baseUrl}/trip/`).then((res) => setData(res.data));
   }, []);
-  // console.log(data);
   if (data) {
     return (
       <div style={{ margin: "2%" }}>

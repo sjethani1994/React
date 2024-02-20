@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./ProductDetails.css";
 import { useLocation } from "react-router-dom";
 import usePost from "../../hooks/usePost"; // Import the usePost hook
+import { swalError } from "../../utils/Swal";
 
 function ProductDetails({ productData }) {
   const location = useLocation(); // Get location object
@@ -43,9 +44,18 @@ function ProductDetails({ productData }) {
   // Function to handle bid placement
   const handleBid = async () => {
     if (isNaN(amount) || amount <= 0) {
-      console.log("Invalid bid amount");
+      swalError("", "Please enter a valid bid amount greater than zero.");
       return;
     }
+
+    if (amount < product.price) {
+      swalError(
+        "",
+        `Bid amount must be higher than the product's actual price of ${product.price}.`
+      );
+      return;
+    }
+
     await placeBid(product._id, amount);
   };
 

@@ -5,8 +5,8 @@ import ProductList from "../productList/ProductList";
 import Navbar from "../../Navbar/Navbar";
 import Footer from "../footer/Footer";
 import Carousel from "../Carousel/Carousel";
-const Main = ({ sendMessage }) => {
-  const { getData, getAllProducts } = useFetch(); // Call the useFetch hook
+const Main = ({ productData }) => {
+  const { getAllProducts } = useFetch(); // Call the useFetch hook
 
   useEffect(() => {
     getAllProducts(); // Fetch data when the component mounts
@@ -18,8 +18,8 @@ const Main = ({ sendMessage }) => {
       <div className={styles.foto}>
         <Carousel /> {/* Use styles.foto for applying CSS class */}
         <div class="row mt-3">
-          {getData &&
-            getData.map((product) => (
+          {productData &&
+            productData.map((product) => (
               <div
                 key={product._id}
                 class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3"

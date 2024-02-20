@@ -66,7 +66,7 @@ function App() {
     <Routes>
       {/* If the user is logged in, render the Main component */}
       {isValid || user ? (
-        <Route path="/" element={<Main />} />
+        <Route path="/" element={<Main productData={productData}/>} />
       ) : (
         // If the user is not logged in, redirect to the login page
         <Route path="/" element={<Login setisValid={setisValid} />} />

@@ -7,13 +7,18 @@ import { swalError } from "../../utils/Swal";
 function ProductDetails({ productData }) {
   const location = useLocation(); // Get location object
   const [product] = useState(JSON.parse(location.state));
-  const [timeLeft, setTimeLeft] = useState(getTimeLeft());
+  const [timeLeft, setTimeLeft] = useState(null);
   const [amount, setAmount] = useState(""); // Initialize amount state with an empty string
   const { error, placeBid } = usePost(); // Destructure values returned by usePost hook
   const [biddersList, setbiddersList] = useState([]);
   // Function to calculate time left until bidding ends
-  function getTimeLeft() {
-    const deadline = new Date(product.endDate).getTime(); // Use product.endDate to calculate deadline
+  function getTimeLeftForProducts(startDate, endDate) {
+    // Check if both startDate and endDate are provided
+    if (!startDate || !endDate) {
+      return "Invalid date range";
+    }
+
+    const deadline = new Date(endDate).getTime();
     const now = new Date().getTime();
     const distance = deadline - now;
 
@@ -34,12 +39,13 @@ function ProductDetails({ productData }) {
   // Effect to update timeLeft every second
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft(getTimeLeft());
+      // Pass product.startDate and product.endDate to getTimeLeftForProducts
+      setTimeLeft(getTimeLeftForProducts(product.startDate, product.endDate));
     }, 1000);
 
     // Cleanup function to clear the interval when the component unmounts
     return () => clearInterval(timer);
-  }, []);
+  }, [product.startDate, product.endDate]);
 
   // Function to handle bid placement
   const handleBid = async () => {

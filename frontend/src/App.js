@@ -25,12 +25,18 @@ function App() {
           (item) => item._id === data._id
         );
 
-        // If _id exists, update the record
-        if (index !== -1) {
-          prevProductData[index] = data;
+        if (data.isActive) {
+          // If _id exists, update the record or add a new record if not found
+          if (index !== -1) {
+            prevProductData[index] = data;
+          } else {
+            prevProductData.push(data);
+          }
         } else {
-          // If _id doesn't exist, add a new record
-          prevProductData.push(data);
+          // If the data is not active, remove it from localStorage if it exists
+          if (index !== -1) {
+            prevProductData.splice(index, 1);
+          }
         }
 
         // Update productData state

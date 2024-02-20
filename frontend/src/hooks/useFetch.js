@@ -17,6 +17,13 @@ const useFetch = () => {
 
       if (response.status === 200) {
         setGetData(response.data.products);
+        if (!localStorage.getItem("biddersData")) {
+          // Filter out inactive products before storing them in localStorage
+          const activeProducts = response.data.products.filter(
+            (product) => product.isActive
+          );
+          localStorage.setItem("biddersData", JSON.stringify(activeProducts));
+        }
       } else {
         setError("Invalid email or password");
       }

@@ -12,6 +12,7 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("biddersData");
+    sessionStorage.removeItem("userData");
     window.location.reload();
   };
 
@@ -34,7 +35,7 @@ const Navbar = () => {
             </a>
           </li>
           <li>
-          <Link to={"/addproduct"}> Add Product </Link>
+            <Link to={"/addproduct"}> Add Product </Link>
           </li>
           <li>
             <a href="contact.html"> Auction </a>
@@ -43,7 +44,7 @@ const Navbar = () => {
             <Link to={"/aboutus"}> About us </Link>
           </li>
           <li>
-            <a href="contact.html"> Contact us </a>
+            <Link to={"/profile"}> Profile </Link>
           </li>
           <li>
             <a href="https://www.instagram.com">
@@ -56,7 +57,7 @@ const Navbar = () => {
             </a>
           </li>
           <li>
-            <a href="#" onClick={handleLogout}>
+            <a href="#top" onClick={handleLogout}>
               <i className="fa fa-sign-out" aria-hidden="true"></i>
             </a>
           </li>

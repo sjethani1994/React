@@ -6,6 +6,7 @@ import Login from "./components/Login/login";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import { socket } from "./hooks/socketSetup";
 import Addproduct from "./components/Addproduct/Addproduct";
+import ProfilePage from "./components/ProfilePage/ProfilePage";
 
 function App() {
   const [isValid, setisValid] = useState(false);
@@ -39,6 +40,7 @@ function App() {
           }
         }
 
+        console.log(prevProductData)
         // Update productData state
         setproductData(prevProductData);
 
@@ -66,7 +68,7 @@ function App() {
     <Routes>
       {/* If the user is logged in, render the Main component */}
       {isValid || user ? (
-        <Route path="/" element={<Main productData={productData}/>} />
+        <Route path="/" element={<Main productData={productData} />} />
       ) : (
         // If the user is not logged in, redirect to the login page
         <Route path="/" element={<Login setisValid={setisValid} />} />
@@ -80,6 +82,7 @@ function App() {
         element={<ProductDetails productData={productData} />}
       />
       <Route path="/addproduct" element={<Addproduct />} />
+      <Route path="/profile" element={<ProfilePage />} />
     </Routes>
   );
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "../Signup/style.module.css";
 import usePost from "../../hooks/usePost"; // Import the usePost hook
+import { decryptData, encryptData } from "../../utils/cryptoUtils";
 
 const Login = ({ setisValid }) => {
   // State to manage form data
@@ -27,6 +28,8 @@ const Login = ({ setisValid }) => {
   // Effect to handle navigation after successful login
   useEffect(() => {
     if (data && data.status === 200) {
+      const encryptedData = encryptData(data.data.user);
+      sessionStorage.setItem("userData", encryptedData);
       localStorage.setItem("token", data.data.token);
       setisValid(true);
       navigate("/");

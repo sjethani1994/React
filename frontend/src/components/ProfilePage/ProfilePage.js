@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./profilePage.css";
 import usePost from "../../hooks/usePost";
-import { decryptData } from "../../utils/cryptoUtils";
+import useFetch from "../../hooks/useFetch";
 
 function ProfilePage() {
   // State object for form fields
   const [formData, setFormData] = useState({
     // Initialize form fields
-    userId: "",
     username: "",
     firstName: "",
     lastName: "",
@@ -26,23 +25,41 @@ function ProfilePage() {
   });
 
   // State variable for error message
-  const [errorMessage, setErrorMessage] = useState("");
-  const [avatarPreview, setAvatarPreview] = useState(null);
+  const [errorMessage] = useState("");
+  const [imagePreview, setImagePreview] = useState(null);
   const { data, error, updateProfile } = usePost();
+  const { getData, getProfileData } = useFetch();
 
-  // Fetch user data on component mount
   useEffect(() => {
-    // Decrypt and set user data from sessionStorage
-    const userData = decryptData(sessionStorage.getItem("userData"));
-    setFormData({
-      ...formData, // Preserve existing form data
-      username: userData.username,
-      firstName: userData.firstName,
-      lastName: userData.lastName,
-      email: userData.email,
-      userId: userData._id
-    });
-  }, []); // Empty dependency array ensures this effect runs only once on mount
+    getProfileData();
+  }, []);
+
+  useEffect(() => {
+    if (getData) {
+      const birthDate = new Date(getData.data.user.birthDate);
+      const dayOfMonth = birthDate.getDate();
+      setFormData({
+        username: getData.data.user.username,
+        firstName: getData.data.user.firstName,
+        lastName: getData.data.user.lastName,
+        email: getData.data.user.email,
+        company: getData.data.user.company,
+        bio: getData.data.user.bio,
+        birthDate: dayOfMonth,
+        address: getData.data.user.address,
+        country: getData.data.user.country,
+        phone: getData.data.user.phone,
+        website: getData.data.user.website,
+        google: getData.data.user.google,
+        linkedIn: getData.data.user.linkedIn,
+        instagram: getData.data.user.instagram,
+        avatar: `http://localhost:5000/${getData.data.user.avatar.replace(
+          /\\/g,
+          "/"
+        )}`,
+      });
+    }
+  }, [getData]);
 
   // Function to handle changes in form fields
   const handleFieldChange = (e) => {
@@ -56,7 +73,7 @@ function ProfilePage() {
     // If changing avatar, display preview
     if (name === "avatar" && files) {
       const avatarURL = URL.createObjectURL(files[0]);
-      setAvatarPreview(avatarURL);
+      setImagePreview(avatarURL);
     }
   };
 
@@ -67,10 +84,10 @@ function ProfilePage() {
     await updateProfile(formData);
   };
 
-   // Fetch user data on component mount
-   useEffect(() => {
+  // Fetch user data on component mount
+  useEffect(() => {
     if (data) {
-      console.log(data)
+      console.log(data);
     }
   }, [data, error]); // Empty dependency array ensures this effect runs only once on mount
   return (
@@ -113,19 +130,21 @@ function ProfilePage() {
                 <div className="tab-pane fade active show" id="account-general">
                   <div className="card-body media align-items-center">
                     {/* Avatar */}
-                    <img
-                      src={
-                        avatarPreview ||
-                        "https://bootdey.com/img/Content/avatar/avatar1.png"
-                      }
-                      alt="avatar"
-                      name="avatar"
-                      className="d-block ui-w-80"
-                      onError={(e) => {
-                        e.target.src =
-                          "https://bootdey.com/img/Content/avatar/avatar1.png";
-                      }}
-                    />
+                    {imagePreview ? (
+                      <img
+                        src={imagePreview}
+                        alt="Preview"
+                        style={{ width: "200px" }}
+                        className="image-preview"
+                      />
+                    ) : (
+                      <img
+                        src={formData.avatar}
+                        alt="Preview"
+                        className="d-block"
+                        style={{ width: "200px" }}
+                      />
+                    )}
                     <div className="media-body ml-4">
                       {/* Avatar Upload */}
                       <label className="label">

@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import API from "../connection/connection";
 import { swalError, swalSuccess } from "../utils/Swal";
+import { decryptData } from "../utils/cryptoUtils";
 
 const usePost = () => {
   const [data, setData] = useState(null); // State to hold response data
@@ -117,13 +118,10 @@ const usePost = () => {
         Authorization: localStorage.getItem("token"),
         "Content-Type": "multipart/form-data",
       };
-    
 
-      const response = await axios.post(
-        `${API}/product/addProduct`,
-        formData,
-        { headers }
-      );
+      const response = await axios.post(`${API}/product/addProduct`, formData, {
+        headers,
+      });
 
       if (response.status === 200) {
         // Assuming successful subscription returns a success message
@@ -194,14 +192,14 @@ const usePost = () => {
 
   const updateProfile = async (formData) => {
     try {
+      const userId = decryptData(sessionStorage.getItem("userData"));
       const headers = {
         Authorization: localStorage.getItem("token"),
         "Content-Type": "multipart/form-data",
       };
-    
 
       const response = await axios.post(
-        `${API}/user/updateProfile/${formData.userId}`,
+        `${API}/user/updateProfile/${userId}`,
         formData,
         { headers }
       );
@@ -241,7 +239,7 @@ const usePost = () => {
     subscribe,
     placeBid,
     addProduct,
-    updateProfile
+    updateProfile,
   };
 };
 

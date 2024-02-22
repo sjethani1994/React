@@ -6,7 +6,7 @@ import Navbar from "../../Navbar/Navbar";
 import Footer from "../footer/Footer";
 import Carousel from "../Carousel/Carousel";
 const Main = ({ productData }) => {
-  const { getData, error, getAllProducts } = useFetch(); // Call the useFetch hook
+  const { getData, getAllProducts } = useFetch(); // Call the useFetch hook
   const [data, setData] = useState([]);
   useEffect(() => {
     getAllProducts(); // Fetch data when the component mounts

@@ -1,10 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
 import API from "../connection/connection";
+import { decryptData } from "../utils/cryptoUtils";
 
 const useFetch = () => {
   const [getData, setGetData] = useState(null);
-  const [error, setError] = useState(null);
+  const [getError, setError] = useState(null);
   const getAllProducts = async () => {
     try {
       const headers = {
@@ -17,8 +18,8 @@ const useFetch = () => {
 
       if (response.status === 200) {
         setGetData(response.data.products);
-         // Filter out inactive products before storing them in localStorage
-         const activeProducts = response.data.products.filter(
+        // Filter out inactive products before storing them in localStorage
+        const activeProducts = response.data.products.filter(
           (product) => product.isActive
         );
         localStorage.setItem("biddersData", JSON.stringify(activeProducts));
@@ -44,7 +45,7 @@ const useFetch = () => {
       });
 
       if (response.status === 200) {
-        return { success: true, data: response, error: null };
+        return { success: true, data: response, getError: null };
       } else {
         return {
           success: false,
@@ -54,7 +55,42 @@ const useFetch = () => {
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
-        return { success: false, data: null, error: "Unauthorized access" };
+        return { success: false, data: null, getError: "Unauthorized access" };
+      } else {
+        return {
+          success: false,
+          data: null,
+          error: error.response
+            ? error.response.data.message
+            : "An error occurred. Please try again later.",
+        };
+      }
+    }
+  };
+
+  const getProfileData = async () => {
+    try {
+      const userId = decryptData(sessionStorage.getItem("userData"));
+      const headers = {
+        Authorization: localStorage.getItem("token"),
+      };
+      const response = await axios.get(`${API}/user/getProfile/${userId}`, {
+        headers,
+      });
+
+      if (response.status === 200) {
+        setGetData(response);
+        return { success: true, data: response, getError: null };
+      } else {
+        return {
+          success: false,
+          data: null,
+          error: `Product with id ${userId} not found`,
+        };
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        return { success: false, data: null, getError: "Unauthorized access" };
       } else {
         return {
           success: false,
@@ -69,9 +105,10 @@ const useFetch = () => {
 
   return {
     getData,
-    error,
+    getError,
     getAllProducts,
     getProductById,
+    getProfileData,
   };
 };
 

@@ -68,7 +68,7 @@ function App() {
 
   return (
     <>
-      {isValid && user && <Navbar />}
+      {user && <Navbar />}
       <div className="body">
         <Routes>
           {/* If the user is logged in, render the Main component */}
@@ -90,7 +90,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </div>
-      {isValid && user && <Footer />}
+      {user && <Footer />}
     </>
   );
 }

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import "../App.css";
+import { NavLink } from "react-router-dom";
+import "./Navbar.css";
 import eAuctionLogo from "../assests/eAutionLogo.png";
-import { Link } from "react-router-dom";
+
 const Navbar = () => {
   const [clicked, setClicked] = useState(false);
 
@@ -18,11 +19,10 @@ const Navbar = () => {
 
   return (
     <nav>
-      .
       <div style={{ flex: "1" }}>
         <img
           src={eAuctionLogo}
-          class="img-responsive"
+          className="img-responsive"
           alt="eAuction"
           style={{ width: "150px", height: "100px" }}
         />
@@ -30,16 +30,24 @@ const Navbar = () => {
       <div>
         <ul id="navbar" className={clicked ? "navbar active" : "navbar"}>
           <li>
-            <Link to={"/"}> Home </Link>
+            <NavLink exact="true" activeclassname="active" to={"/"}>
+              Home
+            </NavLink>
           </li>
           <li>
-            <Link to={"/addproduct"}> Add Product </Link>
+            <NavLink activeclassname="active" to={"/addproduct"}>
+              Add Product
+            </NavLink>
           </li>
           <li>
-            <Link to={"/aboutus"}> About us </Link>
+            <NavLink activeclassname="active" to={"/aboutus"}>
+              About us
+            </NavLink>
           </li>
           <li>
-            <Link to={"/profile"}> Profile </Link>
+            <NavLink activeclassname="active" to={"/profile"}>
+              Profile
+            </NavLink>
           </li>
           <li>
             <a href="https://www.instagram.com">

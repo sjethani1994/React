@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./profilePage.css";
 import usePost from "../../hooks/usePost";
 import useFetch from "../../hooks/useFetch";
-
+import Navbar from "../../Navbar/Navbar";
+import Footer from "../footer/Footer";
 function ProfilePage() {
   // State object for form fields
   const [formData, setFormData] = useState({
@@ -34,10 +35,16 @@ function ProfilePage() {
     getProfileData();
   }, []);
 
+  const formatDate = (dateString) => {
+    const dateWithTime = "2024-02-01T18:30:00.000Z";
+    const dateOnly = dateWithTime.split("T")[0];
+    return dateOnly;
+  };
+
   useEffect(() => {
     if (getData) {
-      const birthDate = new Date(getData.data.user.birthDate);
-      const dayOfMonth = birthDate.getDate();
+      const formattedDate = formatDate(getData.data.user.birthDate);
+      console.log(formattedDate); // Output: 01-02-2024
       setFormData({
         username: getData.data.user.username,
         firstName: getData.data.user.firstName,
@@ -45,7 +52,7 @@ function ProfilePage() {
         email: getData.data.user.email,
         company: getData.data.user.company,
         bio: getData.data.user.bio,
-        birthDate: dayOfMonth,
+        birthDate: formattedDate,
         address: getData.data.user.address,
         country: getData.data.user.country,
         phone: getData.data.user.phone,

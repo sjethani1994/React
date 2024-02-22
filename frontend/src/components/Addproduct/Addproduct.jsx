@@ -73,14 +73,14 @@ function AddProduct() {
     await addProduct(formData);
     // Clear form data and errors after successful submission
     setFormData({
-        title: "",
-        description: "",
-        price: "",
-        category: "",
-        startDate: "",
-        endDate: "",
-        productImage: "",
-        avatar: "",
+      title: "",
+      description: "",
+      price: "",
+      category: "",
+      startDate: "",
+      endDate: "",
+      productImage: "",
+      avatar: "",
     });
     setAvatarPreview(null);
     setErrors({});

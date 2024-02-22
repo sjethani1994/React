@@ -22,10 +22,7 @@ const Footer = () => {
 
   return (
     <div className="container-fluid mt-5">
-      <footer
-        className="text-center text-white"
-        style={{ background: "#3bb19b" }}
-      >
+      <footer className="text-center text-white footer">
         <div className="container p-4 pb-0">
           <section className="">
             <form action="">

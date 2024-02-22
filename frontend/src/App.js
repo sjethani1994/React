@@ -7,6 +7,8 @@ import ProductDetails from "./components/ProductDetails/ProductDetails";
 import { socket } from "./hooks/socketSetup";
 import Addproduct from "./components/Addproduct/Addproduct";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
+import Navbar from "./Navbar/Navbar";
+import Footer from "./components/footer/Footer";
 
 function App() {
   const [isValid, setisValid] = useState(false);
@@ -40,7 +42,7 @@ function App() {
           }
         }
 
-        console.log(prevProductData)
+        console.log(prevProductData);
         // Update productData state
         setproductData(prevProductData);
 
@@ -65,25 +67,31 @@ function App() {
   }, []); // Empty dependency array ensures the effect runs only once on component mount
 
   return (
-    <Routes>
-      {/* If the user is logged in, render the Main component */}
-      {isValid || user ? (
-        <Route path="/" element={<Main productData={productData} />} />
-      ) : (
-        // If the user is not logged in, redirect to the login page
-        <Route path="/" element={<Login setisValid={setisValid} />} />
-      )}
-      {/* Always render the Signup component */}
-      <Route path="/signup" element={<Signup />} />
-      {/* Always render the Login component */}
-      <Route path="/login" element={<Login setisValid={setisValid} />} />
-      <Route
-        path="/productDetails/:id"
-        element={<ProductDetails productData={productData} />}
-      />
-      <Route path="/addproduct" element={<Addproduct />} />
-      <Route path="/profile" element={<ProfilePage />} />
-    </Routes>
+    <>
+      {isValid && user && <Navbar />}
+      <div className="body">
+        <Routes>
+          {/* If the user is logged in, render the Main component */}
+          {isValid || user ? (
+            <Route path="/" element={<Main productData={productData} />} />
+          ) : (
+            // If the user is not logged in, redirect to the login page
+            <Route path="/" element={<Login setisValid={setisValid} />} />
+          )}
+          {/* Always render the Signup component */}
+          <Route path="/signup" element={<Signup />} />
+          {/* Always render the Login component */}
+          <Route path="/login" element={<Login setisValid={setisValid} />} />
+          <Route
+            path="/productDetails/:id"
+            element={<ProductDetails productData={productData} />}
+          />
+          <Route path="/addproduct" element={<Addproduct />} />
+          <Route path="/profile" element={<ProfilePage />} />
+        </Routes>
+      </div>
+      {isValid && user && <Footer />}
+    </>
   );
 }
 

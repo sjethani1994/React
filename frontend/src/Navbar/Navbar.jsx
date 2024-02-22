@@ -30,15 +30,10 @@ const Navbar = () => {
       <div>
         <ul id="navbar" className={clicked ? "navbar active" : "navbar"}>
           <li>
-            <a className="active" href="index.html">
-              Home
-            </a>
+            <Link to={"/"}> Home </Link>
           </li>
           <li>
             <Link to={"/addproduct"}> Add Product </Link>
-          </li>
-          <li>
-            <a href="contact.html"> Auction </a>
           </li>
           <li>
             <Link to={"/aboutus"}> About us </Link>

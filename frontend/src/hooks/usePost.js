@@ -201,7 +201,7 @@ const usePost = () => {
     
 
       const response = await axios.post(
-        `${API}/user/updateProfile`,
+        `${API}/user/updateProfile/${formData.userId}`,
         formData,
         { headers }
       );

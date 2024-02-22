@@ -15,6 +15,8 @@ const Main = ({ productData }) => {
   useEffect(() => {
     if (getData) {
       setData(getData)
+    } else {
+      setData(productData)
     }
   }, [getData]);
 

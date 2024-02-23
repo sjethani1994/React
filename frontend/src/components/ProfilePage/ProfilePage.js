@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./profilePage.css";
 import usePost from "../../hooks/usePost";
 import useFetch from "../../hooks/useFetch";
-import Navbar from "../../Navbar/Navbar";
-import Footer from "../footer/Footer";
 function ProfilePage() {
   // State object for form fields
   const [formData, setFormData] = useState({

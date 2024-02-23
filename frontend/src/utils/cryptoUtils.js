@@ -11,7 +11,6 @@ export const encryptData = (data) => {
       JSON.stringify(data),
       "secret key 123"
     ).toString();
-    console.log(encryptedData);
     // Return the encrypted data
     return encryptedData;
   } catch (error) {

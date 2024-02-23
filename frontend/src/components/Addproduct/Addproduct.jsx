@@ -118,9 +118,7 @@ function AddProduct() {
               value={formData.title}
               onChange={handleChange}
             />
-            {errors.title && (
-              <div className="text-danger">{errors.title}</div>
-            )}
+            {errors.title && <div className="text-danger">{errors.title}</div>}
           </div>
           {/* Product Description */}
           <div className="mb-3">
@@ -152,9 +150,7 @@ function AddProduct() {
               value={formData.price}
               onChange={handleChange}
             />
-            {errors.price && (
-              <div className="text-danger">{errors.price}</div>
-            )}
+            {errors.price && <div className="text-danger">{errors.price}</div>}
           </div>
           {/* Product Category */}
           <div className="mb-3">

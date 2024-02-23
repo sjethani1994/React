@@ -95,51 +95,48 @@ function ProductDetails({ productData }) {
   }, [productData, error, product]);
 
   return (
-      <div className="flex-box">
-        <div className="left" style={{ flex: 1 }}>
-          <div className="big-img">
-            <img
-              src={`http://localhost:5000/${product.avatar.replace(
-                /\\/g,
-                "/"
-              )}`}
-              alt={product.category}
-            />
-          </div>
-        </div>
-
-        <div className="right" style={{ flex: 1 }}>
-          <div className="title">{product.title}</div>
-          <div className="price">₹{product.price}</div>
-          <div className="description text-justify">{product.description}</div>
-          <div className="time-left">Time Left: {timeLeft}</div>
-          <div className="bid-input">
-            <input
-              type="number" // Change input type to number for bid amount
-              placeholder="Enter bid amount"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-            />
-            <button className="bid-btn btn-primary" onClick={handleBid}>
-              Place Bid
-            </button>
-          </div>
-          <div className="bidders-list">
-            <h3>List of Bidders</h3>
-            {biddersList && biddersList.length > 0 ? (
-              <ul>
-                {biddersList.map((bidder, index) => (
-                  <li key={index}>
-                    {bidder.username} - Bid Amount: {bidder.bidAmount}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p>No bidders available</p>
-            )}
-          </div>
+    <div className="flex-box">
+      <div className="left" style={{ flex: 1 }}>
+        <div className="big-img">
+          <img
+            src={`http://localhost:5000/${product.avatar.replace(/\\/g, "/")}`}
+            alt={product.category}
+          />
         </div>
       </div>
+
+      <div className="right" style={{ flex: 1 }}>
+        <div className="title">{product.title}</div>
+        <div className="price">₹{product.price}</div>
+        <div className="description text-justify">{product.description}</div>
+        <div className="time-left">Time Left: {timeLeft}</div>
+        <div className="bid-input">
+          <input
+            type="number" // Change input type to number for bid amount
+            placeholder="Enter bid amount"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+          />
+          <button className="bid-btn btn-primary" onClick={handleBid}>
+            Place Bid
+          </button>
+        </div>
+        <div className="bidders-list">
+          <h3>List of Bidders</h3>
+          {biddersList && biddersList.length > 0 ? (
+            <ul>
+              {biddersList.map((bidder, index) => (
+                <li key={index}>
+                  {bidder.username} - Bid Amount: {bidder.bidAmount}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No bidders available</p>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
 

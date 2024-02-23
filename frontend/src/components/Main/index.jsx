@@ -12,9 +12,9 @@ const Main = ({ productData }) => {
 
   useEffect(() => {
     if (getData) {
-      setData(getData)
+      setData(getData);
     } else {
-      setData(productData)
+      setData(productData);
     }
   }, [getData]);
 

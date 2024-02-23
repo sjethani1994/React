@@ -9,6 +9,7 @@ import Addproduct from "./components/Addproduct/Addproduct";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
 import Navbar from "./Navbar/Navbar";
 import Footer from "./components/footer/Footer";
+import AboutUs from "./components/AboutUs/AboutUs";
 
 function App() {
   const [isValid, setisValid] = useState(false);
@@ -88,6 +89,7 @@ function App() {
           />
           <Route path="/addproduct" element={<Addproduct />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/aboutus" element={<AboutUs />} />
         </Routes>
       </div>
       {user && <Footer />}

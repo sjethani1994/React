@@ -10,7 +10,7 @@ import ProfilePage from "./components/ProfilePage/ProfilePage";
 import Navbar from "./Navbar/Navbar";
 import Footer from "./components/footer/Footer";
 import AboutUs from "./components/AboutUs/AboutUs";
-
+import "./App.css";
 function App() {
   const [isValid, setisValid] = useState(false);
   const user = localStorage.getItem("token");

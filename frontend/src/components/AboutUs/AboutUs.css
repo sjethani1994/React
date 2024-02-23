@@ -75,7 +75,16 @@ html {
   }
 }
 
-.card img {
-  width: 100%;
-  border-radius: 50%;
+.about-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.about-card-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

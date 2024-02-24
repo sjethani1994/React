@@ -1,0 +1,221 @@
+/* Google Font Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+.login_body{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e6eef2;
+  padding: 30px;
+}
+.login_container{
+  position: relative;
+  max-width: 850px;
+  width: 100%;
+  background: #fff;
+  padding: 40px 30px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  perspective: 2700px;
+}
+.login_container .login_cover{
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  width: 50%;
+  z-index: 98;
+  transition: all 1s ease;
+  transform-origin: left;
+  transform-style: preserve-3d;
+}
+.login_container #login_flip:checked ~ .login_cover{
+  transform: rotateY(-180deg);
+}
+ .login_container .login_cover .login_front,
+ .login_container .login_cover .login_back{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+.login_cover .login_back{
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+}
+.login_container .login_cover::before,
+.login_container .login_cover::after{
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #07222e;
+  opacity: 0.5;
+  z-index: 12;
+}
+.login_container .login_cover::after{
+  opacity: 0.3;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+}
+.login_container .login_cover img{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  z-index: 10;
+}
+.login_container .login_cover .login_text{
+  position: absolute;
+  z-index: 130;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.login_cover .login_text .login_text-1,
+.login_cover .login_text .login_text-2{
+  font-size: 26px;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+}
+.login_cover .login_text .login_text-2{
+  font-size: 15px;
+  font-weight: 500;
+}
+.login_container .login_forms{
+  height: 100%;
+  width: 100%;
+  background: #fff;
+}
+.login_container .login_form-content{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.login_form-content .login_login-form,
+.login_form-content .login_signup-form{
+  width: calc(100% / 2 - 25px);
+}
+.login_forms .login_form-content .login_title{
+  position: relative;
+  font-size: 24px;
+  font-weight: 500;
+  color: #333;
+}
+.login_forms .login_form-content .login_title:before{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 25px;
+  background: #07222e;
+}
+.login_forms .login_signup-form  .login_title:before{
+  width: 20px;
+}
+.login_forms .login_form-content .login_input-boxes{
+  margin-top: 30px;
+}
+.login_forms .login_form-content .login_input-box,
+.login_forms .login_form-content .login_textarea-box {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  margin: 10px 0;
+  position: relative;
+}
+.login_form-content .login_input-box input,
+.login_form-content .login_textarea-box textarea {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  padding: 0 30px;
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: 2px solid rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+.login_form-content .login_input-box input:focus,
+.login_form-content .login_input-box input:valid,
+.login_form-content .login_textarea-box textarea:focus,
+.login_form-content .login_textarea-box textarea:valid {
+  border-color: #07222e;
+}
+.login_form-content .login_input-box i,
+.login_form-content .login_textarea-box i {
+  position: absolute;
+  color: #07222e;
+  font-size: 17px;
+}
+.login_forms .login_form-content .login_text{
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+.login_forms .login_form-content .login_text a{
+  text-decoration: none;
+}
+.login_forms .login_form-content .login_text a:hover{
+  text-decoration: underline;
+}
+.login_forms .login_form-content .login_button{
+  color: #fff;
+  margin-top: 40px;
+}
+.login_forms .login_form-content .login_button input{
+  color: #fff;
+  background: #07222e;
+  border-radius: 6px;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+.login_forms .login_form-content .login_button input:hover{
+  background: #07222e;
+}
+.login_forms .login_form-content label{
+  color: #07222e;
+  cursor: pointer;
+}
+.login_forms .login_form-content label:hover{
+  text-decoration: underline;
+}
+.login_forms .login_form-content .login-login-text,
+.login_forms .login_form-content .login-sign-up-text{
+  text-align: center;
+  margin-top: 25px;
+}
+.login_container #login_flip{
+  display: none;
+}
+@media (max-width: 730px) {
+  .login_container .login_cover{
+    display: none;
+  }
+  .login_form-content .login_login-form,
+  .login_form-content .login_signup-form{
+    width: 100%;
+  }
+  .login_form-content .login_signup-form{
+    display: none;
+  }
+  .login_container #login_flip:checked ~ .login_forms .login_signup-form{
+    display: block;
+  }
+  .login_container #login_flip:checked ~ .login_forms .login_login-form{
+    display: none;
+  }
+}

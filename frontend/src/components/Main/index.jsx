@@ -11,12 +11,12 @@ const Main = ({ productData }) => {
   }, []); // Empty dependency array ensures it runs only once on component mount
 
   useEffect(() => {
-    if (getData) {
+    if (getData && productData.length <= getData.length) {
       setData(getData);
     } else {
       setData(productData);
     }
-  }, [getData]);
+  }, [getData, productData]);
 
   return (
     <div className={styles.vic}>

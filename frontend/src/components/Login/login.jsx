@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import styles from "../Signup/style.module.css";
 import usePost from "../../hooks/usePost"; // Import the usePost hook
-import { decryptData, encryptData } from "../../utils/cryptoUtils";
+import { encryptData } from "../../utils/cryptoUtils";
+import "./Login.css";
 
-const Login = ({ setisValid }) => {
+export default function Login({ setisValid }) {
   // State to manage form data
   const [formData, setFormData] = useState({ email: "", password: "" });
 
@@ -35,58 +35,87 @@ const Login = ({ setisValid }) => {
       navigate("/");
     }
   }, [data, error, navigate, setisValid]);
-
   return (
-    <div className={styles.login_container}>
-      <div className={styles.login_form_container}>
-        <div className={styles.left}>
-          <div className={styles.form_container}>
-            <h1>Login To Validate</h1>
-            {/* Input fields for email and password */}
-            <input
-              type="email"
-              placeholder="Email"
-              name="email"
-              onChange={handleChange}
-              value={formData.email}
-              required
-              className={styles.input}
+    <div className="login_body">
+      <div className="login_container">
+        <input type="checkbox" id="login_flip" />
+        <div className="login_cover">
+          <div className="login_front">
+            <img
+              src="https://www.loginradius.com/blog/static/80ca6be823802f80e0327a0abf8a09a9/d3746/username-pswrd.jpg"
+              alt=""
             />
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              onChange={handleChange}
-              value={formData.password}
-              required
-              className={styles.input}
+            <div className="login_text">
+              <span className="login_text-1">
+                Welcome to E-Auction <br /> Enter Details
+              </span>
+              <span className="login_text-2">Here</span>
+            </div>
+          </div>
+          <div className="login_back">
+            <img
+              className="login_backImg"
+              src="https://images.pexels.com/photos/7103164/pexels-photo-7103164.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              alt=""
             />
-
-            {/* Display error message if there is an error */}
-            {error && <div className={styles.error_msg}>{error}</div>}
-
-            {/* Button to trigger form submission */}
-            <button
-              type="button" // Change type to "button"
-              className={styles.green_btn}
-              onClick={handleSubmit} // Call handleSubmit function on button click
-            >
-              Validate
-            </button>
+            <div className="login_text">
+              <span className="login_text-1">
+                Complete miles of journey <br /> with one step
+              </span>
+              <span className="login_text-2">Let's get started</span>
+            </div>
           </div>
         </div>
-        <div className={styles.right}>
-          {/* Link to navigate to signup page */}
-          <h3>New Here?</h3>
-          <Link to="/signup">
-            <button type="button" className={styles.white_btn}>
-              Apply
-            </button>
-          </Link>
+        <div className="login_forms">
+          <div className="login_form-content">
+            <div className="login_login-form">
+              <div className="login_title">Login</div>
+              <form action="#">
+                <div className="login_input-boxes">
+                  <div className="login_input-box">
+                    <i className="fas fa-envelope"></i>
+                    <input
+                      type="text"
+                      placeholder="Enter your email"
+                      name="email"
+                      onChange={handleChange}
+                      value={formData.email}
+                      required
+                    />
+                  </div>
+                  <div className="login_input-box">
+                    <i className="fas fa-lock"></i>
+                    <input
+                      type="password"
+                      placeholder="Enter your password"
+                      name="password"
+                      onChange={handleChange}
+                      value={formData.password}
+                      required
+                    />
+                  </div>
+                  <div className="login_text">
+                    <a href="#top">Forgot password?</a>
+                  </div>
+                  <div className="login_button login_input-box">
+                    <input
+                      type="submit"
+                      value="Submit"
+                      onSubmit={handleSubmit}
+                    />
+                  </div>
+                  <div className="login_text login_sign-up-text">
+                    Don't have an account?{" "}
+                    <Link to="/signup">
+                      <label htmlFor="login_flip">Signup now</label>
+                    </Link>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
-};
-
-export default Login;
+}

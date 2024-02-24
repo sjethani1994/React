@@ -77,7 +77,7 @@ export default function Signup({ setisValid }) {
           <div className="login_form-content">
             <div className="login_signup-form">
               <div className="login_title">Signup</div>
-              <form action="#">
+              <form onSubmit={registerUser}>
                 <div className="login_input-boxes">
                   <div className="login_input-box">
                     <i className="fas fa-user"></i>
@@ -149,7 +149,6 @@ export default function Signup({ setisValid }) {
                     <input
                       type="submit"
                       value="Submit"
-                      onSubmit={registerUser}
                     />
                   </div>
                   <div className="login_text login_sign-up-text">

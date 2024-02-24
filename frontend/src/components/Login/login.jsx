@@ -70,7 +70,7 @@ export default function Login({ setisValid }) {
           <div className="login_form-content">
             <div className="login_login-form">
               <div className="login_title">Login</div>
-              <form action="#">
+              <form onSubmit={handleSubmit}>
                 <div className="login_input-boxes">
                   <div className="login_input-box">
                     <i className="fas fa-envelope"></i>
@@ -101,7 +101,6 @@ export default function Login({ setisValid }) {
                     <input
                       type="submit"
                       value="Submit"
-                      onSubmit={handleSubmit}
                     />
                   </div>
                   <div className="login_text login_sign-up-text">

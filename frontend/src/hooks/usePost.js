@@ -122,8 +122,7 @@ const usePost = () => {
       const response = await axios.post(`${API}/product/addProduct`, formData, {
         headers,
       });
-
-      if (response.status === 200) {
+      if (response.status === 201) {
         // Assuming successful subscription returns a success message
         setData(response.data.message); // Set data if subscription is successful
         swalSuccess("", response.data.message);

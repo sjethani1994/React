@@ -63,6 +63,7 @@ function ProfilePage() {
           "/"
         )}`,
       });
+      setImagePreview(getData.data.user.avatar);
     }
   }, [getData]);
 

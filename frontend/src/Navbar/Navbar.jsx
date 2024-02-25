@@ -20,12 +20,14 @@ const Navbar = () => {
   return (
     <nav>
       <div style={{ flex: "1" }}>
-        <img
-          src={eAuctionLogo}
-          className="img-responsive"
-          alt="eAuction"
-          style={{ width: "150px", height: "100px" }}
-        />
+        <NavLink exact="true" activeclassname="active" to={"/"}>
+          <img
+            src={eAuctionLogo}
+            className="img-responsive"
+            alt="eAuction"
+            style={{ width: "200px", height: "100px" }}
+          />
+        </NavLink>
       </div>
       <div>
         <ul id="navbar" className={clicked ? "navbar active" : "navbar"}>

@@ -5,91 +5,60 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
 }
 
-.flex-box {
+.container-product {
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* .cardImage {
+  width: 90%;
+  margin: 10%;
+} */
+.cardImage .card-img-top {
+  border-radius: 10px;
+}
+
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow */
+  background-color: #fff; /* Add white background color */
+}
+
+.card-one {
+  align-items: center;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+.timer {
   display: flex;
-  width: 1000px;
-  margin: 20px auto;
-  justify-content: space-between;
-  box-shadow: 0 0 15px rgb(21 20 20 / 35%);
-  padding: 20px;
-  border-radius: 22px;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+  padding-top: 15px;
 }
 
-.big-img {
-  width: 300px;
-}
-
-.big-img img {
-  width: inherit;
-}
-
-.title {
-  font-size: 22px;
-  font-weight: 600;
-}
-
-.ratings i {
-  color: rgb(255, 136, 0);
-}
-
-.price {
-  font-size: 20px;
-  font-weight: 500;
-  margin: 20px 0;
-}
-
-.quantity {
-  display: flex;
-}
-
-.quantity p {
-  font-size: 18px;
-  font-weight: 500;
-  margin-top: 17px;
-}
-
-.quantity input {
-  width: 40px;
-  font-size: 17px;
-  font-weight: 500;
-  text-align: center;
-  height: 40px;
-  margin-left: 15px;
-  margin-top: 10px;
-}
-
-.btn-box {
-  display: flex;
-  margin-top: 40px;
-}
-
-.btn-box button {
-  font-size: 18px;
-  padding: 8px 25px;
+button {
+  padding: 10px 20px;
+  font-size: 1em;
+  background-color: #007bff;
+  color: #fff;
   border: none;
-  outline: none;
-  border-radius: 6px;
+  border-radius: 5px;
   cursor: pointer;
-  color: white;
 }
 
-.cart-btn {
-  margin-right: 20px;
+button:hover {
+  background-color: #0056b3;
 }
 
-@media only screen and (max-width: 900px) {
-  .flex-box {
-    width: auto;
-    flex-direction: column;
-    padding: 10px;
-    margin: 10px;
-  }
-
-  .btn-box button {
-    margin-right: 0;
-  }
+#timer {
+  font-size: 2em;
+  font-weight: bold;
+  color: #333;
+  padding: 10px;
+  border: 2px solid #333;
+  border-radius: 5px;
+  margin-bottom: 20px;
 }

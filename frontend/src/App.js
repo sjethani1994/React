@@ -42,8 +42,6 @@ function App() {
             prevProductData.splice(index, 1);
           }
         }
-
-        console.log(prevProductData);
         // Update productData state
         setproductData(prevProductData);
 

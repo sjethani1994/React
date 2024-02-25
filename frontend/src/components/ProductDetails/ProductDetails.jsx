@@ -63,6 +63,7 @@ function ProductDetails({ productData }) {
     }
 
     await placeBid(product._id, amount);
+    setAmount("");
   };
 
   useEffect(() => {
@@ -95,45 +96,85 @@ function ProductDetails({ productData }) {
   }, [productData, error, product]);
 
   return (
-    <div className="flex-box">
-      <div className="left" style={{ flex: 1 }}>
-        <div className="big-img">
+    <div className="row row-cols-1 row-cols-md-4 g-4 ">
+      <div className="col container-product p-0">
+        <div className="cardImage ">
           <img
             src={`http://localhost:5000/${product.avatar.replace(/\\/g, "/")}`}
             alt={product.category}
+            className="card-img-top"
           />
+          <div className="card-body p-0"></div>
+          <div className="card-footer">
+            <h4 style={{ textAlign: "center", justifyContent: "center" }}>
+              {product.title}
+            </h4>
+          </div>
+        </div>
+      </div>
+      <div className="col card-one">
+        <div className="card h-10">
+          <div className="card-body">
+            <h5 className="card-title"> {product.title}</h5>
+            <p className="card-text">{product.description}</p>
+          </div>
+          <div className="card-footer">
+            <span>
+              <h3>
+                Bid Amount: <label> {product.price}Rs</label>
+              </h3>
+            </span>
+            <span>
+              <h5>
+                Enter Bid Amount:{" "}
+                <div class="input-group mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter bid amount"
+                    aria-label="Enter bid amount"
+                    aria-describedby="basic-addon2"
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                  />
+                  <div class="input-group-append">
+                    <button
+                      class="btn btn-outline-primary"
+                      type="button"
+                      onClick={handleBid}
+                    >
+                      Place Bid
+                    </button>
+                  </div>
+                </div>
+              </h5>
+            </span>
+            <div className="timer">
+              <timer id="timer">{timeLeft}</timer>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="right" style={{ flex: 1 }}>
-        <div className="title">{product.title}</div>
-        <div className="price">₹{product.price}</div>
-        <div className="description text-justify">{product.description}</div>
-        <div className="time-left">Time Left: {timeLeft}</div>
-        <div className="bid-input">
-          <input
-            type="number" // Change input type to number for bid amount
-            placeholder="Enter bid amount"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-          />
-          <button className="bid-btn btn-primary" onClick={handleBid}>
-            Place Bid
-          </button>
-        </div>
-        <div className="bidders-list">
-          <h3>List of Bidders</h3>
-          {biddersList && biddersList.length > 0 ? (
-            <ul>
-              {biddersList.map((bidder, index) => (
-                <li key={index}>
-                  {bidder.username} - Bid Amount: {bidder.bidAmount}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>No bidders available</p>
-          )}
+      {/* ThirdCard */}
+      <div className="col">
+        <div className="card h-100">
+          <div className="card-body">
+            <h5 className="card-title">List of Participate Bidder</h5>
+            <ol className="list-group list-group-numbered">
+              {biddersList && biddersList.length > 0 ? (
+                <ul>
+                  {biddersList.map((bidder, index) => (
+                    <li key={index} className="list-group-item">
+                      {bidder.username} - Bid Amount: {bidder.bidAmount}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No bidders available</p>
+              )}
+            </ol>
+          </div>
         </div>
       </div>
     </div>

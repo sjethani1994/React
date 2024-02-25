@@ -9,7 +9,7 @@ const useFetch = () => {
   const getAllProducts = async () => {
     try {
       const headers = {
-        Authorization: localStorage.getItem("token"),
+        Authorization: sessionStorage.getItem("token"),
       };
 
       const response = await axios.get(`${API}/product/getAllProducts`, {
@@ -38,7 +38,7 @@ const useFetch = () => {
   const getProductById = async (_id) => {
     try {
       const headers = {
-        Authorization: localStorage.getItem("token"),
+        Authorization: sessionStorage.getItem("token"),
       };
       const response = await axios.get(`${API}/product/getProductById/${_id}`, {
         headers,
@@ -72,7 +72,7 @@ const useFetch = () => {
     try {
       const userId = decryptData(sessionStorage.getItem("userData"));
       const headers = {
-        Authorization: localStorage.getItem("token"),
+        Authorization: sessionStorage.getItem("token"),
       };
       const response = await axios.get(`${API}/user/getProfile/${userId}`, {
         headers,

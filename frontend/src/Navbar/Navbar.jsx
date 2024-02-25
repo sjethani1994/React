@@ -11,7 +11,7 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
     localStorage.removeItem("biddersData");
     sessionStorage.removeItem("userData");
     window.location.reload();

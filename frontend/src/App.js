@@ -13,7 +13,7 @@ import AboutUs from "./components/AboutUs/AboutUs";
 import "./App.css";
 function App() {
   const [isValid, setisValid] = useState(false);
-  const user = localStorage.getItem("token");
+  const user = sessionStorage.getItem("token");
   const [productData, setproductData] = useState([]);
 
   useEffect(() => {

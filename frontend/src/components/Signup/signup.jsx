@@ -37,7 +37,7 @@ export default function Signup({ setisValid }) {
   // Effect to handle navigation after successful signup
   useEffect(() => {
     if (data && data.status === 200) {
-      localStorage.setItem("token", data.data.token);
+      sessionStorage.setItem("token", data.data.token);
       setisValid(true);
       navigate("/login"); // Redirect to login page after successful signup
     }

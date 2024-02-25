@@ -74,7 +74,7 @@ const usePost = () => {
   const subscribe = async (email) => {
     try {
       const headers = {
-        Authorization: localStorage.getItem("token"),
+        Authorization: sessionStorage.getItem("token"),
       };
 
       const response = await axios.post(
@@ -115,7 +115,7 @@ const usePost = () => {
   const addProduct = async (formData) => {
     try {
       const headers = {
-        Authorization: localStorage.getItem("token"),
+        Authorization: sessionStorage.getItem("token"),
         "Content-Type": "multipart/form-data",
       };
 
@@ -152,7 +152,7 @@ const usePost = () => {
   const placeBid = async (productId, amount) => {
     try {
       const headers = {
-        Authorization: localStorage.getItem("token"),
+        Authorization: sessionStorage.getItem("token"),
       };
 
       const response = await axios.post(
@@ -193,7 +193,7 @@ const usePost = () => {
     try {
       const userId = decryptData(sessionStorage.getItem("userData"));
       const headers = {
-        Authorization: localStorage.getItem("token"),
+        Authorization: sessionStorage.getItem("token"),
         "Content-Type": "multipart/form-data",
       };
 

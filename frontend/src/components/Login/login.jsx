@@ -30,7 +30,7 @@ export default function Login({ setisValid }) {
     if (data && data.status === 200) {
       const encryptedData = encryptData(data.data.user._id);
       sessionStorage.setItem("userData", encryptedData);
-      localStorage.setItem("token", data.data.token);
+      sessionStorage.setItem("token", data.data.token);
       setisValid(true);
       navigate("/");
     }

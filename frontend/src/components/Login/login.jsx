@@ -28,7 +28,7 @@ export default function Login({ setisValid }) {
   // Effect to handle navigation after successful login
   useEffect(() => {
     if (data && data.status === 200) {
-      const encryptedData = encryptData(data.data.user._id);
+      const encryptedData = encryptData(data.data);
       sessionStorage.setItem("userData", encryptedData);
       sessionStorage.setItem("token", data.data.token);
       setisValid(true);

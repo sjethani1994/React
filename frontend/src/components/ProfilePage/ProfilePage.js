@@ -58,12 +58,20 @@ function ProfilePage() {
         google: getData.data.user.google,
         linkedIn: getData.data.user.linkedIn,
         instagram: getData.data.user.instagram,
-        avatar: `http://localhost:5000/${getData.data.user.avatar.replace(
-          /\\/g,
-          "/"
-        )}`,
+        avatar: getData.data.user.avatar.startsWith("http")
+          ? getData.data.user.avatar
+          : `http://localhost:5000/${getData.data.user.avatar.replace(
+              /\\/g,
+              "/"
+            )}`,
       });
-      setImagePreview(getData.data.user.avatar);
+      const imagePath = getData.data.user.avatar.startsWith("http")
+        ? getData.data.user.avatar
+        : `http://localhost:5000/${getData.data.user.avatar.replace(
+            /\\/g,
+            "/"
+          )}`;
+      setImagePreview(imagePath);
     }
   }, [getData]);
 

@@ -191,14 +191,14 @@ const usePost = () => {
 
   const updateProfile = async (formData) => {
     try {
-      const userId = decryptData(sessionStorage.getItem("userData"));
+      const userData = decryptData(sessionStorage.getItem("userData"));
       const headers = {
         Authorization: sessionStorage.getItem("token"),
         "Content-Type": "multipart/form-data",
       };
 
       const response = await axios.post(
-        `${API}/user/updateProfile/${userId}`,
+        `${API}/user/updateProfile/${userData.user._id}`,
         formData,
         { headers }
       );
@@ -229,6 +229,42 @@ const usePost = () => {
       }
     }
   };
+
+  const getUserHighestBidCount = async () => {
+    try {
+      const token = sessionStorage.getItem("token");
+      const userData = decryptData(sessionStorage.getItem("userData"));
+      if (!token) {
+        throw new Error("Authentication token not found");
+      }
+
+      const headers = {
+        Authorization: token,
+      };
+
+      const requestData = {
+        userId: userData.user._id,
+      };
+
+      const response = await axios.post(
+        `${API}/product/getUserHighestBidCount`,
+        requestData,
+        { headers }
+      );
+
+      if (response.status === 200) {
+        setData(response.data.productCount);
+      } else {
+        throw new Error("Failed to fetch user's highest bid count");
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        setError("Unauthorized: Invalid token");
+      } else {
+        setError(error.message || "An error occurred while fetching data");
+      }
+    }
+  };
   // Return data, error, login and signup functions
   return {
     data,
@@ -239,6 +275,7 @@ const usePost = () => {
     placeBid,
     addProduct,
     updateProfile,
+    getUserHighestBidCount,
   };
 };
 

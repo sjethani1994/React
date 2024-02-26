@@ -3,9 +3,13 @@ import styles from "./style.module.css"; // Import CSS module
 import useFetch from "../../hooks/useFetch"; // Import the useFetch hook
 import ProductList from "../productList/ProductList";
 import Carousel from "../Carousel/Carousel";
+import OurPartner from "../OurPartner/OurPartner";
+
 const Main = ({ productData }) => {
   const { getData, getAllProducts } = useFetch(); // Call the useFetch hook
-  const [data, setData] = useState([]);
+
+  const [apiData, setData] = useState([]);
+
   useEffect(() => {
     getAllProducts(); // Fetch data when the component mounts
   }, []); // Empty dependency array ensures it runs only once on component mount
@@ -18,13 +22,15 @@ const Main = ({ productData }) => {
     }
   }, [getData, productData]);
 
+
+
   return (
     <div className={styles.vic}>
       <div className={styles.foto}>
-        <Carousel /> {/* Use styles.foto for applying CSS class */}
+        <Carousel />
         <div class="row mt-3">
-          {data &&
-            data.map((product) => (
+          {apiData &&
+            apiData.map((product) => (
               <div
                 key={product._id}
                 class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3"
@@ -33,6 +39,10 @@ const Main = ({ productData }) => {
               </div>
             ))}
         </div>
+        <div class="row">
+          <OurPartner />
+        </div>
+        
       </div>
     </div>
   );

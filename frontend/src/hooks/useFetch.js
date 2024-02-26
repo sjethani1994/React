@@ -70,11 +70,11 @@ const useFetch = () => {
 
   const getProfileData = async () => {
     try {
-      const userId = decryptData(sessionStorage.getItem("userData"));
+      const userData = decryptData(sessionStorage.getItem("userData"));
       const headers = {
         Authorization: sessionStorage.getItem("token"),
       };
-      const response = await axios.get(`${API}/user/getProfile/${userId}`, {
+      const response = await axios.get(`${API}/user/getProfile/${userData.user._id}`, {
         headers,
       });
 
@@ -85,7 +85,7 @@ const useFetch = () => {
         return {
           success: false,
           data: null,
-          error: `Product with id ${userId} not found`,
+          error: `Product with id ${userData.user._id} not found`,
         };
       }
     } catch (error) {

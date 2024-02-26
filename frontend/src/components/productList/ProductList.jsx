@@ -39,36 +39,49 @@ function ProductList({ product }) {
   };
 
   return (
-    <div className="card product-card" onClick={gotoProductDetails}>
-      <div className="card-body product-card-body">
-        <img
-          src={`http://localhost:5000/${product.avatar.replace(/\\/g, "/")}`}
-          alt={product.title}
-          className="product-image"
-        />
-        <div className="product-details">
-          <h5 className="card-title">{product.title}</h5>
-          <p className="card-text">
-            {getDescription()}
-            {product.description.length > 60 && (
-              <OverlayTrigger
-                placement="top"
-                overlay={
-                  <Tooltip id={`tooltip-${product._id}`}>
-                    {product.description}
-                  </Tooltip>
-                }
-              >
-                <span className="text-primary">(hover to read more)</span>
-              </OverlayTrigger>
-            )}
-          </p>
+    <div className="slider-container">
+      <div className="slide-content">
+        <div className="card-wrapper">
+          <div className="card">
+            <div className="image-content">
+              <span className="overlay"></span>
+              <div className="card-image">
+                <img
+                  src={`http://localhost:5000/${product.avatar.replace(
+                    /\\/g,
+                    "/"
+                  )}`}
+                  className="card-img"
+                  alt="Card"
+                />
+              </div>
+            </div>
+            <div className="card-content">
+              <h2 className="name">{product.title}</h2>
+              <p className="card-text" style={{ fontWeight: "bold" }}>
+                Price: ${product.price}
+              </p>
+              <p className="description">
+                {getDescription()}
+                {product.description.length >= 10 && (
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={
+                      <Tooltip id={`tooltip-${product._id}`}>
+                        {product.description}
+                      </Tooltip>
+                    }
+                  >
+                    <span className="text-primary">(read more)</span>
+                  </OverlayTrigger>
+                )}
+              </p>
+              <button className="button" onClick={gotoProductDetails}>
+                View More
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="card-footer text-muted">
-        <p className="card-text" style={{ fontWeight: "bold" }}>
-          Price: ${product.price}
-        </p>
       </div>
     </div>
   );

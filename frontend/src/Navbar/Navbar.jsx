@@ -1,10 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 import eAuctionLogo from "../assests/eAutionLogo.png";
-
+import usePost from "../hooks/usePost";
 const Navbar = () => {
   const [clicked, setClicked] = useState(false);
+  const { data, getUserHighestBidCount } = usePost();
+
+  useEffect(() => {
+    getUserHighestBidCount();
+  }, []); // Empty dependency array ensures it runs only once on component mount
+
+  // Ensure 'data' is defined before accessing its properties
+  useEffect(() => {
+    try {
+      console.log(data);
+    } catch (error) {
+      console.error("Error handling data:", error);
+    }
+  }, [data]);
 
   const handleClick = () => {
     setClicked(!clicked);
@@ -57,8 +71,9 @@ const Navbar = () => {
             </a>
           </li>
           <li>
-            <a href="https://www.facebook.com">
-              <i className="fab fa-facebook"></i>
+            <a href="#top" className="cart">
+              <span className="count">{data || 0}</span>
+              <i className="fa-solid fa-cart-shopping material-icons"></i>
             </a>
           </li>
           <li>

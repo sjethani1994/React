@@ -11,10 +11,6 @@
   box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* .cardImage {
-  width: 90%;
-  margin: 10%;
-} */
 .cardImage .card-img-top {
   border-radius: 10px;
 }

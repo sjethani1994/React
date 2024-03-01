@@ -11,6 +11,9 @@ import Navbar from "./Navbar/Navbar";
 import Footer from "./components/footer/Footer";
 import AboutUs from "./components/AboutUs/AboutUs";
 import "./App.css";
+import CartPage from "./components/cart/CartPage";
+import ThankyouPage from "./components/Thankyou/ThankyouPage";
+import FailurePage from "./components/failure/FailurePage";
 function App() {
   const [isValid, setisValid] = useState(false);
   const user = sessionStorage.getItem("token");
@@ -88,6 +91,10 @@ function App() {
           <Route path="/addproduct" element={<Addproduct />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/success" element={<ThankyouPage />} />
+          <Route path="/failure" element={<FailurePage />} />
+          
         </Routes>
       </div>
       {user && <Footer />}

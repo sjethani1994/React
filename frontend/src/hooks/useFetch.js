@@ -15,7 +15,6 @@ const useFetch = () => {
       const response = await axios.get(`${API}/product/getAllProducts`, {
         headers,
       });
-
       if (response.status === 200) {
         setGetData(response.data.products);
         // Filter out inactive products before storing them in localStorage
@@ -30,7 +29,7 @@ const useFetch = () => {
       if (error.response && error.response.status === 401) {
         setError("Invalid email or password"); // Unauthorized error
       } else {
-        setError(error.response.data.message); // Other errors
+        setError(error?.response?.data?.message); // Other errors
       }
     }
   };
@@ -61,22 +60,25 @@ const useFetch = () => {
           success: false,
           data: null,
           error: error.response
-            ? error.response.data.message
+            ? error?.response?.data?.message
             : "An error occurred. Please try again later.",
         };
       }
     }
   };
 
-  const getProfileData = async () => {
+  const getCartProducts = async () => {
     try {
-      const userData = decryptData(sessionStorage.getItem("userData"));
       const headers = {
         Authorization: sessionStorage.getItem("token"),
       };
-      const response = await axios.get(`${API}/user/getProfile/${userData.user._id}`, {
-        headers,
-      });
+      const userData = decryptData(sessionStorage.getItem("userData"));
+      const response = await axios.get(
+        `${API}/product/getCartProducts/${userData.user._id}`,
+        {
+          headers,
+        }
+      );
 
       if (response.status === 200) {
         setGetData(response);
@@ -96,7 +98,45 @@ const useFetch = () => {
           success: false,
           data: null,
           error: error.response
-            ? error.response.data.message
+            ? error?.response?.data?.message
+            : "An error occurred. Please try again later.",
+        };
+      }
+    }
+  };
+
+  const getProfileData = async () => {
+    try {
+      const userData = decryptData(sessionStorage.getItem("userData"));
+      const headers = {
+        Authorization: sessionStorage.getItem("token"),
+      };
+      const response = await axios.get(
+        `${API}/user/getProfile/${userData.user._id}`,
+        {
+          headers,
+        }
+      );
+
+      if (response.status === 200) {
+        setGetData(response);
+        return { success: true, data: response, getError: null };
+      } else {
+        return {
+          success: false,
+          data: null,
+          error: `Product with id ${userData.user._id} not found`,
+        };
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        return { success: false, data: null, getError: "Unauthorized access" };
+      } else {
+        return {
+          success: false,
+          data: null,
+          error: error.response
+            ? error?.response?.data?.message
             : "An error occurred. Please try again later.",
         };
       }
@@ -109,6 +149,7 @@ const useFetch = () => {
     getAllProducts,
     getProductById,
     getProfileData,
+    getCartProducts,
   };
 };
 

@@ -3,7 +3,7 @@ import axios from "axios";
 import API from "../connection/connection";
 import { swalError, swalSuccess } from "../utils/Swal";
 import { decryptData } from "../utils/cryptoUtils";
-
+import { loadStripe } from "@stripe/stripe-js";
 const usePost = () => {
   const [data, setData] = useState(null); // State to hold response data
   const [error, setError] = useState(null); // State to hold error messages
@@ -265,6 +265,139 @@ const usePost = () => {
       }
     }
   };
+
+  const depositMoney = async (amount) => {
+    try {
+      const userData = decryptData(sessionStorage.getItem("userData"));
+      const headers = {
+        Authorization: sessionStorage.getItem("token"),
+      };
+
+      const response = await axios.post(
+        `${API}/wallet/deposit/${userData.user._id}`,
+        { amount },
+        { headers }
+      );
+
+      if (response.status === 200) {
+        return response;
+      } else {
+        // Handle unexpected response status
+        setError("Unexpected response status");
+      }
+    } catch (error) {
+      if (error.response) {
+        // The request was made and the server responded with an error status code
+        if (error.response.status === 400) {
+          setError(error.response.data.error); // Bad request, email format is invalid
+          swalError("", error.response.data.error);
+        } else {
+          setError("Server error"); // Other server errors
+        }
+      } else if (error.request) {
+        // The request was made but no response was received
+        setError("No response from server"); // Network error
+      } else {
+        // Something happened in setting up the request that triggered an error
+        setError("Error occurred"); // Generic error
+      }
+    }
+  };
+
+  const deleteProducts = async (productIds) => {
+    try {
+      const headers = {
+        Authorization: sessionStorage.getItem("token"),
+      };
+
+      const response = await axios.post(
+        `${API}/product/deleteProducts`,
+        { productIds },
+        {
+          headers,
+        }
+      );
+      if (response.status === 201) {
+        setData(response.data.message);
+        swalSuccess("", response.data.message);
+      } else {
+        // Handle unexpected response status
+        setError("Unexpected response status");
+      }
+    } catch (error) {
+      if (error.response) {
+        // The request was made and the server responded with an error status code
+        if (error.response.status === 400) {
+          setError(error.response.data.error); // Bad request, email format is invalid
+          swalError("", error.response.data.error);
+        } else {
+          setError("Server error"); // Other server errors
+        }
+      } else if (error.request) {
+        // The request was made but no response was received
+        setError("No response from server"); // Network error
+      } else {
+        // Something happened in setting up the request that triggered an error
+        setError("Error occurred"); // Generic error
+      }
+    }
+  };
+
+  const placeOrderSession = async (body) => {
+    try {
+      // Load Stripe
+      const stripe = await loadStripe(
+        "pk_test_51Oool4SIiKMrNAex7ioOIyx1ahoCol5DJr6SLitld717QDOafCIBEcQZiEFNpXbNloPuoVUYaHPObV1VrlajDpnG000WYrr8jJ"
+      );
+
+      // Set request headers
+      const headers = {
+        "Content-type": "application/json",
+      };
+
+      // Ensure body is defined before making Axios request
+      if (!body) {
+        throw new Error("Request body is missing.");
+      }
+
+      // Axios POST request
+      const fetchResponse = await axios.post(
+        `${API}/wallet/place-order-session`,
+        JSON.stringify(body),
+        { headers }
+      );
+ 
+      // Redirect to Stripe checkout
+      const result =  stripe.redirectToCheckout({
+        sessionId: fetchResponse.data.id,
+      })
+
+      // Check for errors in redirection
+      if (result.error) {
+        console.error(result.error); // Log error
+        // You might want to display an error message to the user here
+      } else {
+        console.log("Payment success");
+        // You may want to provide feedback to the user that the payment was successful
+        // Additionally, you can make an API call to a controller to mark the payment success for a particular auction winner
+      }
+    } catch (error) {
+      // Error handling
+      if (error.response) {
+        if (error.response.status === 400) {
+          setError(error.response.data.error);
+          swalError("", error.response.data.error);
+        } else {
+          setError("Server error");
+        }
+      } else if (error.request) {
+        setError("No response from server");
+      } else {
+        setError("Error occurred");
+      }
+    }
+  };
+
   // Return data, error, login and signup functions
   return {
     data,
@@ -276,6 +409,9 @@ const usePost = () => {
     addProduct,
     updateProfile,
     getUserHighestBidCount,
+    depositMoney,
+    deleteProducts,
+    placeOrderSession,
   };
 };
 

@@ -1,24 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Navbar.css";
 import eAuctionLogo from "../assests/eAutionLogo.png";
 import usePost from "../hooks/usePost";
+import Swal from "sweetalert2";
 const Navbar = () => {
   const [clicked, setClicked] = useState(false);
-  const { data, getUserHighestBidCount } = usePost();
-
+  const { data, getUserHighestBidCount, depositMoney } = usePost();
   useEffect(() => {
     getUserHighestBidCount();
   }, []); // Empty dependency array ensures it runs only once on component mount
-
-  // Ensure 'data' is defined before accessing its properties
-  useEffect(() => {
-    try {
-      console.log(data);
-    } catch (error) {
-      console.error("Error handling data:", error);
-    }
-  }, [data]);
 
   const handleClick = () => {
     setClicked(!clicked);
@@ -29,6 +20,38 @@ const Navbar = () => {
     localStorage.removeItem("biddersData");
     sessionStorage.removeItem("userData");
     window.location.reload();
+  };
+
+  const addMoneyToWallet = () => {
+    Swal.fire({
+      title: "Add Money to Wallet",
+      input: "number",
+      inputAttributes: {
+        step: "any", // Allow decimal numbers
+        min: 0, // Set minimum value to 0
+      },
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      cancelButtonText: "Cancel",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const amount = result.value;
+        if (amount !== "" && amount >= 0) {
+          const response = await depositMoney(amount);
+          try {
+            if (response.status === 200) {
+              Swal.fire("Saved!", `Added ${amount} Rs to wallet.`, "success");
+            }
+          } catch (error) {
+            Swal.fire("Invalid Amount", "Amount adding failed.", "error");
+          }
+        } else {
+          Swal.fire("Invalid Amount", "Please enter a valid amount.", "error");
+        }
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
+    });
   };
 
   return (
@@ -56,6 +79,11 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li>
+            <Link activeclassname="active" onClick={addMoneyToWallet}>
+              Add Money
+            </Link>
+          </li>
+          <li>
             <NavLink activeclassname="active" to={"/aboutus"}>
               About us
             </NavLink>
@@ -71,10 +99,10 @@ const Navbar = () => {
             </a>
           </li>
           <li>
-            <a href="#top" className="cart">
+            <Link className="cart" to={"/cart"}>
               <span className="count">{data || 0}</span>
               <i className="fa-solid fa-cart-shopping material-icons"></i>
-            </a>
+            </Link>
           </li>
           <li>
             <a href="#top" onClick={handleLogout}>

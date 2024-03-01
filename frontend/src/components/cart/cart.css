@@ -1,0 +1,80 @@
+* {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+}
+
+.cart-page {
+  margin: 80px auto;
+  margin-left: 10rem;
+  margin-right: 10rem;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cart-info {
+  display: flex;
+  flex-wrap: wrap;
+}
+th {
+  text-align: left;
+  padding: 5px;
+  color: #fff;
+  background: #3a4b59;
+  font-weight: normal;
+}
+td {
+  padding: 10px 5px;
+}
+.removeLink {
+  color: #d60b28;
+  font-size: 14px;
+}
+.removeLink:hover {
+  color: #d60b28;
+  text-decoration: none;
+}
+td img {
+  width: 80px;
+  height: 80px;
+  margin-right: 10px;
+}
+.total-price {
+  display: flex;
+  justify-content: flex-end;
+}
+.total-price .subtotal-table {
+  border-top: 3px solid #3a4b59;
+  width: 100%;
+  max-width: 400px;
+}
+td:last-child {
+  text-align: right;
+}
+th:last-child {
+  text-align: right;
+}
+.place-order button {
+  background-color: #3a4b59;
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.place-order button:hover {
+  border: 5px solid #3a4b59;
+  transition: 0.2s;
+}
+
+@media only screen and (max-width: 600px) {
+  .cart-info p {
+    display: none;
+  }
+}

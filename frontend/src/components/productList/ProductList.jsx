@@ -42,7 +42,7 @@ function ProductList({ product }) {
     <div className="slider-container">
       <div className="slide-content">
         <div className="card-wrapper">
-          <div className="card">
+          <div className="card product-card">
             <div className="image-content">
               <span className="overlay"></span>
               <div className="card-image">

@@ -7,7 +7,6 @@ import ProductDetails from "./components/ProductDetails/ProductDetails";
 import { socket } from "./hooks/socketSetup";
 import Addproduct from "./components/Addproduct/Addproduct";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
-import Navbar from "./Navbar/Navbar";
 import Footer from "./components/footer/Footer";
 import AboutUs from "./components/AboutUs/AboutUs";
 import "./App.css";

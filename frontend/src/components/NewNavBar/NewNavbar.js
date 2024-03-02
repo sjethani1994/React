@@ -1,32 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faSignIn } from "@fortawesome/free-solid-svg-icons";
-import {
-  faFacebook,
-  faTwitter,
-  faInstagram,
-} from "@fortawesome/free-brands-svg-icons";
+import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import "../NewNavBar/NewNavbar.css";
 import usePost from "../../hooks/usePost";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
 const NewNavbar = () => {
-  const [clicked, setClicked] = useState(false);
-  const { data, getUserHighestBidCount } = usePost();
+  const { getUserHighestBidCount } = usePost();
   const navigate = useNavigate();
   useEffect(() => {
     getUserHighestBidCount();
   }, []); // Empty dependency array ensures it runs only once on component mount
 
-  const handleClick = () => {
-    setClicked(!clicked);
-  };
-
   const handleLogout = () => {
     sessionStorage.removeItem("token");
     localStorage.removeItem("biddersData");
     sessionStorage.removeItem("userData");
-    navigate("/")
+    navigate("/");
     window.location.reload();
   };
   return (
@@ -38,7 +29,7 @@ const NewNavbar = () => {
             <h1>E-Auction</h1>
           </div>
 
-          <ul id="navbar" className={clicked ? "navbar active" : "navbar"}>
+          <ul id="navbar">
             <li>
               <NavLink exact="true" activeclassname="active" to={"/"}>
                 Home
@@ -60,10 +51,18 @@ const NewNavbar = () => {
               </NavLink>
             </li>
             <li>
-              <a href="https://www.facebook.com/" target="_blank" rel="noreferrer">
+              <a
+                href="https://www.facebook.com/"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <FontAwesomeIcon icon={faFacebook} />
               </a>
-              <a href="https://www.instagram.com" target="_blank" rel="noreferrer">
+              <a
+                href="https://www.instagram.com"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <FontAwesomeIcon icon={faInstagram} />
               </a>
               <Link onClick={handleLogout} rel="noopener noreferrer">

@@ -16,7 +16,7 @@ function ThankyouPage() {
     <div className="container">
     {popupOpen && (
       <div className="popup" id="popup">
-        <div className="card">
+        <div className="card thankyou-card">
           <img src="./404-tick.png" alt="tickimage" className="tick-image" />
           <h2 className="card-title">Thank You!</h2>
           <p className="card-text">

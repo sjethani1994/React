@@ -14,7 +14,7 @@ function FailurePage() {
     <div className="container">
       {popupOpen && (
         <div className="popup" id="popup">
-          <div className="card">
+          <div className="card failure-card">
             <img
               src="./paymentFailed.png"
               alt="paymentFailed"

@@ -14,6 +14,7 @@ import "./App.css";
 import CartPage from "./components/cart/CartPage";
 import ThankyouPage from "./components/Thankyou/ThankyouPage";
 import FailurePage from "./components/failure/FailurePage";
+import NewNavbar from "./components/NewNavBar/NewNavbar";
 function App() {
   const [isValid, setisValid] = useState(false);
   const user = sessionStorage.getItem("token");
@@ -70,7 +71,7 @@ function App() {
 
   return (
     <>
-      {user && <Navbar />}
+      {user && <NewNavbar />}
       <div className="body">
         <Routes>
           {/* If the user is logged in, render the Main component */}
@@ -94,7 +95,6 @@ function App() {
           <Route path="/cart" element={<CartPage />} />
           <Route path="/success" element={<ThankyouPage />} />
           <Route path="/failure" element={<FailurePage />} />
-          
         </Routes>
       </div>
       {user && <Footer />}

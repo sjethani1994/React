@@ -27,7 +27,6 @@ const Main = ({ productData }) => {
   return (
     <div className={styles.vic}>
       <div className={styles.foto}>
-        <Carousel />
         <div class="row mt-3">
           {apiData &&
             apiData.map((product) => (

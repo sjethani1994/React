@@ -1,0 +1,167 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial;
+  }
+  
+  .navbar-body {
+    background-size: cover;
+    height: 100vh;
+    background-position: center;
+  }
+  
+  header {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+    box-shadow: 0 0 10px #000;
+  }
+  
+  .transparent-background {
+    background: rgb(58 75 89);
+  }
+  
+  .background {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  
+  #chk1 {
+    display: none;
+  }
+  
+  i {
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  header .navbar-logo {
+    color: #fff;
+    margin-left: 50px;
+    text-transform: uppercase;
+    font-size: 15px;
+  }
+  
+  header .navbar-search-box {
+    flex: 1;
+    position: relative;
+  }
+  
+  .search-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 130px; /* Adjust as needed */
+  }
+  
+  .search-box form {
+    text-align: center;
+  }
+  
+  .search-box label {
+    margin-bottom: 10px;
+    font-weight: bolder;
+    font-size: larger;
+  }
+  
+  .search-box input {
+    width: 350px; /* Adjust the width as needed */
+    height: 50px;
+    margin-bottom: 10px;
+    justify-items: center;
+    border-radius: 5px;
+    margin-right: 5px;
+    padding: 5px;
+  }
+  
+  .search-box button {
+    justify-items: auto;
+    margin-left: -90px;
+    width: 80px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #040404;
+    border: none;
+    padding: 5px 10px;
+  }
+  
+  header ul {
+    display: flex;
+    justify-content: space-evenly;
+    margin-right: 50px;
+  }
+  
+  header ul li {
+    list-style: none;
+  }
+  
+  header ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 10px 15px;
+  }
+  
+  #navbar li a:hover,
+  #navbar li a.active {
+    color: orange;
+    text-decoration: none;
+  }
+  
+  header .menu {
+    font-size: 2.5em;
+    display: none;
+  }
+  
+  .subscribeButton {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .subscribeButton .TextPara {
+    justify-content: center;
+    text-align: center;
+    margin-top: 6%;
+  }
+  
+  @media (max-width: 1000px) {
+    .search-box button {
+      position: absolute;
+    }
+  
+    header ul {
+      position: fixed;
+      top: 100px;
+      right: -100%;
+      background: rgba(0, 0, 0, 0.5);
+      height: calc(100vh - 100px);
+      width: 50%;
+      flex-direction: column;
+      align-items: center;
+      transition: right 0.5s linear;
+    }
+  
+    header .menu {
+      display: block;
+      width: 100px;
+      text-align: center;
+    }
+  
+    #chk1:checked ~ ul {
+      right: 0;
+    }
+  
+    /* Add the following media query to fix header only for smaller screens */
+    @media (max-width: 768px) {
+      header {
+        position: fixed;
+      }
+    }
+  }
+  

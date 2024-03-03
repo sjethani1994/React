@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Main from "./components/Main";
 import Signup from "./components/Signup/signup";
 import Login from "./components/Login/login";
@@ -13,12 +13,12 @@ import "./App.css";
 import CartPage from "./components/cart/CartPage";
 import ThankyouPage from "./components/Thankyou/ThankyouPage";
 import FailurePage from "./components/failure/FailurePage";
-import NewNavbar from "./components/NewNavBar/NewNavbar";
+import Header from "./components/Header/Header";
 function App() {
   const [isValid, setisValid] = useState(false);
   const user = sessionStorage.getItem("token");
   const [productData, setproductData] = useState([]);
-
+  const location = useLocation();
   useEffect(() => {
     // Function to handle socket event and update state
     const handleSocketEvent = (data) => {
@@ -70,7 +70,7 @@ function App() {
 
   return (
     <>
-      {user && <NewNavbar />}
+    {user && location.pathname !== '/' && <Header />}
       <div className="body">
         <Routes>
           {/* If the user is logged in, render the Main component */}

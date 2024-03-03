@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import styles from "./style.module.css"; // Import CSS module
 import useFetch from "../../hooks/useFetch"; // Import the useFetch hook
 import ProductList from "../productList/ProductList";
-import Carousel from "../Carousel/Carousel";
 import OurPartner from "../OurPartner/OurPartner";
-
+import NewNavbar from "../NewNavBar/NewNavbar";
 const Main = ({ productData }) => {
   const { getData, getAllProducts } = useFetch(); // Call the useFetch hook
 
@@ -22,28 +21,28 @@ const Main = ({ productData }) => {
     }
   }, [getData, productData]);
 
-
-
   return (
-    <div className={styles.vic}>
-      <div className={styles.foto}>
-        <div class="row mt-3">
-          {apiData &&
-            apiData.map((product) => (
-              <div
-                key={product._id}
-                class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3"
-              >
-                <ProductList product={product} />
-              </div>
-            ))}
+    <>
+      <NewNavbar />
+      <div className={styles.vic}>
+        <div className={styles.foto}>
+          <div class="row mt-3">
+            {apiData &&
+              apiData.map((product) => (
+                <div
+                  key={product._id}
+                  class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3"
+                >
+                  <ProductList product={product} />
+                </div>
+              ))}
+          </div>
+          <div class="row">
+            <OurPartner />
+          </div>
         </div>
-        <div class="row">
-          <OurPartner />
-        </div>
-        
       </div>
-    </div>
+    </>
   );
 };
 

@@ -20,6 +20,13 @@ header {
   align-items: center;
   z-index: 99;
   box-shadow: 0 0 10px #000;
+}
+
+.transparent-background {
+  background: rgb(58 75 89);
+}
+
+.background {
   background: rgba(0, 0, 0, 0.5);
 }
 
@@ -82,7 +89,6 @@ header .navbar-search-box {
   color: #040404;
   border: none;
   padding: 5px 10px;
-
 }
 
 header ul {
@@ -158,4 +164,15 @@ header .menu {
       position: fixed;
     }
   }
+}
+.centeredImage {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align items to the top */
+  height: 100%; /* Occupy full height of the parent container */
+  margin-top: 15rem;
+}
+
+.centeredImage img {
+  max-width: 100%; /* Optionally, limit the width of the image */
 }

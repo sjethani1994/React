@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignIn } from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping, faSignIn } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import "./Header.css";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-
+import usePost from "../../hooks/usePost";
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [itemsInCart, setitemsInCart] = useState(0);
+  const { data, getUserHighestBidCount } = usePost();
+  useEffect(() => {
+    getUserHighestBidCount();
+  }, []); // Empty dependency array ensures it runs only once on component mount
+
+  useEffect(() => {
+    if (data) setitemsInCart(data);
+  }, [data]);
   const handleLogout = () => {
     sessionStorage.removeItem("token");
     localStorage.removeItem("biddersData");
@@ -63,6 +72,10 @@ const Header = () => {
             >
               <FontAwesomeIcon icon={faInstagram} />
             </a>
+            <Link className="cart-link" to={"/cart"}>
+              <FontAwesomeIcon icon={faCartShopping} />
+              <span className="cart-count">{itemsInCart}</span>
+            </Link>
             <Link onClick={handleLogout} rel="noopener noreferrer">
               <FontAwesomeIcon icon={faSignIn} />
             </Link>

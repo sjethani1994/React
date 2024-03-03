@@ -5,6 +5,7 @@ import "./cart.css";
 // Import useFetch custom hook
 import useFetch from "../../hooks/useFetch";
 import AddressForm from "../AddressForm/AddressForm";
+import { encryptData } from "../../utils/cryptoUtils";
 
 // Define CartPage component
 function CartPage() {
@@ -29,9 +30,9 @@ function CartPage() {
 
   // Update productIds state whenever cartProducts change
   useEffect(() => {
-    // Extract product ids from cartProducts and update productIds state
     const ids = cartProducts.map((product) => product._id);
     setProductIds(ids);
+    sessionStorage.setItem("productIds", encryptData(JSON.stringify(ids)));
   }, [cartProducts]);
 
   // Function to calculate total bid amount

@@ -16,7 +16,7 @@ const AddressForm = ({ cartProducts, totalBidAmount, setShowAddressForm }) => {
     shipping_country: "",
   });
 
-  const { data, error, placeOrderSession } = usePost();
+  const { placeOrderSession } = usePost();
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -68,12 +68,12 @@ const AddressForm = ({ cartProducts, totalBidAmount, setShowAddressForm }) => {
     };
 
     const body = {
-      product: cartProducts, //product id
-      amount: totalBidAmount, // amount
+      product: cartProducts,
+      amount: totalBidAmount,
       name: userData.user.firstName + " " + userData.user.lastName,
       email: userData.user.email,
       address: address,
-      shipping: shipping
+      shipping: shipping,
     };
 
     setShowAddressForm(false);
@@ -87,7 +87,7 @@ const AddressForm = ({ cartProducts, totalBidAmount, setShowAddressForm }) => {
           className="modal-card"
           style={{ height: "600px", overflowY: "scroll" }}
         >
-          <header style={{ height: "60px", padding: "5px" }}>
+          <header style={{ height: "60px", padding: "5px", boxShadow: "none" }}>
             <h3 className="text-dark" style={{ textAlign: "center" }}>
               Please Enter Your Address
             </h3>

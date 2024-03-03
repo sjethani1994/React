@@ -266,52 +266,14 @@ const usePost = () => {
     }
   };
 
-  const depositMoney = async (amount) => {
-    try {
-      const userData = decryptData(sessionStorage.getItem("userData"));
-      const headers = {
-        Authorization: sessionStorage.getItem("token"),
-      };
-
-      const response = await axios.post(
-        `${API}/wallet/deposit/${userData.user._id}`,
-        { amount },
-        { headers }
-      );
-
-      if (response.status === 200) {
-        return response;
-      } else {
-        // Handle unexpected response status
-        setError("Unexpected response status");
-      }
-    } catch (error) {
-      if (error.response) {
-        // The request was made and the server responded with an error status code
-        if (error.response.status === 400) {
-          setError(error.response.data.error); // Bad request, email format is invalid
-          swalError("", error.response.data.error);
-        } else {
-          setError("Server error"); // Other server errors
-        }
-      } else if (error.request) {
-        // The request was made but no response was received
-        setError("No response from server"); // Network error
-      } else {
-        // Something happened in setting up the request that triggered an error
-        setError("Error occurred"); // Generic error
-      }
-    }
-  };
-
-  const deleteProducts = async (productIds) => {
+  const placeOrder = async (productIds) => {
     try {
       const headers = {
         Authorization: sessionStorage.getItem("token"),
       };
 
       const response = await axios.post(
-        `${API}/product/deleteProducts`,
+        `${API}/wallet/place-order`,
         { productIds },
         {
           headers,
@@ -366,11 +328,11 @@ const usePost = () => {
         JSON.stringify(body),
         { headers }
       );
- 
+
       // Redirect to Stripe checkout
-      const result =  stripe.redirectToCheckout({
+      const result = stripe.redirectToCheckout({
         sessionId: fetchResponse.data.id,
-      })
+      });
 
       // Check for errors in redirection
       if (result.error) {
@@ -409,8 +371,7 @@ const usePost = () => {
     addProduct,
     updateProfile,
     getUserHighestBidCount,
-    depositMoney,
-    deleteProducts,
+    placeOrder,
     placeOrderSession,
   };
 };

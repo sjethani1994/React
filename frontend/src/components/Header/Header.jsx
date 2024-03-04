@@ -5,6 +5,7 @@ import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import "./Header.css";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import usePost from "../../hooks/usePost";
+import logo from "../../image/SM Auction.png"
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -33,7 +34,7 @@ const Header = () => {
       >
         <input type="checkbox" name="" id="chk1" />
         <div className="navbar-logo">
-          <h1>E-Auction</h1>
+          <img src={logo} alt="sm auction logo" style={{width: "30%", height: "auto"}}/>
         </div>
 
         <ul id="navbar">

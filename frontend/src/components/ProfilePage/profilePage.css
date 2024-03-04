@@ -147,3 +147,9 @@ label.label input[type="file"] {
   background-color: #3a4b59;
   border-color: #3a4b59;
 }
+
+.btn-primary:active {
+  color: #fff;
+  background-color: #3a4b59 !important;
+  border-color: #3a4b59 !important;
+}

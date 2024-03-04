@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./profilePage.css";
 import usePost from "../../hooks/usePost";
 import useFetch from "../../hooks/useFetch";
+import { useNavigate } from "react-router-dom";
+
 function ProfilePage() {
   // State object for form fields
   const [formData, setFormData] = useState({
@@ -28,7 +30,7 @@ function ProfilePage() {
   const [imagePreview, setImagePreview] = useState(null);
   const { data, error, updateProfile } = usePost();
   const { getData, getProfileData } = useFetch();
-
+  const navigate = useNavigate();
   useEffect(() => {
     getProfileData();
   }, []);
@@ -387,7 +389,13 @@ function ProfilePage() {
             Save changes
           </button>
           &nbsp;
-          <button type="button" className="btn btn-default">
+          <button
+            type="button"
+            className="btn btn-default"
+            onClick={() => {
+              navigate("/");
+            }}
+          >
             Cancel
           </button>
         </div>

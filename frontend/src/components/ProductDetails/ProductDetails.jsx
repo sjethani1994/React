@@ -103,7 +103,7 @@ function ProductDetails({ productData }) {
           <div className="img-display">
             <div className="img-showcase">
               <img
-              className="product-img"
+                className="product-img"
                 src={`http://localhost:5000/${product.avatar.replace(
                   /\\/g,
                   "/"
@@ -122,7 +122,7 @@ function ProductDetails({ productData }) {
 
           <div className="product-price">
             <p className="last-price">
-              Min Bid Price: <span>{product.price}Rs</span>
+              Min Bid Price: <span>{product.price} Rs</span>
             </p>
             <p className="new-price">
               Enter your Bid Price:{" "}
@@ -139,18 +139,16 @@ function ProductDetails({ productData }) {
               </span>
             </p>
           </div>
-
-          <div className="product-detail">
-            <h2>
-              Number of Bids: <span>{biddersList.length}</span>
-            </h2>
-          </div>
-
           <div class="purchase-info">
             <input type="number" min="0" value="1" />
             <button type="button" class="btn" onClick={handleBid}>
               Place Bid <i class="fa fa-gavel"></i>
             </button>
+          </div>
+          <div className="product-detail">
+            <h2>
+              Number of Bids: <span>{biddersList.length}</span>
+            </h2>
           </div>
         </div>
       </div>

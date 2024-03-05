@@ -165,9 +165,9 @@ function AddProduct() {
               onChange={handleChange}
             >
               <option value="">Select Category</option>
-              <option value="1">Electronics</option>
-              <option value="2">Clothing</option>
-              <option value="3">Home & Kitchen</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Clothing">Clothing</option>
+              <option value="Home & Kitchen">Home & Kitchen</option>
               {/* Add more options as needed */}
             </select>
             {errors.category && (

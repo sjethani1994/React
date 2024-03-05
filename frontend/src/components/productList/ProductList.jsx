@@ -56,7 +56,7 @@ function ProductList({ product }) {
                 />
               </div>
             </div>
-            <div className="card-content">
+            <div className="card-content card-body row">
               <h2 className="name">{product.title}</h2>
               <p className="card-text" style={{ fontWeight: "bold" }}>
                 Price: ${product.price}
@@ -76,6 +76,8 @@ function ProductList({ product }) {
                   </OverlayTrigger>
                 )}
               </p>
+            </div>
+            <div className="card-footer d-flex justify-content-center p-0" style={{borderTop: "none", backgroundColor: "transparent", }}>
               <button className="button" onClick={gotoProductDetails}>
                 View More
               </button>

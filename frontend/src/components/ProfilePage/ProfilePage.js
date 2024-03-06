@@ -3,6 +3,7 @@ import "./profilePage.css";
 import usePost from "../../hooks/usePost";
 import useFetch from "../../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
+import API from "../../connection/connection";
 
 function ProfilePage() {
   // State object for form fields
@@ -60,19 +61,12 @@ function ProfilePage() {
         google: getData.data.user.google,
         linkedIn: getData.data.user.linkedIn,
         instagram: getData.data.user.instagram,
-        avatar: getData.data.user.avatar.startsWith("http")
-          ? getData.data.user.avatar
-          : `http://localhost:5000/${getData.data.user.avatar.replace(
-              /\\/g,
-              "/"
-            )}`,
+        avatar: `${API}/${getData.data.user.avatar.replace(/\\/g, "/")}`,
       });
-      const imagePath = getData.data.user.avatar.startsWith("http")
-        ? getData.data.user.avatar
-        : `http://localhost:5000/${getData.data.user.avatar.replace(
-            /\\/g,
-            "/"
-          )}`;
+      const imagePath = `${API}/${getData.data.user.avatar.replace(
+        /\\/g,
+        "/"
+      )}`;
       setImagePreview(imagePath);
     }
   }, [getData]);

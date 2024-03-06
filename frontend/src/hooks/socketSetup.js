@@ -1,7 +1,8 @@
 import { io } from "socket.io-client";
+import API from "../connection/connection";
 
 // Create the socket connection
-const socket = io("http://localhost:5000");
+const socket = io(`${API}`);
 
 // Listen for the "connect" event and log the socket ID
 socket.on("connect", () => {

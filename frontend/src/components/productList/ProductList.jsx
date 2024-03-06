@@ -3,6 +3,7 @@ import "./ProductList.css";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import useFetch from "../../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
+import API from "../../connection/connection";
 function ProductList({ product }) {
   const [showFullDescription] = useState(false);
 
@@ -47,7 +48,7 @@ function ProductList({ product }) {
               <span className="overlay"></span>
               <div className="card-image">
                 <img
-                  src={`http://localhost:5000/${product.avatar.replace(
+                  src={`${API}/${product.avatar.replace(
                     /\\/g,
                     "/"
                   )}`}

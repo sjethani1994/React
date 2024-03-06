@@ -6,6 +6,7 @@ import "./cart.css";
 import useFetch from "../../hooks/useFetch";
 import AddressForm from "../AddressForm/AddressForm";
 import { encryptData } from "../../utils/cryptoUtils";
+import API from "../../connection/connection";
 
 // Define CartPage component
 function CartPage() {
@@ -69,7 +70,7 @@ function CartPage() {
                 <td>
                   <div className="cart-info">
                     <img
-                      src={`http://localhost:5000/${product.avatar}`}
+                      src={`${API}/${product.avatar}`}
                       alt=""
                       className="cart-image"
                     />

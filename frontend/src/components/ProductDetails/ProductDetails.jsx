@@ -3,6 +3,7 @@ import "./ProductDetails.css";
 import { useLocation } from "react-router-dom";
 import usePost from "../../hooks/usePost"; // Import the usePost hook
 import { swalError } from "../../utils/Swal";
+import API from "../../connection/connection";
 
 function ProductDetails({ productData }) {
   const location = useLocation(); // Get location object
@@ -104,7 +105,7 @@ function ProductDetails({ productData }) {
             <div className="img-showcase">
               <img
                 className="product-img"
-                src={`http://localhost:5000/${product.avatar.replace(
+                src={`${API}/${product.avatar.replace(
                   /\\/g,
                   "/"
                 )}`}

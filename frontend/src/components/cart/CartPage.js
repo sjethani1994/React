@@ -7,7 +7,7 @@ import useFetch from "../../hooks/useFetch";
 import AddressForm from "../AddressForm/AddressForm";
 import { encryptData } from "../../utils/cryptoUtils";
 import API from "../../connection/connection";
-
+import emptyCart from "../../image/empty-cart-yellow.png"
 // Define CartPage component
 function CartPage() {
   // Destructure methods from useFetch hook
@@ -54,63 +54,71 @@ function CartPage() {
   return (
     <>
       <div className="small-container cart-page">
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>Product</th>
-              <th>Quantity</th>
-              <th>Amount</th>
-              <th>Bid Amount</th>
-              <th>Subtotal</th>
-            </tr>
-          </thead>
-          <tbody>
-            {cartProducts.map((product, index) => (
-              <tr key={index}>
-                <td>
-                  <div className="cart-info">
-                    <img
-                      src={`${API}/${product.avatar}`}
-                      alt=""
-                      className="cart-image"
-                    />
-                    <div>
-                      <p>{product.title}</p> {/* Change to product.title */}
-                      <small>Rs. {product.price}</small>
-                      <br />
-                    </div>
-                  </div>
-                </td>
-                <td>1</td>
-                <td>{product.price}</td>
-                <td>
-                  {product.bidders.length > 0
-                    ? product.bidders[0].bidAmount
-                    : "N/A"}
-                </td>
-                <td>
-                  {product.bidders.length > 0
-                    ? product.bidders[0].bidAmount
-                    : "N/A"}
-                </td>
+        {cartProducts.length === 0 ? (
+          <div className="empty-cart-container">
+          <img src={emptyCart} alt="empty cart"/>
+        </div>
+        ) : (
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Amount</th>
+                <th>Bid Amount</th>
+                <th>Subtotal</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-        <div className="total-price">
-          <table className="subtotal-table">
+            </thead>
             <tbody>
-              <tr>
-                <td>Total</td>
-                <td>{calculateTotalBidAmount()}</td>
-              </tr>
-              <tr>
-                <td className="place-order">
-                  <button onClick={handlePlaceOrderClick}>Place Order</button>
-                </td>
-              </tr>
+              {cartProducts.map((product, index) => (
+                <tr key={index}>
+                  <td>
+                    <div className="cart-info">
+                      <img
+                        src={`${API}/${product.avatar}`}
+                        alt=""
+                        className="cart-image"
+                      />
+                      <div>
+                        <p>{product.title}</p> {/* Change to product.title */}
+                        <small>Rs. {product.price}</small>
+                        <br />
+                      </div>
+                    </div>
+                  </td>
+                  <td>1</td>
+                  <td>{product.price}</td>
+                  <td>
+                    {product.bidders.length > 0
+                      ? product.bidders[0].bidAmount
+                      : "N/A"}
+                  </td>
+                  <td>
+                    {product.bidders.length > 0
+                      ? product.bidders[0].bidAmount
+                      : "N/A"}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
+        )}
+        <div className="total-price">
+          {cartProducts.length > 0 && (
+            <table className="subtotal-table">
+              <tbody>
+                <tr>
+                  <td>Total</td>
+                  <td>{calculateTotalBidAmount()}</td>
+                </tr>
+                <tr>
+                  <td className="place-order">
+                    <button onClick={handlePlaceOrderClick}>Place Order</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
       <div>

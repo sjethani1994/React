@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { decryptData } from "../../utils/cryptoUtils";
 import usePost from "../../hooks/usePost";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 const AddressForm = ({ cartProducts, totalBidAmount, setShowAddressForm }) => {
   const [formData, setFormData] = useState({
     city: "New Delhi", // Default value for city
@@ -91,6 +93,11 @@ const AddressForm = ({ cartProducts, totalBidAmount, setShowAddressForm }) => {
             <h3 className="text-dark" style={{ textAlign: "center" }}>
               Please Enter Your Address
             </h3>
+            <FontAwesomeIcon
+              icon={faXmark}
+              className="Xmark"
+              onClick={() => setShowAddressForm(false)}
+            />
           </header>
           <div className="container">
             <div className="row">
@@ -310,7 +317,13 @@ const AddressForm = ({ cartProducts, totalBidAmount, setShowAddressForm }) => {
   color: #fff;
   background-color: #3a4b59;
   border-color: #3a4b59;
-} `}
+} 
+
+.Xmark {
+  font-size: 27px;
+    margin-bottom: auto;
+    cursor: pointer;
+}`}
       </style>
     </>
   );

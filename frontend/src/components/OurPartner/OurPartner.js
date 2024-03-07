@@ -31,7 +31,7 @@ function OurPartner() {
   ];
 
   return (
-    <AppContainer>
+    <AppContainer className="mt-3">
       <Wrapper>
         <Text>Partners.</Text>
         <Note>Our official E-Auction Partner.</Note>

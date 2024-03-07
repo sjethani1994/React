@@ -58,7 +58,7 @@ function ProductDetails({ productData }) {
     if (amount < product.price) {
       swalError(
         "",
-        `Bid amount must be higher than the product's actual price of ${product.price}.`
+        `Bid amount must be higher than the product's actual price of Rs {product.price}.`
       );
       return;
     }

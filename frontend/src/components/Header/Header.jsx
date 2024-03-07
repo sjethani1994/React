@@ -5,7 +5,7 @@ import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import "./Header.css";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import usePost from "../../hooks/usePost";
-import logo from "../../image/SM Auction.png"
+import logo from "../../image/SM Auction.png";
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -34,27 +34,56 @@ const Header = () => {
       >
         <input type="checkbox" name="" id="chk1" />
         <div className="navbar-logo">
-          <img src={logo} alt="sm auction logo" style={{width: "30%", height: "auto"}}/>
+          <img
+            src={logo}
+            alt="sm auction logo"
+            style={{ width: "30%", height: "auto" }}
+          />
         </div>
 
         <ul id="navbar">
           <li>
-            <NavLink exact="true" activeclassname="active" to={"/"}>
+            <NavLink
+              exact="true"
+              activeclassname="active"
+              to={"/"}
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Home"
+            >
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink activeclassname="active" to={"/addproduct"}>
+            <NavLink
+              activeclassname="active"
+              to={"/addproduct"}
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Add Product"
+            >
               Add Product
             </NavLink>
           </li>
           <li>
-            <NavLink activeclassname="active" to={"/aboutus"}>
+            <NavLink
+              activeclassname="active"
+              to={"/aboutus"}
+              data-toggle="tooltip"
+              data-placement="top"
+              title="About us"
+            >
               About us
             </NavLink>
           </li>
           <li>
-            <NavLink activeclassname="active" to={"/profile"}>
+            <NavLink
+              activeclassname="active"
+              to={"/profile"}
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Profile"
+            >
               Profile
             </NavLink>
           </li>
@@ -63,6 +92,9 @@ const Header = () => {
               href="https://www.facebook.com/"
               target="_blank"
               rel="noreferrer"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="facebook"
             >
               <FontAwesomeIcon icon={faFacebook} />
             </a>
@@ -70,14 +102,29 @@ const Header = () => {
               href="https://www.instagram.com"
               target="_blank"
               rel="noreferrer"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Instagram"
             >
               <FontAwesomeIcon icon={faInstagram} />
             </a>
-            <Link className="cart-link" to={"/cart"}>
+            <Link
+              className="cart-link"
+              to={"/cart"}
+              data-toggle="tooltip"
+              data-placement="top"
+              title="cart"
+            >
               <FontAwesomeIcon icon={faCartShopping} />
               <span className="cart-count">{itemsInCart}</span>
             </Link>
-            <Link onClick={handleLogout} rel="noopener noreferrer">
+            <Link
+              onClick={handleLogout}
+              rel="noopener noreferrer"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Logout"
+            >
               <FontAwesomeIcon icon={faSignIn} />
             </Link>
           </li>

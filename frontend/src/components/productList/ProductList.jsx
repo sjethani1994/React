@@ -60,7 +60,7 @@ function ProductList({ product }) {
             <div className="card-content card-body row">
               <h2 className="name">{product.title}</h2>
               <p className="card-text" style={{ fontWeight: "bold" }}>
-                Price: ${product.price}
+                Price: Rs{product.price}
               </p>
               <p className="description">
                 {getDescription()}

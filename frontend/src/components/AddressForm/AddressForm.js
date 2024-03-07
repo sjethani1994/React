@@ -5,12 +5,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 const AddressForm = ({ cartProducts, totalBidAmount, setShowAddressForm }) => {
   const [formData, setFormData] = useState({
-    city: "New Delhi", // Default value for city
-    country: "India", // Default value for country
-    line1: "Street, PO Box, or company name", // Default value for line1
-    line2: "Street2, PO Box2, or company name2", // Default value for line2
-    postal_code: "110034", // Default value for postal_code
-    state: "New Delhi", // Default value for state
+    city: "",
+    country: "",
+    line1: "",
+    line2: "",
+    postal_code: "",
+    state: "",
     shipping_line1: "",
     shipping_postal_code: "",
     shipping_city: "",
@@ -29,7 +29,7 @@ const AddressForm = ({ cartProducts, totalBidAmount, setShowAddressForm }) => {
     if (document.getElementById("check-address").checked) {
       setFormData({
         ...formData,
-        shipping_line1: formData.line1,
+        shipping_line1: formData.txtaddress,
         shipping_city: formData.city,
         shipping_country: formData.country,
         shipping_postal_code: formData.postal_code,
@@ -113,6 +113,7 @@ const AddressForm = ({ cartProducts, totalBidAmount, setShowAddressForm }) => {
                       className="form-control"
                       value={formData.txtaddress}
                       onChange={handleChange}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -125,6 +126,7 @@ const AddressForm = ({ cartProducts, totalBidAmount, setShowAddressForm }) => {
                       className="form-control"
                       value={formData.line2}
                       onChange={handleChange}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -137,6 +139,7 @@ const AddressForm = ({ cartProducts, totalBidAmount, setShowAddressForm }) => {
                       className="form-control"
                       value={formData.txtlname}
                       onChange={handleChange}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -149,6 +152,7 @@ const AddressForm = ({ cartProducts, totalBidAmount, setShowAddressForm }) => {
                       className="form-control"
                       value={formData.city}
                       onChange={handleChange}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -161,6 +165,7 @@ const AddressForm = ({ cartProducts, totalBidAmount, setShowAddressForm }) => {
                       className="form-control"
                       value={formData.country}
                       onChange={handleChange}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -173,6 +178,7 @@ const AddressForm = ({ cartProducts, totalBidAmount, setShowAddressForm }) => {
                       className="form-control"
                       value={formData.postal_code}
                       onChange={handleChange}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -185,6 +191,7 @@ const AddressForm = ({ cartProducts, totalBidAmount, setShowAddressForm }) => {
                       className="form-control"
                       value={formData.state}
                       onChange={handleChange}
+                      required
                     />
                   </div>
                   <hr />
@@ -210,6 +217,7 @@ const AddressForm = ({ cartProducts, totalBidAmount, setShowAddressForm }) => {
                       className="form-control"
                       value={formData.shipping_line1}
                       onChange={handleChange}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -222,6 +230,7 @@ const AddressForm = ({ cartProducts, totalBidAmount, setShowAddressForm }) => {
                       className="form-control"
                       value={formData.shipping_postal_code}
                       onChange={handleChange}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -234,6 +243,7 @@ const AddressForm = ({ cartProducts, totalBidAmount, setShowAddressForm }) => {
                       className="form-control"
                       value={formData.shipping_city}
                       onChange={handleChange}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -246,6 +256,7 @@ const AddressForm = ({ cartProducts, totalBidAmount, setShowAddressForm }) => {
                       className="form-control"
                       value={formData.shipping_country}
                       onChange={handleChange}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -254,7 +265,6 @@ const AddressForm = ({ cartProducts, totalBidAmount, setShowAddressForm }) => {
                       type="submit"
                       value="Submit"
                       style={{ fontWeight: "bold" }}
-                      onClick={handleSubmit}
                     />
                   </div>
                 </form>
